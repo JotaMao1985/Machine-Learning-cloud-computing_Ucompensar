@@ -1,0 +1,20 @@
+# Sistema
+.DS_Store
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+*.tmp
+
+# Documentos institucionales: no se publican
+*SYLLABUS*.pdf
+*Syllabus*.pdf
+
+# Plan interno, auditorías y glosario interno: no se publican
+PLAN_ML_Nube.md
+AUDITORIA_*.md
+fuente/comun/glosario.md
+fuentes/
+
+# El generador revela las reglas con que se inventaron los datos: queda solo en local (M3).
+# Los notebooks descargan datos/clientes.csv, que sí se publica.
+precalculo/genera_datos.py

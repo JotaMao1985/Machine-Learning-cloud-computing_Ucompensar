@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Material de clase de Machine Learning y Seguridad en la Nube, Especialización en Big Data, Fundación Universitaria Compensar.">
+  <title>Machine Learning y Seguridad en la Nube · Especialización en Big Data</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+  <style>
+    /* Paleta UCompensar (portada del syllabus). El naranja de marca y el ámbar solo van en
+       bordes, íconos y franjas; el texto naranja usa --uc-naranja-texto (5,2:1 sobre blanco). */
+    :root {
+      --uc-morado: #691E7A;
+      --uc-morado-claro: #8A2E9E;
+      --uc-morado-profundo: #3A0F47;
+      --uc-naranja: #F46201;
+      --uc-naranja-texto: #B84A00;
+      --uc-ambar: #FAA012;
+      --uc-pizarra: #566B7F;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: #1E293B;
+      background: #F8FAFC;
+    }
+
+    .contenedor { max-width: 72rem; margin: 0 auto; padding: 0 1rem; width: 100%; }
+    @media (min-width: 640px) { .contenedor { padding: 0 1.5rem; } }
+
+    .skip-link {
+      position: absolute; top: -100px; left: 1rem; z-index: 100;
+      background: white; color: var(--uc-morado); border: 2px solid var(--uc-morado);
+      padding: 0.75rem 1rem; border-radius: 0.5rem; font-weight: 500; text-decoration: none;
+      transition: top 0.2s;
+    }
+    .skip-link:focus { top: 1rem; }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+    }
+
+    .heroe { background: linear-gradient(135deg, #5C1A6C 0%, var(--uc-morado-profundo) 100%); color: white; }
+    .heroe .contenedor { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+    .uc-logo {
+      display: inline-flex; align-items: center; background: white; border-radius: 999px;
+      padding: 0.35rem 0.9rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18); margin-bottom: 1.5rem;
+    }
+    .uc-logo img { height: 30px; width: auto; display: block; }
+    .antetitulo {
+      margin: 0; color: var(--uc-ambar); font-size: 0.85rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+    }
+    h1 { margin: 0.5rem 0 1rem; font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; line-height: 1.15; }
+    .heroe p.lead { margin: 0; max-width: 48rem; font-size: 1.125rem; color: rgba(255, 255, 255, 0.92); }
+    .uc-franja {
+      height: 5px;
+      background: linear-gradient(90deg, var(--uc-naranja) 0%, var(--uc-ambar) 55%, var(--uc-pizarra) 100%);
+    }
+
+    main { flex-grow: 1; padding: 2.5rem 0; }
+    .rejilla { display: grid; gap: 1.5rem; }
+    @media (min-width: 768px) { .rejilla { grid-template-columns: repeat(2, 1fr); } }
+
+    .sesion {
+      display: flex; flex-direction: column; background: white; border: 1px solid #E5E7EB;
+      border-radius: 1rem; padding: 1.5rem; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    }
+    .sesion.proxima { background: #F8FAFC; box-shadow: none; }
+    .etiqueta {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+      color: var(--uc-naranja-texto);
+    }
+    .sesion h2 { margin: 0.2rem 0 0; font-size: 1.6rem; line-height: 1.25; color: var(--uc-morado); }
+    .sesion ul { margin: 0.75rem 0 1.25rem; padding-left: 1.2rem; color: #374151; font-size: 0.95rem; }
+    .sesion li { margin-bottom: 0.3rem; }
+    .acciones { margin-top: auto; display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .boton {
+      display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.7rem 1.4rem;
+      border-radius: 999px; font-weight: 700; font-size: 0.92rem; text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .boton.principal { color: white; background: linear-gradient(140deg, var(--uc-morado) 0%, var(--uc-naranja-texto) 100%); }
+    .boton.secundario { color: var(--uc-morado); border: 2px solid var(--uc-morado); background: white; }
+    .boton:hover, .boton:focus-visible { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(105, 30, 122, 0.25); }
+    .boton:focus-visible { outline: 3px solid var(--uc-morado); outline-offset: 2px; }
+    .estado { margin-top: auto; color: #64748B; font-weight: 700; font-size: 0.92rem; }
+
+    .nota {
+      margin-top: 2.5rem; background: #FFF7ED; border-left: 4px solid var(--uc-naranja);
+      padding: 1.5rem; border-radius: 0 0.75rem 0.75rem 0;
+    }
+    .nota p { margin: 0 0 0.75rem; }
+    .nota p:last-child { margin: 0; }
+    .nota strong { color: var(--uc-naranja-texto); }
+    kbd {
+      font-family: ui-monospace, monospace; font-size: 0.85em; padding: 0.1em 0.4em;
+      border: 1px solid #CBD5E1; border-bottom-width: 2px; border-radius: 0.3rem; background: white;
+    }
+
+    footer { background: linear-gradient(180deg, #5C1A6C 0%, var(--uc-morado-profundo) 100%); }
+    footer p { margin: 0; padding: 1.5rem 0; text-align: center; color: white; font-size: 0.875rem; }
+    footer span { color: var(--uc-ambar); }
+
+    @media (prefers-reduced-motion: reduce) { .boton { transition: none; } }
+  </style>
+</head>
+
+<body>
+  <a href="#contenido" class="skip-link">Saltar al contenido</a>
+
+  <header class="heroe">
+    <div class="contenedor">
+      <span class="uc-logo"><img src="{{LOGO}}" alt="Fundación Universitaria Compensar"></span>
+      <p class="antetitulo">Especialización en Big Data · Electiva</p>
+      <h1>Machine Learning y Seguridad en la Nube</h1>
+      <p class="lead">Del dato al modelo, y del modelo a la nube: aprendizaje supervisado, no supervisado, redes
+        neuronales y por refuerzo, con Python en Google Colab, y cómo llevar datos y modelos a Microsoft Azure sin
+        poner en riesgo los datos personales. Un mismo caso de principio a fin.</p>
+    </div>
+    <div class="uc-franja" aria-hidden="true"></div>
+  </header>
+
+  <main id="contenido">
+    <div class="contenedor">
+      <div class="rejilla">
+        <section class="sesion" aria-labelledby="titulo-s1">
+          <span class="etiqueta">Sesión 1 · viernes 6 de noviembre · 4 horas</span>
+          <h2 id="titulo-s1">Del dato al modelo, del equipo a la nube</h2>
+          <ul>
+            <li>Diagnóstico de entrada (sin nota)</li>
+            <li>Computación en la nube: características, IaaS, PaaS y SaaS, modelos de implementación y responsabilidad compartida</li>
+            <li>Qué es aprender de datos: tipos de aprendizaje, entrenamiento y prueba, línea base</li>
+            <li>Primer contacto con los datos de Yarumo en Colab</li>
+          </ul>
+          <div class="acciones">
+            <a class="boton principal" href="diapositivas/sesion-1-del-dato-al-modelo.html"><i
+                class="fas fa-chalkboard-user" aria-hidden="true"></i>Diapositivas</a>
+            <a class="boton secundario" href="{{COLAB:1}}" target="_blank" rel="noopener"><i
+                class="fas fa-laptop-code" aria-hidden="true"></i>Abrir en Colab<span class="sr-only"> (se abre en
+                otra pestaña)</span></a>
+          </div>
+        </section>
+        <section class="sesion" aria-labelledby="titulo-s2">
+          <span class="etiqueta">Sesión 2 · sábado 7 de noviembre · 6 horas</span>
+          <h2 id="titulo-s2">Aprender con etiqueta</h2>
+          <ul>
+            <li>Regresión: lineal, vecinos más cercanos, bosques aleatorios y XGBoost</li>
+            <li>Clasificación: regresión logística, árboles, SVM y XGBoost; matriz de confusión, precisión y sensibilidad</li>
+            <li>Sobreajuste y validación cruzada</li>
+            <li>Identidades y acceso en Azure: Microsoft Entra ID, RBAC y Azure Policy</li>
+          </ul>
+          <div class="acciones">
+            <a class="boton principal" href="diapositivas/sesion-2-aprender-con-etiqueta.html"><i
+                class="fas fa-chalkboard-user" aria-hidden="true"></i>Diapositivas</a>
+            <a class="boton secundario" href="{{COLAB:2}}" target="_blank" rel="noopener"><i
+                class="fas fa-laptop-code" aria-hidden="true"></i>Abrir en Colab<span class="sr-only"> (se abre en
+                otra pestaña)</span></a>
+          </div>
+        </section>
+        <section class="sesion proxima" aria-labelledby="titulo-s3">
+          <span class="etiqueta">Sesión 3 · viernes 13 de noviembre · 4 horas</span>
+          <h2 id="titulo-s3">Grupos sin etiqueta</h2>
+          <ul>
+            <li>Agrupamiento: K-Means, DBSCAN y jerárquico</li>
+            <li>Riesgos, regulación y privacidad en la nube</li>
+            <li>IaaS frente a PaaS en Azure</li>
+          </ul>
+          <p class="estado"><i class="fas fa-hourglass-half" aria-hidden="true"></i> Próximamente</p>
+        </section>
+        <section class="sesion proxima" aria-labelledby="titulo-s4">
+          <span class="etiqueta">Sesión 4 · sábado 14 de noviembre · 6 horas</span>
+          <h2 id="titulo-s4">Redes y datos en Azure</h2>
+          <ul>
+            <li>Redes neuronales: perceptrón multicapa, entrenamiento y regularización; CNN y RNN</li>
+            <li>Almacenamiento, bases de datos, monitoreo y Defender for Cloud en Azure</li>
+          </ul>
+          <p class="estado"><i class="fas fa-hourglass-half" aria-hidden="true"></i> Próximamente</p>
+        </section>
+        <section class="sesion proxima" aria-labelledby="titulo-s5">
+          <span class="etiqueta">Sesión 5 · viernes 20 de noviembre · 4 horas</span>
+          <h2 id="titulo-s5">Aprender por ensayo y error</h2>
+          <ul>
+            <li>Aprendizaje por refuerzo: agente, entorno, recompensa y Q-learning</li>
+            <li>Sustentación del proyecto final</li>
+          </ul>
+          <p class="estado"><i class="fas fa-hourglass-half" aria-hidden="true"></i> Próximamente</p>
+        </section>
+
+        <section class="sesion" aria-labelledby="titulo-proyecto">
+          <span class="etiqueta">Proyecto final · en parejas</span>
+          <h2 id="titulo-proyecto">Plan de adopción segura de Azure para el modelo de Yarumo</h2>
+          <ul>
+            <li>Un modelo de aprendizaje automático con los datos de Yarumo, medido contra una línea base</li>
+            <li>Un plan para llevarlo a Azure con seguridad: servicios, responsabilidades, accesos y privacidad</li>
+            <li>Se sustenta en la sesión 5</li>
+          </ul>
+          <div class="acciones">
+            <a class="boton principal" href="proyecto.html"><i class="fas fa-shield-halved"
+                aria-hidden="true"></i>Enunciado y rúbrica</a>
+          </div>
+        </section>
+      </div>
+
+      <div class="nota">
+        <p><strong>Antes de empezar.</strong> Necesitas una cuenta de Google para abrir los cuadernos (<em>notebooks</em>) en
+          Colab. Al abrir uno, usa <em>Archivo → Guardar una copia en Drive</em> para conservar tus cambios. La primera
+          celda descarga los datos del caso desde el repositorio del curso y comprueba que estén completos: no hay que
+          subir nada. Si la descarga falla, <a href="{{DATOS_URL}}">descarga <em>clientes.csv</em></a>, súbelo a Colab con
+          el ícono de carpeta y vuelve a ejecutar la celda. En las diapositivas, las flechas avanzan y la tecla
+          <kbd>F</kbd> pone la pantalla completa.</p>
+        <p><strong>El caso del curso.</strong> Todas las sesiones trabajan con <em>Yarumo Fibra S.A.S.</em>, un operador
+          regional de internet fijo <strong>ficticio</strong> con clientes en cinco ciudades. Sus 8000 clientes se
+          generaron para el curso con una semilla fija y no corresponden a personas ni a empresas reales.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="contenedor">
+      <p>Machine Learning y Seguridad en la Nube · Especialización en Big Data · Fundación Universitaria Compensar ·
+        Material diseñado por <span>Javier Mauricio Sierra</span></p>
+    </div>
+  </footer>
+</body>
+
+</html>
