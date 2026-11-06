@@ -8,7 +8,9 @@ Para cada bloque ```python [id] de fuente/diapositivas/sesionN.md:
   Una salida partida en dos líneas en la diapositiva se acepta si, unida, coincide;
 - código: cada línea proyectada tiene que estar en la celda [id] de celdas_sesionN.py, en el
   mismo orden (se pueden quitar líneas y comentarios, no cambiar código);
-- ancho: ninguna línea proyectada pasa de 76 caracteres.
+- ancho: ninguna línea proyectada pasa de 76 caracteres;
+- origen: si se proyecta una salida, la última línea de código de la celda (la que suele producirla)
+  tiene que estar en la diapositiva.
 """
 import json
 import re
@@ -68,6 +70,15 @@ def main(n):
             if fuera is not None:
                 problemas.append(f"código que no está en la celda (o fuera de orden): {fuera}")
         proyectada = [l[2:] for l in lineas if l.startswith("#>")]
+        # la salida suele venir de la última línea de la celda: si la diapositiva no la muestra,
+        # el estudiante no sabe de dónde sale lo que ve
+        if proyectada and ident in celdas:
+            cuerpo_celda = [l.rstrip() for l in celdas[ident].split("\n")
+                            if l.strip() and not l.lstrip().startswith("#")]
+            codigo_visible = [sin_comentario(l) for l in lineas if l.strip() and not l.startswith("#>")]
+            if cuerpo_celda and sin_comentario(cuerpo_celda[-1]) not in codigo_visible:
+                problemas.append("la salida viene de la última línea de la celda y la diapositiva no la "
+                                 "muestra: " + cuerpo_celda[-1].strip()[:60])
         if proyectada:
             real = salidas.get(ident)
             if real is None:

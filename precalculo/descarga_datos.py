@@ -1,11 +1,7 @@
-"""Datos del caso «Yarumo Fibra S.A.S.» (empresa FICTICIA), descargados del repositorio.
+"""Datos del caso «Yarumo Fibra S.A.S.» (empresa FICTICIA), descargados del repositorio del curso.
 
-Deja en datos/clientes.csv los 8000 clientes del curso. La primera celda de cada notebook los
-descarga en lugar de crearlos con el generador (M3): así las reglas con que se inventaron los
-datos no quedan a la vista justo cuando los modelos intentan aprenderlas.
-
-El archivo se comprueba con su huella SHA-256: si no es idéntico al del curso, no se usa.
-Solo usa la biblioteca estándar.
+Deja en datos/clientes.csv los 8000 clientes del curso y comprueba su huella SHA-256: si el
+archivo no es idéntico al del curso, no se usa. Solo usa la biblioteca estándar de Python.
 """
 
 import hashlib
@@ -30,7 +26,7 @@ def _sin_datos(motivo):
 
 
 def _leer_url():
-    # Al preparar el material, antes de publicar el repositorio, se usa la copia local
+    # Solo al preparar el material: la variable apunta a una copia local del mismo archivo
     local = os.environ.get("YARUMO_CSV_LOCAL")
     if local:
         return Path(local).read_bytes()

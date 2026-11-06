@@ -2,9 +2,11 @@
 
     python3 precalculo/espacios.py fuente/diapositivas/sesionN.md              # muestra los cambios
     python3 precalculo/espacios.py fuente/diapositivas/sesionN.md --escribir   # y los guarda
+    python3 precalculo/espacios.py precalculo/celdas_sesionN.py --escribir     # solo celdas markdown
 
 - miles: 12 000 → 12 000 con U+202F (espacio fino de no separación), también en cifras de 7 dígitos
-- número + unidad o %: 40,8 % · 5 min · 28,8 °C · 400 mil · 58 000 pesos → U+00A0 (también tras **negrita**)
+- número + unidad o %: 40,8 % · 5 min · 28,8 °C · 400 mil · 58 000 pesos · 300 GB · 500 Mbps · 12 meses
+  → U+00A0 (también tras **negrita**); y moneda + número: USD 100 → U+00A0
 - operadores entre números (28,8 / 13,9 ≈ 2,07) y «<» de una secuencia → U+00A0 delante
 
 No toca el encabezado, los bloques de código, el código en línea, las fórmulas \\( \\) y $$ $$,
@@ -21,10 +23,28 @@ PROTEGIDO = re.compile(r"(`[^`\n]*`|\\\(.*?\\\)|\$\$.*?\$\$|\]\([^)]*\)|https?:/
 
 def prosa(t):
     t = re.sub(r"(?<![\d.,])\d{1,3}(?:[ \u202f]\d{3})+(?![\d])", lambda m: m.group(0).replace(" ", FINO), t)
-    t = re.sub(r"(\d\**) (%|min\b|km\b|°C|h\b|horas\b|mil\b|millones\b|pesos\b)", rf"\1{NB}\2", t)
+    t = re.sub(r"(\d\**) (%|min\b|km\b|°C|h\b|horas\b|mil\b|millones\b|pesos\b|GB\b|Mbps\b"
+               r"|segundos\b|días\b|meses\b|años\b)", rf"\1{NB}\2", t)
+    t = re.sub(r"\b(USD|COP) (\**\d)", rf"\1{NB}\2", t)
     t = re.sub(r"(\d\**) (/|≈|=) (\**\d)", rf"\1{NB}\2{NB}\3", t)
     t = re.sub(r" < ", f"{NB}< ", t)
     return t
+
+
+def pasar_celdas(texto):
+    """Para celdas_sesionN.py: solo la prosa de las celdas markdown («# texto»), nunca el código."""
+    salida, en_markdown = [], False
+    for linea in texto.split("\n"):
+        if linea.startswith("# %%"):
+            en_markdown = linea.strip() == "# %% [markdown]"
+            salida.append(linea)
+            continue
+        if en_markdown and linea.startswith("# ") and not linea.startswith("#   "):
+            partes = PROTEGIDO.split(linea[2:])
+            salida.append("# " + "".join(p if i % 2 else prosa(p) for i, p in enumerate(partes)))
+        else:
+            salida.append(linea)
+    return "\n".join(salida)
 
 
 def pasar(texto):
@@ -49,7 +69,7 @@ def pasar(texto):
 if __name__ == "__main__":
     ruta = Path(sys.argv[1])
     viejo = ruta.read_text(encoding="utf-8")
-    nuevo = pasar(viejo)
+    nuevo = pasar_celdas(viejo) if ruta.suffix == ".py" else pasar(viejo)
     cambios = 0
     for a, b in zip(viejo.split("\n"), nuevo.split("\n")):
         if a != b:

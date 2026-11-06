@@ -5,17 +5,14 @@ Las de cada sesión están en ayudas_sesionN.py.
 
 
 def _aviso_version():
-    """Las diapositivas se ejecutaron con pandas 2.2 y scikit-learn 1.6; con otras, algo cambia."""
+    """Las diapositivas se ejecutaron con pandas 2.2 y scikit-learn 1.6: si Colab trae otras, se dice."""
     import pandas as pd
     import sklearn
 
-    if int(pd.__version__.split(".")[0]) >= 3:
-        print(f"Aviso: este Colab trae pandas {pd.__version__} y las diapositivas usan pandas 2.2. "
-              "Algunas salidas se verán un poco distintas (por ejemplo, el texto sale como str "
-              "y no como object).")
-    if sklearn.__version__.split(".")[:2] != ["1", "6"]:
-        print(f"Aviso: este Colab trae scikit-learn {sklearn.__version__} y las diapositivas usan "
-              "la 1.6. Algunas cifras de los modelos pueden cambiar en los últimos decimales.")
+    if pd.__version__.split(".")[:2] != ["2", "2"] or sklearn.__version__.split(".")[:2] != ["1", "6"]:
+        print(f"Nota: este Colab trae pandas {pd.__version__} y scikit-learn {sklearn.__version__}; "
+              "las diapositivas se hicieron con pandas 2.2 y scikit-learn 1.6. Si alguna salida "
+              "se ve un poco distinta, es por eso.")
 
 
 _aviso_version()

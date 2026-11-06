@@ -1,0 +1,320 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" viewBox="0 0 734.175156 300.812781" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 300.812781 
+L 734.175156 300.812781 
+L 734.175156 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 52.495156 264.218406 
+L 355.185156 264.218406 
+L 355.185156 40.726406 
+L 52.495156 40.726406 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1"/>
+     <g id="text_1">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; fill: #2b2b2b" transform="translate(77.408712 277.001219)">Línea base</text>
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; fill: #2b2b2b" transform="translate(66.211446 290.96525)">(siempre «No»)</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2"/>
+     <g id="text_2">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; fill: #2b2b2b" transform="translate(274.170507 277.350594)">Árbol de</text>
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; fill: #2b2b2b" transform="translate(266.103397 291.051375)">dos niveles</text>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_3">
+      <path d="M 52.495156 264.218406 
+L 355.185156 264.218406 
+" clip-path="url(#pedbe2f3dec)" style="fill: none; stroke: #e3e3e0; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_4">
+      <defs>
+       <path id="m8e1891da7e" d="M 0 0 
+L -3.5 0 
+" style="stroke: #5f6b76; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#m8e1891da7e" x="52.495156" y="264.218406" style="fill: #5f6b76; stroke: #5f6b76; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_3">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: end; fill: #5f6b76" x="45.495156" y="268.859812" transform="rotate(-0 45.495156 268.859812)">0 %</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_5">
+      <path d="M 52.495156 219.520006 
+L 355.185156 219.520006 
+" clip-path="url(#pedbe2f3dec)" style="fill: none; stroke: #e3e3e0; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_6">
+      <g>
+       <use xlink:href="#m8e1891da7e" x="52.495156" y="219.520006" style="fill: #5f6b76; stroke: #5f6b76; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: end; fill: #5f6b76" x="45.495156" y="224.161412" transform="rotate(-0 45.495156 224.161412)">20 %</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_7">
+      <path d="M 52.495156 174.821606 
+L 355.185156 174.821606 
+" clip-path="url(#pedbe2f3dec)" style="fill: none; stroke: #e3e3e0; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_8">
+      <g>
+       <use xlink:href="#m8e1891da7e" x="52.495156" y="174.821606" style="fill: #5f6b76; stroke: #5f6b76; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_5">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: end; fill: #5f6b76" x="45.495156" y="179.463012" transform="rotate(-0 45.495156 179.463012)">40 %</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_9">
+      <path d="M 52.495156 130.123206 
+L 355.185156 130.123206 
+" clip-path="url(#pedbe2f3dec)" style="fill: none; stroke: #e3e3e0; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_10">
+      <g>
+       <use xlink:href="#m8e1891da7e" x="52.495156" y="130.123206" style="fill: #5f6b76; stroke: #5f6b76; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_6">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: end; fill: #5f6b76" x="45.495156" y="134.764612" transform="rotate(-0 45.495156 134.764612)">60 %</text>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_11">
+      <path d="M 52.495156 85.424806 
+L 355.185156 85.424806 
+" clip-path="url(#pedbe2f3dec)" style="fill: none; stroke: #e3e3e0; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_12">
+      <g>
+       <use xlink:href="#m8e1891da7e" x="52.495156" y="85.424806" style="fill: #5f6b76; stroke: #5f6b76; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_7">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: end; fill: #5f6b76" x="45.495156" y="90.066212" transform="rotate(-0 45.495156 90.066212)">80 %</text>
+     </g>
+    </g>
+    <g id="ytick_6">
+     <g id="line2d_13">
+      <path d="M 52.495156 40.726406 
+L 355.185156 40.726406 
+" clip-path="url(#pedbe2f3dec)" style="fill: none; stroke: #e3e3e0; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_14">
+      <g>
+       <use xlink:href="#m8e1891da7e" x="52.495156" y="40.726406" style="fill: #5f6b76; stroke: #5f6b76; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_8">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: end; fill: #5f6b76" x="45.495156" y="45.367812" transform="rotate(-0 45.495156 45.367812)">100 %</text>
+     </g>
+    </g>
+   </g>
+   <g id="patch_3">
+    <path d="M 66.253793 264.218406 
+L 151.652225 264.218406 
+L 151.652225 93.358772 
+L 66.253793 93.358772 
+z
+" clip-path="url(#pedbe2f3dec)" style="fill: #5f6b76"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 256.028087 264.218406 
+L 341.42652 264.218406 
+L 341.42652 91.794328 
+L 256.028087 91.794328 
+z
+" clip-path="url(#pedbe2f3dec)" style="fill: #8a2e9e"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 52.495156 264.218406 
+L 52.495156 40.726406 
+" style="fill: none; stroke: #e3e3e0; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 52.495156 264.218406 
+L 355.185156 264.218406 
+" style="fill: none; stroke: #e3e3e0; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_9">
+    <text style="font-weight: 700; font-size: 14px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: middle; fill: #2b2b2b" x="108.953009" y="86.130495" transform="rotate(-0 108.953009 86.130495)">76,5 %</text>
+   </g>
+   <g id="text_10">
+    <text style="font-weight: 700; font-size: 14px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: middle; fill: #2b2b2b" x="298.727304" y="84.566051" transform="rotate(-0 298.727304 84.566051)">77,2 %</text>
+   </g>
+   <g id="text_11">
+    <text style="font-weight: 700; font-size: 15px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: start; fill: #2b2b2b" x="52.495156" y="34.726406" transform="rotate(-0 52.495156 34.726406)">Exactitud en prueba</text>
+   </g>
+  </g>
+  <g id="axes_2">
+   <g id="patch_7">
+    <path d="M 424.285156 264.218406 
+L 726.975156 264.218406 
+L 726.975156 40.726406 
+L 424.285156 40.726406 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_3">
+    <g id="xtick_3">
+     <g id="line2d_15"/>
+     <g id="text_12">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; fill: #2b2b2b" transform="translate(449.198712 277.001219)">Línea base</text>
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; fill: #2b2b2b" transform="translate(438.001446 290.96525)">(siempre «No»)</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_16"/>
+     <g id="text_13">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; fill: #2b2b2b" transform="translate(645.960507 277.350594)">Árbol de</text>
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; fill: #2b2b2b" transform="translate(637.893397 291.051375)">dos niveles</text>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_4">
+    <g id="ytick_7">
+     <g id="line2d_17">
+      <path d="M 424.285156 264.218406 
+L 726.975156 264.218406 
+" clip-path="url(#p2e02c45f64)" style="fill: none; stroke: #e3e3e0; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_18">
+      <g>
+       <use xlink:href="#m8e1891da7e" x="424.285156" y="264.218406" style="fill: #5f6b76; stroke: #5f6b76; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_14">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: end; fill: #5f6b76" x="417.285156" y="268.859812" transform="rotate(-0 417.285156 268.859812)">0</text>
+     </g>
+    </g>
+    <g id="ytick_8">
+     <g id="line2d_19">
+      <path d="M 424.285156 216.767875 
+L 726.975156 216.767875 
+" clip-path="url(#p2e02c45f64)" style="fill: none; stroke: #e3e3e0; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_20">
+      <g>
+       <use xlink:href="#m8e1891da7e" x="424.285156" y="216.767875" style="fill: #5f6b76; stroke: #5f6b76; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_15">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: end; fill: #5f6b76" x="417.285156" y="221.409282" transform="rotate(-0 417.285156 221.409282)">100</text>
+     </g>
+    </g>
+    <g id="ytick_9">
+     <g id="line2d_21">
+      <path d="M 424.285156 169.317345 
+L 726.975156 169.317345 
+" clip-path="url(#p2e02c45f64)" style="fill: none; stroke: #e3e3e0; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_22">
+      <g>
+       <use xlink:href="#m8e1891da7e" x="424.285156" y="169.317345" style="fill: #5f6b76; stroke: #5f6b76; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_16">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: end; fill: #5f6b76" x="417.285156" y="173.958751" transform="rotate(-0 417.285156 173.958751)">200</text>
+     </g>
+    </g>
+    <g id="ytick_10">
+     <g id="line2d_23">
+      <path d="M 424.285156 121.866814 
+L 726.975156 121.866814 
+" clip-path="url(#p2e02c45f64)" style="fill: none; stroke: #e3e3e0; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_24">
+      <g>
+       <use xlink:href="#m8e1891da7e" x="424.285156" y="121.866814" style="fill: #5f6b76; stroke: #5f6b76; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_17">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: end; fill: #5f6b76" x="417.285156" y="126.50822" transform="rotate(-0 417.285156 126.50822)">300</text>
+     </g>
+    </g>
+    <g id="ytick_11">
+     <g id="line2d_25">
+      <path d="M 424.285156 74.416283 
+L 726.975156 74.416283 
+" clip-path="url(#p2e02c45f64)" style="fill: none; stroke: #e3e3e0; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_26">
+      <g>
+       <use xlink:href="#m8e1891da7e" x="424.285156" y="74.416283" style="fill: #5f6b76; stroke: #5f6b76; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_18">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: end; fill: #5f6b76" x="417.285156" y="79.057689" transform="rotate(-0 417.285156 79.057689)">400</text>
+     </g>
+    </g>
+   </g>
+   <g id="patch_8">
+    <path d="M 438.043793 264.218406 
+L 523.442225 264.218406 
+L 523.442225 264.218406 
+L 438.043793 264.218406 
+z
+" clip-path="url(#p2e02c45f64)" style="fill: #5f6b76"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 627.818087 264.218406 
+L 713.21652 264.218406 
+L 713.21652 165.521302 
+L 627.818087 165.521302 
+z
+" clip-path="url(#p2e02c45f64)" style="fill: #8a2e9e"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 424.285156 264.218406 
+L 424.285156 40.726406 
+" style="fill: none; stroke: #e3e3e0; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 424.285156 264.218406 
+L 726.975156 264.218406 
+" style="fill: none; stroke: #e3e3e0; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_19">
+    <text style="font-weight: 700; font-size: 14px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: middle; fill: #2b2b2b" x="480.743009" y="256.990129" transform="rotate(-0 480.743009 256.990129)">0 de 471</text>
+   </g>
+   <g id="text_20">
+    <text style="font-weight: 700; font-size: 14px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: middle; fill: #2b2b2b" x="670.517304" y="158.293025" transform="rotate(-0 670.517304 158.293025)">208 de 471</text>
+   </g>
+   <g id="text_21">
+    <text style="font-weight: 700; font-size: 15px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; fill: #2b2b2b" transform="translate(424.285156 17.910937)">De los 471 que cancelaron,</text>
+    <text style="font-weight: 700; font-size: 15px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; fill: #2b2b2b" transform="translate(424.285156 34.726406)">¿a cuántos encontró?</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pedbe2f3dec">
+   <rect x="52.495156" y="40.726406" width="302.69" height="223.492"/>
+  </clipPath>
+  <clipPath id="p2e02c45f64">
+   <rect x="424.285156" y="40.726406" width="302.69" height="223.492"/>
+  </clipPath>
+ </defs>
+</svg>

@@ -1,0 +1,276 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" viewBox="0 0 613.195487 289.19952" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 289.19952 
+L 613.195487 289.19952 
+L 613.195487 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 126.544375 245.836395 
+L 603.973441 245.836395 
+L 603.973441 24.597656 
+L 126.544375 24.597656 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 126.544375 235.780089 
+L 531.145279 235.780089 
+L 531.145279 208.038554 
+L 126.544375 208.038554 
+z
+" clip-path="url(#p33b87ac966)" style="fill: #566b7f"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 126.544375 201.10317 
+L 365.324594 201.10317 
+L 365.324594 173.361636 
+L 126.544375 173.361636 
+z
+" clip-path="url(#p33b87ac966)" style="fill: #8a2e9e"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 126.544375 166.426252 
+L 364.590156 166.426252 
+L 364.590156 138.684717 
+L 126.544375 138.684717 
+z
+" clip-path="url(#p33b87ac966)" style="fill: #8a2e9e"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 126.544375 131.749334 
+L 338.959696 131.749334 
+L 338.959696 104.007799 
+L 126.544375 104.007799 
+z
+" clip-path="url(#p33b87ac966)" style="fill: #8a2e9e"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 126.544375 97.072415 
+L 290.516207 97.072415 
+L 290.516207 69.330881 
+L 126.544375 69.330881 
+z
+" clip-path="url(#p33b87ac966)" style="fill: #8a2e9e"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 126.544375 62.395497 
+L 287.100101 62.395497 
+L 287.100101 34.653963 
+L 126.544375 34.653963 
+z
+" clip-path="url(#p33b87ac966)" style="fill: #8a2e9e"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <defs>
+       <path id="m7073dcfe1f" d="M 0 0 
+L 0 3.5 
+" style="stroke: #475569; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#m7073dcfe1f" x="126.544375" y="245.836395" style="fill: #475569; stroke: #475569; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_1">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: middle; fill: #475569" x="126.544375" y="262.714364" transform="rotate(-0 126.544375 262.714364)">0</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2">
+      <g>
+       <use xlink:href="#m7073dcfe1f" x="184.924905" y="245.836395" style="fill: #475569; stroke: #475569; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_2">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: middle; fill: #475569" x="184.924905" y="262.714364" transform="rotate(-0 184.924905 262.714364)">25</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_3">
+      <g>
+       <use xlink:href="#m7073dcfe1f" x="243.305434" y="245.836395" style="fill: #475569; stroke: #475569; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_3">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: middle; fill: #475569" x="243.305434" y="262.714364" transform="rotate(-0 243.305434 262.714364)">50</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_4">
+      <g>
+       <use xlink:href="#m7073dcfe1f" x="301.685964" y="245.836395" style="fill: #475569; stroke: #475569; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: middle; fill: #475569" x="301.685964" y="262.714364" transform="rotate(-0 301.685964 262.714364)">75</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_5">
+      <g>
+       <use xlink:href="#m7073dcfe1f" x="360.066494" y="245.836395" style="fill: #475569; stroke: #475569; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_5">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: middle; fill: #475569" x="360.066494" y="262.714364" transform="rotate(-0 360.066494 262.714364)">100</text>
+     </g>
+    </g>
+    <g id="xtick_6">
+     <g id="line2d_6">
+      <g>
+       <use xlink:href="#m7073dcfe1f" x="418.447023" y="245.836395" style="fill: #475569; stroke: #475569; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_6">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: middle; fill: #475569" x="418.447023" y="262.714364" transform="rotate(-0 418.447023 262.714364)">125</text>
+     </g>
+    </g>
+    <g id="xtick_7">
+     <g id="line2d_7">
+      <g>
+       <use xlink:href="#m7073dcfe1f" x="476.827553" y="245.836395" style="fill: #475569; stroke: #475569; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_7">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: middle; fill: #475569" x="476.827553" y="262.714364" transform="rotate(-0 476.827553 262.714364)">150</text>
+     </g>
+    </g>
+    <g id="xtick_8">
+     <g id="line2d_8">
+      <g>
+       <use xlink:href="#m7073dcfe1f" x="535.208083" y="245.836395" style="fill: #475569; stroke: #475569; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_8">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: middle; fill: #475569" x="535.208083" y="262.714364" transform="rotate(-0 535.208083 262.714364)">175</text>
+     </g>
+    </g>
+    <g id="xtick_9">
+     <g id="line2d_9">
+      <g>
+       <use xlink:href="#m7073dcfe1f" x="593.588612" y="245.836395" style="fill: #475569; stroke: #475569; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_9">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: middle; fill: #475569" x="593.588612" y="262.714364" transform="rotate(-0 593.588612 262.714364)">200</text>
+     </g>
+    </g>
+    <g id="text_10">
+     <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: middle; fill: #334155" x="365.258908" y="279.295926" transform="rotate(-0 365.258908 279.295926)">Error absoluto medio en prueba (GB por cliente)</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_10">
+      <defs>
+       <path id="m24e3719a07" d="M 0 0 
+L -3.5 0 
+" style="stroke: #475569; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#m24e3719a07" x="126.544375" y="221.909321" style="fill: #475569; stroke: #475569; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_11">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: end; fill: #475569" x="119.544375" y="226.848306" transform="rotate(-0 119.544375 226.848306)">Línea base</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_11">
+      <g>
+       <use xlink:href="#m24e3719a07" x="126.544375" y="187.232403" style="fill: #475569; stroke: #475569; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_12">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: end; fill: #475569" x="119.544375" y="192.171387" transform="rotate(-0 119.544375 192.171387)">Árbol sin límite</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_12">
+      <g>
+       <use xlink:href="#m24e3719a07" x="126.544375" y="152.555485" style="fill: #475569; stroke: #475569; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_13">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: end; fill: #475569" x="119.544375" y="157.494469" transform="rotate(-0 119.544375 157.494469)">KNN (10 vecinos)</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_13">
+      <g>
+       <use xlink:href="#m24e3719a07" x="126.544375" y="117.878566" style="fill: #475569; stroke: #475569; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_14">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: end; fill: #475569" x="119.544375" y="122.817551" transform="rotate(-0 119.544375 122.817551)">Lineal</text>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_14">
+      <g>
+       <use xlink:href="#m24e3719a07" x="126.544375" y="83.201648" style="fill: #475569; stroke: #475569; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_15">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: end; fill: #475569" x="119.544375" y="88.140633" transform="rotate(-0 119.544375 88.140633)">Bosque aleatorio</text>
+     </g>
+    </g>
+    <g id="ytick_6">
+     <g id="line2d_15">
+      <g>
+       <use xlink:href="#m24e3719a07" x="126.544375" y="48.52473" style="fill: #475569; stroke: #475569; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_16">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: end; fill: #475569" x="119.544375" y="53.463714" transform="rotate(-0 119.544375 53.463714)">XGBoost</text>
+     </g>
+    </g>
+   </g>
+   <g id="patch_9">
+    <path d="M 126.544375 245.836395 
+L 126.544375 24.597656 
+" style="fill: none; stroke: #94a3b8; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 126.544375 245.836395 
+L 603.973441 245.836395 
+" style="fill: none; stroke: #94a3b8; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_17">
+    <text style="font-size: 12px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: start; fill: #1e293b" x="535.815721" y="225.220571" transform="rotate(-0 535.815721 225.220571)">173 GB</text>
+   </g>
+   <g id="text_18">
+    <text style="font-size: 12px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: start; fill: #1e293b" x="369.995037" y="190.543653" transform="rotate(-0 369.995037 190.543653)">102 GB</text>
+   </g>
+   <g id="text_19">
+    <text style="font-size: 12px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: start; fill: #1e293b" x="369.260598" y="155.866735" transform="rotate(-0 369.260598 155.866735)">102 GB</text>
+   </g>
+   <g id="text_20">
+    <text style="font-size: 12px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: start; fill: #1e293b" x="343.630139" y="121.189816" transform="rotate(-0 343.630139 121.189816)">91 GB</text>
+   </g>
+   <g id="text_21">
+    <text style="font-size: 12px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: start; fill: #1e293b" x="295.186649" y="86.512898" transform="rotate(-0 295.186649 86.512898)">70 GB</text>
+   </g>
+   <g id="text_22">
+    <text style="font-size: 12px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: start; fill: #1e293b" x="291.770544" y="51.83598" transform="rotate(-0 291.770544 51.83598)">69 GB</text>
+   </g>
+   <g id="text_23">
+    <text style="font-weight: 700; font-size: 15px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: start; fill: #1e293b" x="126.544375" y="18.597656" transform="rotate(-0 126.544375 18.597656)">El bosque y XGBoost se equivocan menos</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p33b87ac966">
+   <rect x="126.544375" y="24.597656" width="477.429066" height="221.238739"/>
+  </clipPath>
+ </defs>
+</svg>

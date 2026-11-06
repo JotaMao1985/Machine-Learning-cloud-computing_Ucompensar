@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Enunciado y rúbrica del proyecto final de Machine Learning y Seguridad en la Nube: el plan de adopción segura de Azure para el modelo de Yarumo Fibra.">
+  <title>Proyecto final: el plan de adopción segura · Machine Learning y Seguridad en la Nube</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+  <!--
+    Fuente de Htmls/proyecto.html (la construye precalculo/portada.py, que resuelve los marcadores del logo, de Colab y de los datos).
+    Las decisiones que no estaban en el PLAN las aprobó el docente el 6 de noviembre de 2026 («Sí, apruébalas»), junto con la
+    fecha de cierre de la entrega. Solo el peso en la nota queda pendiente (comentario PENDIENTE). Ver AUDITORIA_sesion2_2026-11-06.md.
+    Cada afirmación de Azure o de normas sale de fuentes/FUENTES.md (ID entre paréntesis en los comentarios).
+  -->
+  <style>
+    /* Paleta UCompensar (portada del syllabus). El naranja de marca y el ámbar solo van en
+       bordes, íconos y franjas; el texto naranja usa --uc-naranja-texto (5,2:1 sobre blanco). */
+    :root {
+      --uc-morado: #691E7A;
+      --uc-morado-claro: #8A2E9E;
+      --uc-morado-profundo: #3A0F47;
+      --uc-naranja: #F46201;
+      --uc-naranja-texto: #B84A00;
+      --uc-ambar: #FAA012;
+      --uc-pizarra: #566B7F;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: #1E293B;
+      background: #F8FAFC;
+    }
+
+    .contenedor { max-width: 72rem; margin: 0 auto; padding: 0 1rem; width: 100%; }
+    @media (min-width: 640px) { .contenedor { padding: 0 1.5rem; } }
+
+    .skip-link {
+      position: absolute; top: -100px; left: 1rem; z-index: 100;
+      background: white; color: var(--uc-morado); border: 2px solid var(--uc-morado);
+      padding: 0.75rem 1rem; border-radius: 0.5rem; font-weight: 500; text-decoration: none;
+      transition: top 0.2s;
+    }
+    .skip-link:focus { top: 1rem; }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+    }
+
+    .heroe { background: linear-gradient(135deg, #5C1A6C 0%, var(--uc-morado-profundo) 100%); color: white; }
+    .heroe .contenedor { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+    .uc-logo {
+      display: inline-flex; align-items: center; background: white; border-radius: 999px;
+      padding: 0.35rem 0.9rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18); margin-bottom: 1.5rem;
+    }
+    .uc-logo img { height: 30px; width: auto; display: block; }
+    .antetitulo {
+      margin: 0; color: var(--uc-ambar); font-size: 0.85rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+    }
+    h1 { margin: 0.5rem 0 1rem; font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; line-height: 1.15; }
+    .heroe p.lead { margin: 0; max-width: 48rem; font-size: 1.125rem; color: rgba(255, 255, 255, 0.92); }
+    .heroe a.volver { color: white; font-weight: 500; }
+    .heroe p.migas { margin: 1.25rem 0 0; font-size: 0.95rem; }
+    .uc-franja {
+      height: 5px;
+      background: linear-gradient(90deg, var(--uc-naranja) 0%, var(--uc-ambar) 55%, var(--uc-pizarra) 100%);
+    }
+
+    main { flex-grow: 1; padding: 2.5rem 0; }
+
+    .indice {
+      background: white; border: 1px solid #E5E7EB; border-radius: 1rem; padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .indice h2 { margin: 0 0 0.5rem; font-size: 1rem; color: var(--uc-morado); }
+    .indice ol { margin: 0; padding-left: 1.4rem; columns: 2; column-gap: 2rem; }
+    @media (max-width: 640px) { .indice ol { columns: 1; } }
+    .indice a { color: var(--uc-morado); }
+
+    .bloque {
+      background: white; border: 1px solid #E5E7EB; border-radius: 1rem; padding: 1.5rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06); margin-bottom: 1.5rem;
+    }
+    .bloque h2 { margin: 0 0 0.75rem; font-size: 1.5rem; line-height: 1.25; color: var(--uc-morado); }
+    .bloque h3 { margin: 1.25rem 0 0.5rem; font-size: 1.1rem; color: var(--uc-morado-profundo); }
+    .bloque p { margin: 0 0 0.75rem; }
+    .bloque ul, .bloque ol { margin: 0.25rem 0 0.75rem; padding-left: 1.3rem; }
+    .bloque li { margin-bottom: 0.3rem; }
+    .bloque a { color: var(--uc-morado); }
+    .etiqueta {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+      color: var(--uc-naranja-texto);
+    }
+    .pregunta-grande {
+      margin: 0.25rem 0 0.75rem; font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 900;
+      line-height: 1.2; color: var(--uc-morado-profundo);
+    }
+    code {
+      font-family: ui-monospace, 'SFMono-Regular', Menlo, monospace; font-size: 0.88em;
+      background: #F1F5F9; border: 1px solid #E2E8F0; border-radius: 0.3rem; padding: 0.05em 0.35em;
+      overflow-wrap: anywhere;
+    }
+
+    table { width: 100%; border-collapse: collapse; margin: 0.5rem 0 1rem; font-size: 0.95rem; }
+    th, td { text-align: left; vertical-align: top; padding: 0.55rem 0.7rem; border: 1px solid #E5E7EB; }
+    thead th { background: #F5EEF7; color: var(--uc-morado-profundo); }
+    tbody th { background: #FAFAFB; color: var(--uc-morado-profundo); font-weight: 700; }
+
+    .partes { list-style: none; padding: 0 !important; display: grid; gap: 0.75rem; }
+    @media (min-width: 768px) { .partes { grid-template-columns: repeat(3, 1fr); } }
+    .partes li {
+      border: 1px solid #E5E7EB; border-top: 4px solid var(--uc-naranja); border-radius: 0.75rem;
+      padding: 0.75rem 1rem; margin: 0;
+    }
+    .partes strong { display: block; color: var(--uc-morado-profundo); }
+
+    .rubrica td { font-size: 0.9rem; }
+    .rubrica tbody th { width: 17%; }
+    .rubrica tbody th small { display: block; font-weight: 400; color: #475569; }
+    @media (max-width: 760px) {
+      .rubrica thead { display: none; }
+      .rubrica, .rubrica tbody, .rubrica tr, .rubrica th, .rubrica td { display: block; width: 100%; }
+      .rubrica tr { border: 1px solid #E5E7EB; border-radius: 0.75rem; margin-bottom: 1rem; overflow: hidden; }
+      .rubrica tbody th { width: 100%; border: 0; border-bottom: 1px solid #E5E7EB; }
+      .rubrica td { border: 0; border-bottom: 1px solid #F1F5F9; }
+      .rubrica td::before {
+        content: attr(data-nivel); display: block; font-size: 0.72rem; font-weight: 700;
+        letter-spacing: 0.05em; text-transform: uppercase; color: var(--uc-naranja-texto);
+      }
+    }
+
+    .aviso {
+      background: #FFF7ED; border-left: 4px solid var(--uc-naranja); padding: 1rem 1.25rem;
+      border-radius: 0 0.75rem 0.75rem 0; margin: 0.75rem 0 1rem;
+    }
+    .aviso p:last-child { margin: 0; }
+    .aviso strong { color: var(--uc-naranja-texto); }
+
+    .hitos { list-style: none; padding: 0 !important; display: grid; gap: 0.75rem; }
+    @media (min-width: 768px) { .hitos { grid-template-columns: repeat(5, 1fr); } }
+    .hitos li {
+      border: 1px solid #E5E7EB; border-top: 4px solid var(--uc-morado); border-radius: 0.75rem;
+      padding: 0.75rem 1rem; margin: 0;
+    }
+    .hitos strong { display: block; color: var(--uc-morado-profundo); }
+
+    .boton {
+      display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.7rem 1.4rem;
+      border-radius: 999px; font-weight: 700; font-size: 0.92rem; text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .boton.principal { color: white !important; background: linear-gradient(140deg, var(--uc-morado) 0%, var(--uc-naranja-texto) 100%); }
+    .boton.secundario { color: var(--uc-morado) !important; border: 2px solid var(--uc-morado); background: white; }
+    .boton:hover, .boton:focus-visible { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(105, 30, 122, 0.25); }
+    .boton:focus-visible { outline: 3px solid var(--uc-morado); outline-offset: 2px; }
+    .acciones { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 0.5rem 0 0.75rem; }
+
+    footer { background: linear-gradient(180deg, #5C1A6C 0%, var(--uc-morado-profundo) 100%); }
+    footer p { margin: 0; padding: 1.5rem 0; text-align: center; color: white; font-size: 0.875rem; }
+    footer span { color: var(--uc-ambar); }
+
+    @media (prefers-reduced-motion: reduce) { .boton { transition: none; } }
+
+    @media print {
+      @page { margin: 1.6cm 1.4cm; }
+      body { background: white; font-size: 10.5pt; display: block; }
+      .skip-link, .indice, .boton i, .uc-franja { display: none; }
+      .heroe { background: none; color: #1E293B; border-bottom: 2px solid var(--uc-morado); }
+      .heroe .contenedor { padding: 0 0 0.75rem; }
+      .heroe p.lead { color: #1E293B; }
+      .heroe a.volver { color: var(--uc-morado); }
+      .antetitulo { color: var(--uc-naranja-texto); }
+      .uc-logo { box-shadow: none; padding: 0; margin-bottom: 0.75rem; }
+      main { padding: 1rem 0 0; }
+      .bloque { box-shadow: none; border: 0; padding: 0; margin-bottom: 1rem; }
+      .bloque h2 { break-after: avoid; }
+      .boton, .boton.principal, .boton.secundario { padding: 0; border: 0; color: var(--uc-morado) !important; background: none; }
+      .hitos { grid-template-columns: repeat(5, 1fr); }
+      .partes { grid-template-columns: repeat(3, 1fr); }
+      tr, .hitos li, .partes li, .aviso { break-inside: avoid; }
+      .rubrica thead { display: none; }
+      .rubrica, .rubrica tbody, .rubrica tr, .rubrica th, .rubrica td { display: block; width: 100%; }
+      .rubrica tr { border: 1px solid #CBD5E1; border-radius: 0.5rem; margin-bottom: 0.75rem; overflow: hidden; }
+      .rubrica tbody th, .rubrica td { border: 0; border-bottom: 1px solid #E5E7EB; }
+      .rubrica td::before {
+        content: attr(data-nivel); display: block; font-size: 0.72rem; font-weight: 700;
+        letter-spacing: 0.05em; text-transform: uppercase; color: var(--uc-naranja-texto);
+      }
+      footer { background: none; }
+      footer p { color: #475569; padding: 0.5rem 0; }
+      footer span { color: #475569; }
+      a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #475569; overflow-wrap: anywhere; }
+    }
+  </style>
+</head>
+
+<body>
+  <a href="#contenido" class="skip-link">Saltar al contenido</a>
+
+  <header class="heroe">
+    <div class="contenedor">
+      <span class="uc-logo"><img src="{{LOGO}}" alt="Fundación Universitaria Compensar"></span>
+      <p class="antetitulo">Machine Learning y Seguridad en la Nube · Proyecto final</p>
+      <h1>Plan de adopción segura de Azure para el modelo de Yarumo</h1>
+      <p class="lead">Un modelo de aprendizaje automático con los datos de <em>Yarumo Fibra S.A.S.</em> y un plan para llevarlo
+        a Microsoft Azure sin poner en riesgo los datos personales de sus clientes. Aquí están el enunciado, lo que se
+        entrega y cómo se evalúa.</p>
+      <p class="migas"><a class="volver" href="index.html"><i class="fas fa-arrow-left" aria-hidden="true"></i>
+          Volver a la portada del curso</a></p>
+    </div>
+    <div class="uc-franja" aria-hidden="true"></div>
+  </header>
+
+  <main id="contenido">
+    <div class="contenedor">
+      <nav class="indice" aria-labelledby="titulo-indice">
+        <h2 id="titulo-indice">En esta página</h2>
+        <ol>
+          <li><a href="#pregunta">La pregunta</a></li>
+          <li><a href="#organizacion">Cómo se organiza</a></li>
+          <li><a href="#datos">Los datos</a></li>
+          <li><a href="#partes">Las tres partes</a></li>
+          <li><a href="#lista-minima">La lista mínima</a></li>
+          <li><a href="#hitos">Hitos</a></li>
+          <li><a href="#entrega">La entrega y la sustentación</a></li>
+          <li><a href="#evaluacion">La evaluación</a></li>
+          <li><a href="#rubrica">La rúbrica</a></li>
+          <li><a href="#ia">El uso de IA</a></li>
+          <li><a href="#fuentes">Para consultar</a></li>
+        </ol>
+      </nav>
+
+      <section class="bloque" id="pregunta" aria-labelledby="titulo-pregunta">
+        <span class="etiqueta">La pregunta de la gerencia</span>
+        <h2 id="titulo-pregunta" class="sr-only">La pregunta</h2>
+        <p class="pregunta-grande">¿Llevamos los datos y el modelo a Azure, y cómo, sin poner en riesgo los datos personales de
+          los clientes?</p>
+        <p>Yarumo Fibra es un operador regional de internet fijo con 8000 clientes en cinco ciudades. Sus sistemas corren hoy en
+          un centro de datos propio en Pereira. La gerencia quiere usar el aprendizaje automático, por ejemplo para anticipar
+          qué clientes van a cancelar, y quiere saber si lo lleva a la nube. Tu equipo le entrega a la gerencia dos cosas: <strong>un
+          modelo que funciona</strong>, medido con honestidad, y <strong>un plan para llevarlo a Azure con
+          seguridad</strong>: quién puede ver qué, qué reglas se aplican, dónde quedan los datos, qué dice la ley y cuánto
+          cuesta.</p>
+        <p>Yarumo es una empresa <strong>ficticia</strong>: sus datos se generaron para el curso y no corresponden a personas
+          ni a empresas reales.</p>
+      </section>
+
+      <section class="bloque" id="organizacion" aria-labelledby="titulo-organizacion">
+        <h2 id="titulo-organizacion">Cómo se organiza</h2>
+        <ul>
+          <li><strong>En parejas.</strong> Solo si el grupo tiene un número impar de estudiantes, un equipo puede ser un
+            trío. Las parejas se forman al final de la sesión 2.</li>
+          <li><strong>Trabajo independiente</strong>, desde la sesión 2 hasta la sesión 5, con un avance que se revisa en
+            clase (ver <a href="#hitos">Hitos</a>).</li>
+          <li><strong>Se entrega por la plataforma del curso hasta el jueves 19 de noviembre de 2026 a las 23:59</strong>
+            (hora de Colombia) y <strong>se sustenta en la sesión 5</strong>, el viernes 20 de noviembre de 2026.</li>
+          <li><strong>Sin gastar dinero.</strong> Nadie tiene que crear recursos de pago en Azure: el plan se puede escribir
+            completo sin crear nada. El laboratorio de la sesión 4 es para quien tenga una cuenta de Azure, y es
+            opcional. Ojo: la cuenta gratuita de Azure pide una tarjeta y, pasados 30 días o agotado el crédito, deshabilita
+            los servicios si no pasas a pago por uso; Azure for Students no pide tarjeta, pero exige ser estudiante de tiempo
+            completo.</li>
+        </ul>
+        <!-- Sin gastar dinero: M5 del PLAN. La cuenta gratuita pide tarjeta y dura 30 días si no se pasa a pago por uso
+             (F-AZ-20); Azure for Students exige ser estudiante de tiempo completo (F-AZ-21, F-AZ-22). -->
+      </section>
+
+      <section class="bloque" id="datos" aria-labelledby="titulo-datos">
+        <h2 id="titulo-datos">Los datos</h2>
+        <p>El proyecto usa <code>clientes.csv</code>: los 8000 clientes de Yarumo activos el 30 de junio de 2026, con las 21
+          columnas del diccionario de datos de la sesión 1. Es el mismo archivo de los notebooks de las sesiones: su primera celda lo descarga
+          y comprueba que sea idéntico al del curso.</p>
+        <div class="acciones">
+          <a class="boton principal" href="{{DATOS_URL}}"><i class="fas fa-file-csv" aria-hidden="true"></i>
+            Descargar clientes.csv</a>
+          <a class="boton secundario" href="{{COLAB:2}}" target="_blank" rel="noopener"><i class="fas fa-laptop-code"
+              aria-hidden="true"></i>Notebook de la sesión 2<span class="sr-only"> (se abre en otra pestaña)</span></a>
+        </div>
+        <p>La tabla está <strong>seudonimizada</strong>: el nombre, la cédula, la dirección y el teléfono se quedaron en el
+          CRM (el sistema de gestión de clientes), y solo viaja el seudónimo <code>id_cliente</code>. Aun así, la edad, la ciudad y el estrato
+          siguen siendo <strong>datos personales</strong> según la Ley 1581 de 2012, porque Yarumo puede volver a unirlos con
+          cada persona. Trátalos como tales en tu plan.</p>
+        <!-- Ley 1581, art. 3, lit. c: dato personal es la información que puede asociarse a personas determinables (F-LEY-01). -->
+      </section>
+
+      <section class="bloque" id="partes" aria-labelledby="titulo-partes">
+        <h2 id="titulo-partes">Las tres partes</h2>
+        <ol class="partes">
+          <li><strong>1 · El notebook</strong>Un modelo supervisado (regresión o clasificación, sesión 2) o de agrupamiento
+            (sesión 3) con los datos de Yarumo, con sus métricas y contra una línea base.</li>
+          <li><strong>2 · El plan de nube</strong>Cómo se llevaría ese modelo, con sus datos, a Azure: servicios,
+            responsabilidades, accesos, reglas, almacenamiento, monitoreo, privacidad y costo.</li>
+          <li><strong>3 · La sustentación</strong>En la sesión 5: una explicación del modelo y del plan que otra persona pueda
+            auditar.</li>
+        </ol>
+
+        <h3>Parte 1 · El notebook</h3>
+        <ul>
+          <li><strong>Una pregunta de la gerencia</strong> que el modelo responde: quién va a cancelar, cuánto consumirá un
+            cliente, qué grupos de clientes hay u otra que se pueda responder con los datos.</li>
+          <li><strong>Una línea base</strong> (la regla simple con la que se compara) y al menos un modelo, medidos en datos que
+            el modelo no vio al entrenar. Si agrupas, la línea base es otro número de grupos o un reparto al azar.</li>
+          <li><strong>La métrica que sirve a la decisión</strong>, con su porqué. Si clasificas, la matriz de confusión y el
+            umbral que elegiste; si haces regresión, el error en las unidades de la etiqueta; si agrupas, cómo elegiste el
+            número de grupos (sesión 3).</li>
+          <li><strong>Qué mira el modelo</strong>: qué columnas usa y por qué, sin columnas que no se conocían al momento de
+            predecir.</li>
+        </ul>
+
+        <h3>Parte 2 · El plan de nube</h3>
+        <ol>
+          <li><strong>El modelo de servicio</strong> (IaaS, PaaS o SaaS) para los datos y para el modelo, justificado frente a
+            otra opción (sesión 1).</li>
+          <li><strong>La matriz de responsabilidad compartida</strong>: qué le queda a Yarumo y qué a Microsoft con ese modelo
+            de servicio (sesión 1).</li>
+          <li><strong>Los roles con privilegio mínimo</strong>: la matriz de roles de Azure RBAC, con grupos de Microsoft Entra
+            ID (antes, Azure Active Directory), rol integrado y ámbito para cada uno, y la identidad administrada de la aplicación que predice (sesión 2).</li>
+          <li><strong>Las directivas</strong> de Azure Policy que aplicaría Yarumo, con su efecto (<em>Deny</em>, denegar, o <em>Audit</em>, auditar) y por qué
+            (sesión 2).</li>
+          <li><strong>El almacenamiento y el monitoreo</strong>: dónde quedan los datos y el modelo, y qué se vigila
+            (sesión 4).</li>
+          <li><strong>La privacidad según la Ley 1581</strong>: quién es el responsable y quién el encargado del tratamiento,
+            en qué región quedan los datos y qué pasa si salen de Colombia (sesión 3).</li>
+          <li><strong>El costo en la capa gratuita</strong>: qué servicios usaría, cuáles son gratuitos y con qué límites,
+            según la página oficial de Azure.</li>
+        </ol>
+
+        <h3>Parte 3 · La sustentación</h3>
+        <p>Los dos syllabus del curso piden, al final, una <strong>explicación auditable</strong>. En este proyecto quiere decir
+          que otra persona puede seguir cada cifra hasta la celda del notebook que la calcula, entender por qué el modelo
+          señala a un cliente y encontrar la razón y la fuente de cada decisión de seguridad.</p>
+      </section>
+
+      <section class="bloque" id="lista-minima" aria-labelledby="titulo-lista">
+        <h2 id="titulo-lista">La lista mínima</h2>
+        <div class="aviso">
+          <p><strong>Es requisito para que el proyecto se evalúe:</strong> cada elemento tiene que estar. Qué tan bien está
+            hecho se valora con la <a href="#rubrica">rúbrica</a>.</p>
+        </div>
+        <ol>
+          <li><strong>El notebook corre de principio a fin en Colab</strong>, con los datos del curso (descargados por su
+            primera celda o desde esta página).</li>
+          <li><strong>Una línea base y al menos un modelo</strong>, medidos en datos que el modelo no vio, con la métrica que
+            sirve a la decisión y su porqué.</li>
+          <li><strong>El modelo de servicio</strong> elegido, con la matriz de responsabilidad compartida.</li>
+          <li><strong>La matriz de roles</strong>: para cada grupo, el rol integrado de Azure y su ámbito, o «sin acceso», con
+            una razón.</li>
+          <li><strong>Al menos dos directivas</strong> de Azure Policy, con su efecto.</li>
+          <li><strong>El almacenamiento y el monitoreo</strong> de los datos y del modelo.</li>
+          <li><strong>La privacidad</strong>: responsable, encargado y región, según la Ley 1581.</li>
+          <li><strong>El costo</strong> en la capa gratuita, con la fuente oficial que lo respalda.</li>
+          <li><strong>Las fuentes</strong> de cada afirmación técnica o legal, y la declaración del uso de IA (ver <a
+              href="#ia">El uso de IA</a>).</li>
+        </ol>
+      </section>
+
+      <section class="bloque" id="hitos" aria-labelledby="titulo-hitos">
+        <h2 id="titulo-hitos">Hitos</h2>
+        <!-- Los cinco hitos salen del PLAN (S2 parejas, S3 revisión del avance en salas, S4 laboratorio, entrega antes de
+             la S5, sustentación en la S5). El contenido del avance de la S3 y la fecha de cierre los aprobó el docente el
+             6 de noviembre. -->
+        <ol class="hitos">
+          <li><strong>S2 · 7 de noviembre</strong>La pareja y la pregunta de su modelo.</li>
+          <li><strong>S3 · 13 de noviembre</strong>Revisión del avance, en salas: la pregunta, la línea base, un primer
+            modelo y el modelo de servicio elegido.</li>
+          <li><strong>S4 · 14 de noviembre</strong>Almacenamiento, monitoreo y Defender for Cloud; laboratorio opcional
+            para quien tenga cuenta de Azure.</li>
+          <li><strong>19 de noviembre · 23:59</strong>La entrega por la plataforma del curso (hora de Colombia).</li>
+          <li><strong>S5 · 20 de noviembre</strong>La sustentación y la coevaluación.</li>
+        </ol>
+      </section>
+
+      <section class="bloque" id="entrega" aria-labelledby="titulo-entrega">
+        <h2 id="titulo-entrega">La entrega y la sustentación</h2>
+        <!-- Formato de la entrega, fecha de cierre, duración y formato de la sustentación: aprobados por el docente el
+             6 de noviembre de 2026. -->
+        <p>Por la plataforma del curso, <strong>hasta el jueves 19 de noviembre de 2026 a las 23:59</strong> (hora de
+          Colombia), una entrega por pareja con:</p>
+        <ul>
+          <li><strong>El notebook</strong>: el archivo <code>.ipynb</code>, con las celdas ejecutadas, que corre de principio
+            a fin en Colab.</li>
+          <li><strong>El plan de nube</strong>, en un PDF, con las fuentes al final.</li>
+          <li><strong>El material de la sustentación</strong>, si usan diapositivas.</li>
+        </ul>
+        <p><strong>La sustentación</strong>, en la sesión 5: 10 minutos por equipo: 6 para presentar el modelo y el plan, y 4
+          para las preguntas del docente. Todas las personas del equipo presentan y responden. Si hay muchas parejas, el
+          docente puede organizar salas paralelas.</p>
+      </section>
+
+      <section class="bloque" id="evaluacion" aria-labelledby="titulo-evaluacion">
+        <h2 id="titulo-evaluacion">La evaluación</h2>
+        <!-- PENDIENTE DEL DOCENTE: el peso de cada parte y de cada mirada en la nota; no se fijan aquí. -->
+        <p>Como dicen los dos syllabus del curso, el proyecto se evalúa desde tres miradas. El peso de cada una en la nota lo
+          fija el docente.</p>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Quién evalúa</th>
+              <th scope="col">Qué se valora</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Tú: autoevaluación individual</th>
+              <td>Tu desempeño con los criterios de la rúbrica y tu aporte a la pareja: qué hizo cada integrante.</td>
+            </tr>
+            <tr>
+              <th scope="row">Otra pareja: coevaluación</th>
+              <td>Un formulario de tres criterios (ver <a href="#coevaluacion">abajo</a>) que llena en la sesión 5 la pareja que
+                sustenta justo después.</td>
+            </tr>
+            <tr>
+              <th scope="row">El docente: heteroevaluación</th>
+              <td>La rúbrica completa, de seis criterios, sobre lo entregado y la sustentación.</td>
+            </tr>
+          </tbody>
+        </table>
+        <h3 id="coevaluacion">La coevaluación</h3>
+        <!-- Aprobada por el docente el 6 de noviembre: tres criterios, Sí / En parte / No sin puntos, la evalúa la pareja
+             que sustenta justo después. Se acuerda con el grupo en la S3 porque los syllabus piden criterios «establecidos
+             en consenso»: por eso, y solo aquí, lo visible dice «propuesta de partida». -->
+        <p>Después de cada sustentación, la pareja que sustenta justo después (a la última la evalúa la primera) marca cada
+          criterio con <strong>Sí</strong>, <strong>En parte</strong> o <strong>No</strong>, en un minuto. Como piden los
+          syllabus, estos criterios se acuerdan con el grupo en la sesión 3; esta es la propuesta de partida:</p>
+        <ol>
+          <li><strong>Se puede auditar.</strong> Cuando el docente preguntó de dónde sale una cifra, la pareja mostró la celda o
+            la fuente que la respalda.</li>
+          <li><strong>El acceso es mínimo.</strong> En su matriz de roles, nadie que no lo necesite puede ver los datos
+            personales.</li>
+          <li><strong>La recomendación sirve a la gerencia.</strong> La métrica, y el umbral si lo hay, se justifican con la
+            decisión que toma la empresa, no solo con la exactitud.</li>
+        </ol>
+        <p>Al final, una línea abierta: lo que más les convenció del proyecto y lo primero que cambiarían.</p>
+      </section>
+
+      <section class="bloque" id="rubrica" aria-labelledby="titulo-rubrica">
+        <h2 id="titulo-rubrica">La rúbrica</h2>
+        <p>Seis criterios, cada uno en cuatro niveles, alineados con los criterios de realización (CR) de los dos syllabus:
+          Machine Learning y Seguridad en Cloud Computing. Los descriptores dicen qué se tiene que poder ver en el notebook,
+          en el plan o en la sustentación. La rúbrica se aplica a los proyectos que cumplen la <a
+            href="#lista-minima">lista mínima</a>: los niveles describen qué tan bien está hecho cada elemento, no si está.
+          Destacado incluye lo de Logrado.</p>
+        <p>Un nivel se alcanza cuando se cumplen todas sus condiciones; si falta una, queda en el nivel anterior. Para
+          Destacado basta con una de sus opciones.</p>
+        <table class="rubrica">
+          <thead>
+            <tr>
+              <th scope="col">Criterio</th>
+              <th scope="col">Inicial</th>
+              <th scope="col">En desarrollo</th>
+              <th scope="col">Logrado</th>
+              <th scope="col">Destacado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1. El modelo y sus métricas <small>Machine Learning, CR1</small></th>
+              <td data-nivel="Inicial">Hay línea base y un modelo medidos en datos que no vio, pero la métrica no responde la
+                pregunta (por ejemplo, solo la exactitud en la cancelación) o no se explica por qué se eligió.</td>
+              <td data-nivel="En desarrollo">La métrica responde la pregunta, pero el umbral (si clasifica) no se justifica con
+                la decisión, o el modelo usa una columna que no se conocía al momento de predecir.</td>
+              <td data-nivel="Logrado">La métrica y el umbral se justifican con la decisión, sin columnas del futuro, y la
+                validación cruzada (con su promedio y su desviación) muestra que el resultado no es suerte de una partición.
+                Si agrupas, en lugar del umbral y la validación cruzada se justifica cómo se eligió el número de grupos.</td>
+              <td data-nivel="Destacado">Además, muestra cómo cambia la decisión con el umbral o con la complejidad del
+                modelo, o lo compara con una red neuronal (sesión 4).</td>
+            </tr>
+            <tr>
+              <th scope="row">2. El cuidado del dato <small>Machine Learning, CR2</small></th>
+              <td data-nivel="Inicial">Dice qué columnas usa, pero no por qué, o usa el seudónimo como si describiera al
+                cliente.</td>
+              <td data-nivel="En desarrollo">Justifica las columnas, pero no señala cuáles son datos personales ni cómo los
+                cuida al trabajar (dónde quedan las copias del archivo, quién las ve).</td>
+              <td data-nivel="Logrado">Justifica las columnas, señala cuáles son datos personales según la Ley 1581, trabaja
+                solo con la tabla seudonimizada y muestra qué columnas pesan en el modelo (por ejemplo, con las reglas de un
+                árbol pequeño).</td>
+              <td data-nivel="Destacado">Además, revisa si el modelo se equivoca más con algún grupo de clientes (una ciudad,
+                un estrato, un rango de edad) y dice qué haría Yarumo con eso.</td>
+            </tr>
+            <tr>
+              <th scope="row">3. El modelo de servicio <small>Seguridad en Cloud Computing, CR1</small></th>
+              <td data-nivel="Inicial">Elige un modelo de servicio, pero la matriz de responsabilidad no corresponde a ese
+                modelo o no dice qué le queda a Yarumo.</td>
+              <td data-nivel="En desarrollo">Elige el modelo de servicio, pero no lo compara con otra opción, o la matriz deja
+                responsabilidades sin dueño.</td>
+              <td data-nivel="Logrado">Elige el modelo de servicio frente a otra opción, con razones, y la matriz dice qué le
+                queda a Yarumo y qué a Microsoft, incluido lo que siempre es del cliente: los datos, las cuentas y el
+                acceso.</td>
+              <td data-nivel="Destacado">Además, justifica la estrategia de migración desde el centro de datos de Pereira (por
+                ejemplo, rehospedaje o replataformación).</td>
+            </tr>
+            <tr>
+              <th scope="row">4. El acceso y el gobierno <small>Seguridad en Cloud Computing, CR2</small></th>
+              <td data-nivel="Inicial">Hay matriz de roles y directivas, pero los roles son amplios (por ejemplo, Propietario o
+                Colaborador en la suscripción) o los ámbitos no se justifican.</td>
+              <td data-nivel="En desarrollo">La matriz de roles tiene ámbitos, pero alguien puede ver los datos personales sin
+                necesitarlo, o falta el almacenamiento o el monitoreo.</td>
+              <td data-nivel="Logrado">La matriz asigna a grupos un rol integrado en el ámbito más estrecho que basta, con una
+                identidad administrada para la aplicación; al menos dos directivas tienen su efecto y su porqué; dice dónde se
+                almacenan los datos y el modelo y qué se monitorea.</td>
+              <td data-nivel="Destacado">Además, prevé cómo se revisan los accesos y cómo se retira el acceso de quien termina (por
+                ejemplo, el del proveedor externo cuando termina su trabajo), y qué alerta concreta avisaría de un problema.</td>
+            </tr>
+            <tr>
+              <th scope="row">5. La privacidad y el costo <small>Seguridad en Cloud Computing, CR3 (costo y suscripción) y tema 4.3
+                  (privacidad)</small></th>
+              <td data-nivel="Inicial">Menciona la Ley 1581 y estima el costo, pero trata la tabla seudonimizada como anónima o
+                el costo no tiene fuente.</td>
+              <td data-nivel="En desarrollo">Dice quién es el responsable y quién el encargado, pero no elige la región ni dice
+                qué pasa si los datos salen de Colombia.</td>
+              <td data-nivel="Logrado">Responsable, encargado y región, con lo que dice la ley si los datos salen del país; y
+                el costo en la capa gratuita, con los servicios que usaría, sus límites y la página oficial que lo
+                respalda.</td>
+              <td data-nivel="Destacado">Además, propone un estudio de impacto de privacidad, que la Superintendencia de
+                Industria y Comercio (SIC) pide para los sistemas de inteligencia artificial cuando es probable un alto riesgo
+                para los titulares, o explica cómo evitaría cargos al pasar los límites gratuitos.</td>
+            </tr>
+            <tr>
+              <th scope="row">6. La sustentación <small>Etapa 3 de los dos syllabus: explicación auditable</small></th>
+              <td data-nivel="Inicial">Lee lo escrito, o no puede decir de dónde sale una cifra o por qué tomó una decisión de
+                seguridad.</td>
+              <td data-nivel="En desarrollo">Explica bien el modelo o el plan, pero no los dos, o alguna cifra no se puede
+                rastrear hasta su celda o su fuente.</td>
+              <td data-nivel="Logrado">Todas las personas del equipo explican el modelo y el plan; cada cifra se rastrea hasta su
+                celda y cada decisión de seguridad, hasta su razón y su fuente; al menos una gráfica (la matriz de confusión,
+                la curva del umbral u otra) apoya la decisión, y dicen cómo sirve el resultado a las decisiones de negocio de
+                Yarumo; responden las preguntas con los datos.</td>
+              <td data-nivel="Destacado">Además, muestra en vivo cómo el modelo llega a una predicción y reconoce con claridad
+                los límites del modelo y del plan.</td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- No se fijan pesos en la nota: los define el docente. CR de Machine Learning: CR1 fundamentos de ML en la
+             analítica y el gobierno de datos; CR2 (segundo párrafo) integridad, custodia y confidencialidad del dato; CR3
+             redes neuronales (opcional en el Destacado del criterio 1). CR de Seguridad en Cloud Computing: CR1
+             responsabilidad compartida; CR2 servicios y seguridad que cumplen los estándares internos y de gobierno; CR3
+             servicios para el plan de seguridad y la suscripción académica; la privacidad está en el tema 4.3 del syllabus,
+             no en un CR. Criterio 6: la Etapa 3 de ML pide además el dominio de la relación Big Data e inteligencia de
+             negocios, y la de Cloud, técnicas de visualización. Estudio de impacto: SIC, Circular Externa 002 de 2024
+             (F-LEY-05), si es probable un alto riesgo. -->
+      </section>
+
+      <section class="bloque" id="ia" aria-labelledby="titulo-ia">
+        <h2 id="titulo-ia">El uso de IA</h2>
+        <p>Puedes usar herramientas de inteligencia artificial (IA) para programar, buscar o redactar, <strong>si lo
+            declaras</strong> al final del plan: qué herramienta usaste y para qué. Cada integrante de la pareja debe poder
+          explicar cada cifra del notebook y cada decisión del plan. Ojo: no pegues los datos de los clientes en una
+          herramienta de IA externa. Aunque sean ficticios, es el hábito que defiende tu plan: los datos personales no se
+          comparten con servicios que Yarumo no controla.</p>
+      </section>
+
+      <section class="bloque" id="fuentes" aria-labelledby="titulo-fuentes">
+        <h2 id="titulo-fuentes">Para consultar</h2>
+        <p>Las fuentes oficiales que usa el curso. Cita las que uses en tu plan.</p>
+        <ul>
+          <li>Microsoft Learn: <a href="https://learn.microsoft.com/es-es/azure/security/fundamentals/shared-responsibility"
+              target="_blank" rel="noopener">Responsabilidad compartida en la nube</a>, <a
+              href="https://learn.microsoft.com/es-es/azure/role-based-access-control/overview" target="_blank"
+              rel="noopener">¿Qué es Azure RBAC?</a>, <a
+              href="https://learn.microsoft.com/es-es/azure/role-based-access-control/best-practices" target="_blank"
+              rel="noopener">Procedimientos recomendados para RBAC</a> e <a
+              href="https://learn.microsoft.com/es-es/azure/governance/policy/overview" target="_blank"
+              rel="noopener">Introducción a Azure Policy</a>. Las páginas en español son traducciones automáticas: ante una
+            duda, la versión en inglés manda.</li>
+          <li>Azure: <a href="https://azure.microsoft.com/es-es/pricing/free-services/" target="_blank" rel="noopener">los
+              servicios gratuitos</a> y sus límites.</li>
+          <li>La <a href="http://www.secretariasenado.gov.co/senado/basedoc/ley_1581_2012.html" target="_blank"
+              rel="noopener">Ley Estatutaria 1581 de 2012</a> y el <a
+              href="https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=53646" target="_blank"
+              rel="noopener">Decreto 1377 de 2013</a>, que la reglamenta (hoy compilado en el capítulo 25 del Decreto 1074 de
+            2015).</li>
+          <li>scikit-learn: <a href="https://scikit-learn.org/stable/modules/model_evaluation.html" target="_blank"
+              rel="noopener">las métricas y la línea base</a> y <a
+              href="https://scikit-learn.org/stable/common_pitfalls.html" target="_blank" rel="noopener">los errores
+              comunes</a>, como la fuga de datos (<em>data leakage</em>).</li>
+        </ul>
+        <!-- F-AZ-01, F-AZ-15, F-AZ-18, F-AZ-19a, F-AZ-20, F-AZ-21, F-LEY-01, F-LEY-03, F-ML-12, F-ML-18. -->
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="contenedor">
+      <p>Machine Learning y Seguridad en la Nube · Especialización en Big Data · Fundación Universitaria Compensar ·
+        Material diseñado por <span>Javier Mauricio Sierra</span></p>
+    </div>
+  </footer>
+</body>
+
+</html>
