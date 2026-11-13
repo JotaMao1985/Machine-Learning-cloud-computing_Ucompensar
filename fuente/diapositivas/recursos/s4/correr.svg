@@ -1,0 +1,41 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" viewBox="0 0 358.178906 191.997176" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 191.997176 
+L 358.178906 191.997176 
+L 358.178906 -0 
+L 0 -0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g clip-path="url(#pd23545b390)">
+    <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAYAAABSZ763AAADoElEQVR4nO3dvYpdZRiG4TWSoGOx04gMnkIaTS/pksoyjegB2AhpDIylkNbRVMHGKmlSWQqSQoTBOr2SajupssH8MDOMJyHvDWuu6wSe1dy8u9rf3tnp+cUyaLvdjW0dHz9fJj0+/G10796jO6N7Nz7+aHRvzd6pPwAuI+FBQHgQEB4EhAcB4UFAeBAQHgSEBwHhQUB4EBAeBIQHAeFBQHgQEB4EhAcB4UFAeBAQHgSEBwHhQUB4EBAeBIQHAeFBQHgQ2Jt+O2HN3r45Hd376vbPo3tHv3wxtrW5tr+smYsHAeFBQHgQEB4EhAcB4UFAeBAQHgSEBwHhQUB4EBAeBIQHAeFBQHgQEB4EhAcB4UFAeBAQHgSEBwHhQUB4EBAeBIQHAeFBQHgQuLKs2Ha7G907ONiM7v374tXo3qvXc29DbLydAPzf/NSEgPAgIDwICA8CwoOA8CAgPAgIDwLCg4DwICA8CAgPAsKDgPAgIDwICA8CwoOA8CAgPAgIDwLCg4DwICA8CAgPAsKDwKr/wv34+Pno3oM7T5Y1e3//av0Jq+HiQUB4EBAeBIQHAeFBQHgQEB4EhAcB4UFAeBAQHgSEBwHhQUB4EBAeBIQHAeFBQHgQEB4EhAcB4UFAeBAQHgSEBwHhQUB4EBAeBPbOTs8viuE12m53o3s/PfxzWatv7t0c3Xv3vdl3IVw8CAgPAsKDgPAgIDwICA8CwoOA8CAgPAgIDwLCg4DwICA8CAgPAsKDgPAgIDwICA8CwoOA8CAgPAgIDwLCg4DwICA8CAgPAsKDy/B2wu7l67Gt+4e/LpMO798a3dtc2x/d+/H735e1+vrup6N7Lh4EhAcB4UFAeBAQHgSEBwHhQUB4EBAeBIQHAeFBQHgQEB4EhAcB4UFAeBAQHgSEBwHhQUB4EBAeBIQHAeFBQHgQEB4EhAcB4UHgyrJiJ89ORvd+OPpjdO/zLz8Z3Xu5ezu2dfLsn2XU3dk5Fw8CwoOA8CAgPAgIDwLCg4DwICA8CAgPAsKDgPAgIDwICA8CwoOA8CAgPAgIDwLCg4DwICA8CAgPAsKDgPAgIDwICA8CwoPA3tnp+cWyUtvtbnTv6Luno3t/Pf17dO/D6x+MbX374LNl0sHBZnTPxYOA8CAgPAgIDwLCg4DwICA8CAgPAsKDgPAgIDwICA8CwoOA8CAgPAgIDwLCg4DwICA8CAgPAsKDgPAgIDwICA8CwoOA8EB4sFwK/wG5BlTpbcoa0gAAAABJRU5ErkJggg==" id="image963df1e647" transform="scale(1 -1) translate(0 -159.84)" x="7.2" y="-24.957176" width="159.84" height="159.84"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 15px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: start; fill: #1e293b" x="7.2" y="19.197656" transform="rotate(-0 7.2 19.197656)">Original</text>
+   </g>
+  </g>
+  <g id="axes_2">
+   <g clip-path="url(#p1bd98ba126)">
+    <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAYAAABSZ763AAADiElEQVR4nO3dPWqUYRiG0S8Si1gkjUhwCzbqBuy0srQRXYAbUIilYGs0ldhYaWNlKUgKEYK1vWI1xsoB/0hCXITyXvDlnA3cw8DFM9W8K4cHR8fTTC0Wy6F7e3tfhu693Ho7dO/eixvDti5fPD/N2an6A8BJJDwICA8CwoOA8CAgPAgIDwLCg4DwICA8CAgPAsKDgPAgIDwICA8CwoOA8CAgPAgIDwLCg4DwICA8CAgPAsKDgPAgIDwICA8CK3N+O2Hu/vw+GLp359rzYVvbr29NI61vrA3dc/EgIDwICA8CwoOA8CAgPAgIDwLCg4DwICA8CAgPAsKDgPAgIDwICA8CwoOA8CAgPAgIDwLCg4DwICA8CAgPAsKDgPAgIDwICA8Cq8XoXC0Wy6F7m5vrQ/d+fPs5bOvnr7HvQng7AU4APzUhIDwICA8CwoOA8CAgPAgIDwLCg4DwICA8CAgPAsKDgPAgIDwICA8CwoOA8CAgPAgIDwLCg4DwICA8CAgPAsKDgPAg4C/c/6O9vS/TSDs3Xk1zdWbt9DRnLh4EhAcB4UFAeBAQHgSEBwHhQUB4EBAeBIQHAeFBQHgQEB4EhAcB4UFAeBAQHgSEBwHhQUB4EBAeBIQHAeFBQHgQEB4EhAcB4UFg5fDg6LgY5t8tFsuhX+Ozpx+mubp778rQPRcPAsKDgPAgIDwICA8CwoOA8CAgPAgIDwLCg4DwICA8CAgPAsKDgPAgIDwICA8CwoOA8CAgPAgIDwLCg4DwICA8CAgPAsKDgPAgMOu3E5bffw3de7j1Zuje1sOrQ/fWN9aGbT159G6aMxcPAsKDgPAgIDwICA8CwoOA8CAgPAgIDwLCg4DwICA8CAgPAsKDgPAgIDwICA8CwoOA8CAgPAgIDwLCg4DwICA8CAgPAsKDgPAgsFqMztX+x/2he4+33w/du3n70rCt78s/00j7H78O3XPxICA8CAgPAsKDgPAgIDwICA8CwoOA8CAgPAgIDwLCg4DwICA8CAgPAsKDgPAgIDwICA8CwoOA8CAgPAgIDwLCg4DwICA8CKwcHhwdF8NztFgsh+5tP9gduvdp9/OwrXMXzk4j3d+5PnTPxYOA8CAgPAgIDwLCg4DwICA8CAgPAsKDgPAgIDwICA8CwoOA8CAgPAgIDwLCg4DwICA8CAgPAsKDgPAgIDwICA8CwoOA8EB4MJ0IfwHkE1MKEBWPPwAAAABJRU5ErkJggg==" id="imagecc2db1ee0b" transform="scale(1 -1) translate(0 -159.84)" x="172.8" y="-24.957176" width="159.84" height="159.84"/>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 15px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: start; fill: #1e293b" x="172.8" y="19.197656" transform="rotate(-0 172.8 19.197656)">Un píxel a la derecha</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pd23545b390">
+   <rect x="7.2" y="25.197656" width="159.59952" height="159.59952"/>
+  </clipPath>
+  <clipPath id="p1bd98ba126">
+   <rect x="172.8" y="25.197656" width="159.59952" height="159.59952"/>
+  </clipPath>
+ </defs>
+</svg>

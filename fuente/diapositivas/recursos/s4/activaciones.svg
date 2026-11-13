@@ -1,0 +1,414 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" viewBox="0 0 613.19952 238.79952" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 238.79952 
+L 613.19952 238.79952 
+L 613.19952 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 22.47125 194.916395 
+L 297.374354 194.916395 
+L 297.374354 24.597656 
+L 22.47125 24.597656 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <defs>
+       <path id="m7073dcfe1f" d="M 0 0 
+L 0 3.5 
+" style="stroke: #475569; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#m7073dcfe1f" x="34.966846" y="194.916395" style="fill: #475569; stroke: #475569; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_1">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: middle; fill: #475569" x="34.966846" y="211.794364" transform="rotate(-0 34.966846 211.794364)">−6</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2">
+      <g>
+       <use xlink:href="#m7073dcfe1f" x="76.618831" y="194.916395" style="fill: #475569; stroke: #475569; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_2">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: middle; fill: #475569" x="76.618831" y="211.794364" transform="rotate(-0 76.618831 211.794364)">−4</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_3">
+      <g>
+       <use xlink:href="#m7073dcfe1f" x="118.270816" y="194.916395" style="fill: #475569; stroke: #475569; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_3">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: middle; fill: #475569" x="118.270816" y="211.794364" transform="rotate(-0 118.270816 211.794364)">−2</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_4">
+      <g>
+       <use xlink:href="#m7073dcfe1f" x="159.922802" y="194.916395" style="fill: #475569; stroke: #475569; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: middle; fill: #475569" x="159.922802" y="211.794364" transform="rotate(-0 159.922802 211.794364)">0</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_5">
+      <g>
+       <use xlink:href="#m7073dcfe1f" x="201.574787" y="194.916395" style="fill: #475569; stroke: #475569; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_5">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: middle; fill: #475569" x="201.574787" y="211.794364" transform="rotate(-0 201.574787 211.794364)">2</text>
+     </g>
+    </g>
+    <g id="xtick_6">
+     <g id="line2d_6">
+      <g>
+       <use xlink:href="#m7073dcfe1f" x="243.226773" y="194.916395" style="fill: #475569; stroke: #475569; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_6">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: middle; fill: #475569" x="243.226773" y="211.794364" transform="rotate(-0 243.226773 211.794364)">4</text>
+     </g>
+    </g>
+    <g id="xtick_7">
+     <g id="line2d_7">
+      <g>
+       <use xlink:href="#m7073dcfe1f" x="284.878758" y="194.916395" style="fill: #475569; stroke: #475569; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_7">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: middle; fill: #475569" x="284.878758" y="211.794364" transform="rotate(-0 284.878758 211.794364)">6</text>
+     </g>
+    </g>
+    <g id="text_8">
+     <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: middle; fill: #334155" x="159.922802" y="228.895926" transform="rotate(-0 159.922802 228.895926)">z, la suma ponderada más el sesgo</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_8">
+      <defs>
+       <path id="m24e3719a07" d="M 0 0 
+L -3.5 0 
+" style="stroke: #475569; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#m24e3719a07" x="22.47125" y="187.174634" style="fill: #475569; stroke: #475569; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_9">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: end; fill: #475569" x="15.47125" y="192.113619" transform="rotate(-0 15.47125 192.113619)">0</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_9">
+      <g>
+       <use xlink:href="#m24e3719a07" x="22.47125" y="135.562895" style="fill: #475569; stroke: #475569; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_10">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: end; fill: #475569" x="15.47125" y="140.50188" transform="rotate(-0 15.47125 140.50188)">2</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_10">
+      <g>
+       <use xlink:href="#m24e3719a07" x="22.47125" y="83.951156" style="fill: #475569; stroke: #475569; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_11">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: end; fill: #475569" x="15.47125" y="88.89014" transform="rotate(-0 15.47125 88.89014)">4</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_11">
+      <g>
+       <use xlink:href="#m24e3719a07" x="22.47125" y="32.339417" style="fill: #475569; stroke: #475569; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_12">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: end; fill: #475569" x="15.47125" y="37.278401" transform="rotate(-0 15.47125 37.278401)">6</text>
+     </g>
+    </g>
+   </g>
+   <g id="line2d_12">
+    <path d="M 34.966846 187.174634 
+L 159.294882 187.174634 
+L 160.550721 186.396568 
+L 284.878758 32.339417 
+L 284.878758 32.339417 
+" clip-path="url(#p509b96b721)" style="fill: none; stroke: #8a2e9e; stroke-width: 2.5; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_13">
+    <path d="M 22.47125 187.174634 
+L 297.374354 187.174634 
+" clip-path="url(#p509b96b721)" style="fill: none; stroke: #94a3b8; stroke-width: 0.8; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_14">
+    <path d="M 159.922802 194.916395 
+L 159.922802 24.597656 
+" clip-path="url(#p509b96b721)" style="fill: none; stroke: #94a3b8; stroke-width: 0.8; stroke-linecap: square"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 22.47125 194.916395 
+L 22.47125 24.597656 
+" style="fill: none; stroke: #94a3b8; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 22.47125 194.916395 
+L 297.374354 194.916395 
+" style="fill: none; stroke: #94a3b8; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_13">
+    <text style="font-weight: 700; font-size: 15px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: start; fill: #1e293b" x="22.47125" y="18.597656" transform="rotate(-0 22.47125 18.597656)">ReLU: max(0, z)</text>
+   </g>
+  </g>
+  <g id="axes_2">
+   <g id="patch_5">
+    <path d="M 331.096416 194.916395 
+L 605.99952 194.916395 
+L 605.99952 24.597656 
+L 331.096416 24.597656 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_3">
+    <g id="xtick_8">
+     <g id="line2d_15">
+      <g>
+       <use xlink:href="#m7073dcfe1f" x="343.592012" y="194.916395" style="fill: #475569; stroke: #475569; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_14">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: middle; fill: #475569" x="343.592012" y="211.794364" transform="rotate(-0 343.592012 211.794364)">−6</text>
+     </g>
+    </g>
+    <g id="xtick_9">
+     <g id="line2d_16">
+      <g>
+       <use xlink:href="#m7073dcfe1f" x="385.243997" y="194.916395" style="fill: #475569; stroke: #475569; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_15">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: middle; fill: #475569" x="385.243997" y="211.794364" transform="rotate(-0 385.243997 211.794364)">−4</text>
+     </g>
+    </g>
+    <g id="xtick_10">
+     <g id="line2d_17">
+      <g>
+       <use xlink:href="#m7073dcfe1f" x="426.895983" y="194.916395" style="fill: #475569; stroke: #475569; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_16">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: middle; fill: #475569" x="426.895983" y="211.794364" transform="rotate(-0 426.895983 211.794364)">−2</text>
+     </g>
+    </g>
+    <g id="xtick_11">
+     <g id="line2d_18">
+      <g>
+       <use xlink:href="#m7073dcfe1f" x="468.547968" y="194.916395" style="fill: #475569; stroke: #475569; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_17">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: middle; fill: #475569" x="468.547968" y="211.794364" transform="rotate(-0 468.547968 211.794364)">0</text>
+     </g>
+    </g>
+    <g id="xtick_12">
+     <g id="line2d_19">
+      <g>
+       <use xlink:href="#m7073dcfe1f" x="510.199954" y="194.916395" style="fill: #475569; stroke: #475569; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_18">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: middle; fill: #475569" x="510.199954" y="211.794364" transform="rotate(-0 510.199954 211.794364)">2</text>
+     </g>
+    </g>
+    <g id="xtick_13">
+     <g id="line2d_20">
+      <g>
+       <use xlink:href="#m7073dcfe1f" x="551.851939" y="194.916395" style="fill: #475569; stroke: #475569; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_19">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: middle; fill: #475569" x="551.851939" y="211.794364" transform="rotate(-0 551.851939 211.794364)">4</text>
+     </g>
+    </g>
+    <g id="xtick_14">
+     <g id="line2d_21">
+      <g>
+       <use xlink:href="#m7073dcfe1f" x="593.503924" y="194.916395" style="fill: #475569; stroke: #475569; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_20">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: middle; fill: #475569" x="593.503924" y="211.794364" transform="rotate(-0 593.503924 211.794364)">6</text>
+     </g>
+    </g>
+    <g id="text_21">
+     <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: middle; fill: #334155" x="468.547968" y="228.895926" transform="rotate(-0 468.547968 228.895926)">z, la suma ponderada más el sesgo</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_4">
+    <g id="ytick_5">
+     <g id="line2d_22">
+      <g>
+       <use xlink:href="#m24e3719a07" x="331.096416" y="187.559386" style="fill: #475569; stroke: #475569; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_22">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: end; fill: #475569" x="324.096416" y="192.49837" transform="rotate(-0 324.096416 192.49837)">0.0</text>
+     </g>
+    </g>
+    <g id="ytick_6">
+     <g id="line2d_23">
+      <g>
+       <use xlink:href="#m24e3719a07" x="331.096416" y="156.438442" style="fill: #475569; stroke: #475569; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_23">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: end; fill: #475569" x="324.096416" y="161.377426" transform="rotate(-0 324.096416 161.377426)">0.2</text>
+     </g>
+    </g>
+    <g id="ytick_7">
+     <g id="line2d_24">
+      <g>
+       <use xlink:href="#m24e3719a07" x="331.096416" y="125.317498" style="fill: #475569; stroke: #475569; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_24">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: end; fill: #475569" x="324.096416" y="130.256482" transform="rotate(-0 324.096416 130.256482)">0.4</text>
+     </g>
+    </g>
+    <g id="ytick_8">
+     <g id="line2d_25">
+      <g>
+       <use xlink:href="#m24e3719a07" x="331.096416" y="94.196554" style="fill: #475569; stroke: #475569; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_25">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: end; fill: #475569" x="324.096416" y="99.135538" transform="rotate(-0 324.096416 99.135538)">0.6</text>
+     </g>
+    </g>
+    <g id="ytick_9">
+     <g id="line2d_26">
+      <g>
+       <use xlink:href="#m24e3719a07" x="331.096416" y="63.075609" style="fill: #475569; stroke: #475569; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_26">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: end; fill: #475569" x="324.096416" y="68.014594" transform="rotate(-0 324.096416 68.014594)">0.8</text>
+     </g>
+    </g>
+    <g id="ytick_10">
+     <g id="line2d_27">
+      <g>
+       <use xlink:href="#m24e3719a07" x="331.096416" y="31.954665" style="fill: #475569; stroke: #475569; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_27">
+      <text style="font-size: 13px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: end; fill: #475569" x="324.096416" y="36.89365" transform="rotate(-0 324.096416 36.89365)">1.0</text>
+     </g>
+    </g>
+   </g>
+   <g id="line2d_28">
+    <path d="M 343.592012 187.174634 
+L 357.406238 186.814232 
+L 367.452948 186.355827 
+L 376.24382 185.731172 
+L 383.778852 184.947585 
+L 390.058046 184.049238 
+L 395.081401 183.119052 
+L 400.104756 181.951456 
+L 403.872272 180.887084 
+L 407.639788 179.631374 
+L 411.407305 178.154266 
+L 415.174821 176.422705 
+L 418.942337 174.401042 
+L 422.709854 172.051777 
+L 426.47737 169.336735 
+L 430.244886 166.218757 
+L 432.756564 163.899301 
+L 435.268241 161.37691 
+L 439.035757 157.197964 
+L 442.803274 152.532537 
+L 446.57079 147.380196 
+L 450.338306 141.757848 
+L 454.105822 135.702216 
+L 457.873339 129.270957 
+L 462.896694 120.248824 
+L 480.478436 88.062018 
+L 484.245953 81.748276 
+L 488.013469 75.831704 
+L 491.780985 70.362961 
+L 495.548501 65.371964 
+L 499.316018 60.869513 
+L 503.083534 56.850095 
+L 506.85105 53.295294 
+L 510.618566 50.177316 
+L 514.386083 47.462274 
+L 518.153599 45.113009 
+L 521.921115 43.091346 
+L 525.688632 41.359785 
+L 529.456148 39.882678 
+L 533.223664 38.626968 
+L 536.99118 37.562596 
+L 542.014535 36.395 
+L 547.03789 35.464814 
+L 553.317084 34.566466 
+L 559.596278 33.895098 
+L 567.13131 33.311148 
+L 575.922182 32.846736 
+L 587.224731 32.474357 
+L 593.503924 32.339417 
+L 593.503924 32.339417 
+" clip-path="url(#pce8304a73d)" style="fill: none; stroke: #f46201; stroke-width: 2.5; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_29">
+    <path d="M 331.096416 187.559386 
+L 605.99952 187.559386 
+" clip-path="url(#pce8304a73d)" style="fill: none; stroke: #94a3b8; stroke-width: 0.8; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_30">
+    <path d="M 468.547968 194.916395 
+L 468.547968 24.597656 
+" clip-path="url(#pce8304a73d)" style="fill: none; stroke: #94a3b8; stroke-width: 0.8; stroke-linecap: square"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 331.096416 194.916395 
+L 331.096416 24.597656 
+" style="fill: none; stroke: #94a3b8; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 331.096416 194.916395 
+L 605.99952 194.916395 
+" style="fill: none; stroke: #94a3b8; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_28">
+    <text style="font-weight: 700; font-size: 15px; font-family: Roboto, 'Helvetica Neue', Arial, sans-serif; text-anchor: start; fill: #1e293b" x="331.096416" y="18.597656" transform="rotate(-0 331.096416 18.597656)">Sigmoide: entre 0 y 1</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p509b96b721">
+   <rect x="22.47125" y="24.597656" width="274.903104" height="170.318739"/>
+  </clipPath>
+  <clipPath id="pce8304a73d">
+   <rect x="331.096416" y="24.597656" width="274.903104" height="170.318739"/>
+  </clipPath>
+ </defs>
+</svg>

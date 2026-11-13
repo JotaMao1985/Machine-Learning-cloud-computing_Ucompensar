@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 360" width="100%" style="font-family: Roboto, 'Helvetica Neue', Arial, sans-serif">
+<line x1="170" y1="45" x2="450" y2="30" stroke="#CBD5E1" stroke-width="1.3"/>
+<line x1="170" y1="45" x2="450" y2="84" stroke="#CBD5E1" stroke-width="1.3"/>
+<line x1="170" y1="45" x2="450" y2="138" stroke="#CBD5E1" stroke-width="1.3"/>
+<line x1="170" y1="45" x2="450" y2="192" stroke="#CBD5E1" stroke-width="1.3"/>
+<line x1="170" y1="45" x2="450" y2="246" stroke="#CBD5E1" stroke-width="1.3"/>
+<line x1="170" y1="45" x2="450" y2="300" stroke="#CBD5E1" stroke-width="1.3"/>
+<line x1="170" y1="105" x2="450" y2="30" stroke="#CBD5E1" stroke-width="1.3"/>
+<line x1="170" y1="105" x2="450" y2="84" stroke="#CBD5E1" stroke-width="1.3"/>
+<line x1="170" y1="105" x2="450" y2="138" stroke="#CBD5E1" stroke-width="1.3"/>
+<line x1="170" y1="105" x2="450" y2="192" stroke="#CBD5E1" stroke-width="1.3"/>
+<line x1="170" y1="105" x2="450" y2="246" stroke="#CBD5E1" stroke-width="1.3"/>
+<line x1="170" y1="105" x2="450" y2="300" stroke="#CBD5E1" stroke-width="1.3"/>
+<line x1="170" y1="165" x2="450" y2="30" stroke="#CBD5E1" stroke-width="1.3"/>
+<line x1="170" y1="165" x2="450" y2="84" stroke="#CBD5E1" stroke-width="1.3"/>
+<line x1="170" y1="165" x2="450" y2="138" stroke="#CBD5E1" stroke-width="1.3"/>
+<line x1="170" y1="165" x2="450" y2="192" stroke="#CBD5E1" stroke-width="1.3"/>
+<line x1="170" y1="165" x2="450" y2="246" stroke="#CBD5E1" stroke-width="1.3"/>
+<line x1="170" y1="165" x2="450" y2="300" stroke="#CBD5E1" stroke-width="1.3"/>
+<line x1="170" y1="225" x2="450" y2="30" stroke="#CBD5E1" stroke-width="1.3"/>
+<line x1="170" y1="225" x2="450" y2="84" stroke="#CBD5E1" stroke-width="1.3"/>
+<line x1="170" y1="225" x2="450" y2="138" stroke="#CBD5E1" stroke-width="1.3"/>
+<line x1="170" y1="225" x2="450" y2="192" stroke="#CBD5E1" stroke-width="1.3"/>
+<line x1="170" y1="225" x2="450" y2="246" stroke="#CBD5E1" stroke-width="1.3"/>
+<line x1="170" y1="225" x2="450" y2="300" stroke="#CBD5E1" stroke-width="1.3"/>
+<line x1="170" y1="285" x2="450" y2="30" stroke="#CBD5E1" stroke-width="1.3"/>
+<line x1="170" y1="285" x2="450" y2="84" stroke="#CBD5E1" stroke-width="1.3"/>
+<line x1="170" y1="285" x2="450" y2="138" stroke="#CBD5E1" stroke-width="1.3"/>
+<line x1="170" y1="285" x2="450" y2="192" stroke="#CBD5E1" stroke-width="1.3"/>
+<line x1="170" y1="285" x2="450" y2="246" stroke="#CBD5E1" stroke-width="1.3"/>
+<line x1="170" y1="285" x2="450" y2="300" stroke="#CBD5E1" stroke-width="1.3"/>
+<line x1="450" y1="30" x2="730" y2="165" stroke="#CBD5E1" stroke-width="1.6"/>
+<line x1="450" y1="84" x2="730" y2="165" stroke="#CBD5E1" stroke-width="1.6"/>
+<line x1="450" y1="138" x2="730" y2="165" stroke="#CBD5E1" stroke-width="1.6"/>
+<line x1="450" y1="192" x2="730" y2="165" stroke="#CBD5E1" stroke-width="1.6"/>
+<line x1="450" y1="246" x2="730" y2="165" stroke="#CBD5E1" stroke-width="1.6"/>
+<line x1="450" y1="300" x2="730" y2="165" stroke="#CBD5E1" stroke-width="1.6"/>
+<circle cx="170" cy="45" r="17" fill="#F3E8F7" stroke="#8A2E9E" stroke-width="2.5"/>
+<circle cx="170" cy="105" r="17" fill="#F3E8F7" stroke="#8A2E9E" stroke-width="2.5"/>
+<circle cx="170" cy="165" r="17" fill="#F3E8F7" stroke="#8A2E9E" stroke-width="2.5"/>
+<text x="170" y="233" text-anchor="middle" font-size="26" fill="#566B7F">⋮</text>
+<circle cx="170" cy="285" r="17" fill="#F3E8F7" stroke="#8A2E9E" stroke-width="2.5"/>
+<circle cx="450" cy="30" r="19" fill="#F3E8F7" stroke="#8A2E9E" stroke-width="2.5"/>
+<circle cx="450" cy="84" r="19" fill="#F3E8F7" stroke="#8A2E9E" stroke-width="2.5"/>
+<circle cx="450" cy="138" r="19" fill="#F3E8F7" stroke="#8A2E9E" stroke-width="2.5"/>
+<circle cx="450" cy="192" r="19" fill="#F3E8F7" stroke="#8A2E9E" stroke-width="2.5"/>
+<circle cx="450" cy="246" r="19" fill="#F3E8F7" stroke="#8A2E9E" stroke-width="2.5"/>
+<circle cx="450" cy="300" r="19" fill="#F3E8F7" stroke="#8A2E9E" stroke-width="2.5"/>
+<circle cx="730" cy="165" r="24" fill="#FFF1E6" stroke="#F46201" stroke-width="3"/>
+<text x="170" y="350" text-anchor="middle" font-size="17" fill="#1E293B">25 columnas</text>
+<text x="450" y="350" text-anchor="middle" font-size="17" fill="#1E293B">capa oculta (ReLU)</text>
+<text x="730" y="215" text-anchor="middle" font-size="17" fill="#1E293B">salida (sigmoide)</text>
+<text x="730" y="238" text-anchor="middle" font-size="17" font-weight="bold" fill="#8A2E9E">P(cancela)</text>
+<text x="60" y="165" text-anchor="middle" font-size="15" fill="#566B7F">entrada</text>
+</svg>
