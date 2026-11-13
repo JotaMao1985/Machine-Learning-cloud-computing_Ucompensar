@@ -12,6 +12,7 @@ __pycache__/
 # Plan interno, auditorías y glosario interno: no se publican
 PLAN_ML_Nube.md
 AUDITORIA_*.md
+DISENO_*.md
 fuente/comun/glosario.md
 fuentes/
 

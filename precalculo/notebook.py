@@ -129,6 +129,20 @@ def genera(numero):
     print("Notebook:", destino.relative_to(RAIZ))
 
 
+_ANSI = re.compile(r"\x1b\[[0-9;?]*[A-Za-z]")
+
+
+def _limpiar(texto):
+    """Quita lo que una terminal interpreta y un JSON no: códigos de color ANSI, retrocesos (\\x08)
+    y las barras de progreso que se reescriben con \\r (queda solo el último estado de cada línea).
+    Con salidas que no traen nada de eso (las de la S1 y la S2), devuelve el mismo texto."""
+    texto = _ANSI.sub("", texto)
+    while "\x08" in texto:
+        texto = re.sub(r"[^\x08\n]?\x08", "", texto, count=1)
+    return "\n".join(linea.split("\r")[-1] if "\r" in linea.rstrip("\r") else linea.rstrip("\r")
+                     for linea in texto.split("\n"))
+
+
 def ejecuta(numero):
     import nbformat
     from nbclient import NotebookClient
@@ -158,7 +172,7 @@ def ejecuta(numero):
                 texto.append(s.data.get("text/plain", "") + "\n")
             elif s.output_type == "error":
                 raise SystemExit(f"La celda [{celda.metadata['etiqueta']}] falló: {s.ename}: {s.evalue}")
-        salidas[celda.metadata["etiqueta"]] = "".join(texto).rstrip("\n")
+        salidas[celda.metadata["etiqueta"]] = _limpiar("".join(texto)).rstrip("\n")
     import pandas
     import sklearn
     salidas.pop("_preludio", None)
