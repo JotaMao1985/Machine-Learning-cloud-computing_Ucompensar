@@ -45,7 +45,7 @@ agenda: si
 Pausa: **10 min a las 19:15**.
 
 ???
-Hitos de reloj, que no se mueven: el agrupamiento empieza a las 18:05; la pausa, a las 19:15; la práctica, a las 19:25; la nube, a las 19:55; las salas, a las 20:55; la coevaluación, a las 21:40, y el cierre, a las 21:50. Orden de recorte de toda la sesión (DISENO_S3_S4.md): (1) el jerárquico se reduce a la diapositiva del dendrograma; (2) por eso la comparación de Ward y el enlace simple (*single*) queda solo en sus notas (en la práctica, (1) y (2) son la misma diapositiva que se salta: −3 min); (3) la demostración de la máquina virtual se cambia por una captura (−3 min). Recortes adicionales, si hacen falta: la diapositiva de `eps` = 0,3 se salta (queda para el ejercicio 3, −2 min) y `nombrar` se dice sin proyectar el código (−2 min). No se recortan nunca la revisión en salas ni la IA responsable. Entre las 19:25 y las 22:00 no hay pausa: si el grupo lo pide, 3 minutos antes de la diapositiva de IaaS frente a PaaS (hacia las 20:35), a costa del recorte (3).
+Hitos de reloj, que no se mueven: el agrupamiento empieza a las 18:05; la pausa, a las 19:15; la práctica, a las 19:25; la nube, a las 19:55; las salas, a las 20:55; la coevaluación, a las 21:40, y el cierre, a las 21:50. Orden de recorte de toda la sesión (DISENO_S3_S4.md): (1) el jerárquico se reduce a la diapositiva del dendrograma; (2) por eso la comparación de Ward y el enlace simple (*single*) queda solo en sus notas (en la práctica, (1) y (2) son la misma diapositiva que se salta: −3 min); (3) la demostración de la máquina virtual se cambia por una captura (−3 min). Recortes adicionales, si hacen falta: la diapositiva de `eps` = 0,3 se salta (queda para el ejercicio 3, −2 min) y `nombrar` se dice sin proyectar el código (−2 min). No se recortan nunca la revisión en salas ni la IA responsable. Entre las 19:25 y las 22:00 no hay pausa: si el grupo lo pide, 3 minutos antes de la diapositiva de IaaS frente a PaaS (hacia las 20:35), a costa del recorte (3).
 
 ## Hoy la gerente pregunta algo que nadie ha etiquetado
 
@@ -378,7 +378,7 @@ K-Means da segmentos que se pueden describir; el jerárquico deja ver el árbol 
 ???
 19:12. Resumen del bloque, en una frase por método. Para el proyecto: si una pareja elige agrupar, su línea base es otro número de grupos o un reparto al azar, y tiene que justificar cómo eligió k (página del proyecto). Transición a la pausa.
 
-## Pausa de 10 minutos {.idea etiqueta="Pausa" icono=fa-mug-hot}
+## Pausa de 10 minutos {.idea etiqueta="Pausa" icono=fa-mug-hot}
 
 Volvemos a las 19:25 con la práctica. En la pausa, ejecuta el notebook hasta la celda [dbscan]: **Entorno de ejecución → Ejecutar anteriores** desde el ejercicio 1.
 
@@ -546,7 +546,7 @@ Veinte minutos para todo el bloque de privacidad: esta es la diapositiva central
 
 1. Yarumo le pasa la tabla a una aseguradora de Medellín, que hará con ella sus propias campañas
 2. Yarumo sube la tabla a un almacenamiento en Estados Unidos; el proveedor solo la guarda, y el contrato le prohíbe cualquier otro uso
-3. Una consultora de Bogotá revisa el modelo con una copia de la tabla y le entrega el informe a Yarumo, que le fijó qué hacer
+3. Un centro de llamadas de Bogotá recibe la lista de clientes que Yarumo quiere retener y los llama a nombre de Yarumo, con el guion que Yarumo le fijó
 4. Yarumo le vende la tabla a una empresa de mercadeo en México, que la usará para vender otros servicios
 
 ::: respuesta
@@ -554,7 +554,7 @@ Veinte minutos para todo el bloque de privacidad: esta es la diapositiva central
 :::
 
 ???
-Tres minutos, en el chat: «1 …, 2 …». La clave es quién decide: si el que recibe decide para qué usa los datos, es responsable y hay transferencia (F-LEY-03, art. 3); el país no decide si es una u otra. En el 1, aun siendo una aseguradora colombiana, es transferencia; en el 2, aunque salga del país, es transmisión. En el 3, la consultora del ejercicio de roles de la S2: con contrato, transmisión; sin él, Yarumo no tiene cómo exigirle seguridad. En el 4, el país es adecuado (F-LEY-12), pero vender datos para otra finalidad choca con el principio de finalidad.
+Tres minutos, en el chat: «1 …, 2 …». La clave es quién decide: si el que recibe decide para qué usa los datos, es responsable y hay transferencia (F-LEY-03, art. 3); el país no decide si es una u otra. En el 1, aun siendo una aseguradora colombiana, es transferencia; en el 2, aunque salga del país, es transmisión. En el 3, el centro de llamadas trata los datos por cuenta de Yarumo: con contrato, transmisión; sin él, Yarumo no tiene cómo exigirle seguridad. (No es la consultora de la S2, que solo veía el contenedor `modelos` y no recibía datos de clientes.) En el 4, el país es adecuado (F-LEY-12), pero vender datos para otra finalidad choca con el principio de finalidad.
 
 ## No hay región de Azure en Colombia: ¿dónde quedan los datos? {.denso}
 
@@ -665,7 +665,7 @@ Seis minutos: que cada pareja escriba una línea por fila en el notebook (parte 
 > Dos parejas por sala: cada una revisa el avance de la otra
 
 ???
-20:55. Cuarenta y cinco minutos: 3 de instrucciones aquí, 2 para entrar, 35 en salas y 5 para volver. **Preparado antes de clase** (lo hace el docente): la hoja compartida, con una fila por pareja (nombres y sala), el Sí / En parte / No de los cuatro puntos como lista desplegable, una columna «consejo», la lista del avance y los tres criterios arriba, y para los criterios una columna «Conservar / Cambiar» (desplegable) con la redacción solo si cambia; las salas, preasignadas de dos parejas (si el número es impar, una sala de tres parejas, que reparte los 35 minutos en tres turnos de 10 + 1 de marcar). El docente pega el enlace en el chat y abre las salas. Durante las salas, lee la hoja (el primer «No» aparece hacia el minuto 15) y visita primero las salas con algún «No». Con unas 12 parejas son unas 6 salas: de 3 a 4 minutos por sala.
+20:55. Cuarenta y cinco minutos: 3 de instrucciones aquí, 2 para entrar, 35 en salas y 5 para volver. **Preparado antes de clase** (lo hace el docente): la hoja compartida, con una fila por pareja (nombres y sala), el Sí / En parte / No de los cuatro puntos como lista desplegable, una columna «consejo», la lista del avance y los tres criterios arriba, y para los criterios una columna «Conservar / Cambiar» (desplegable) con la redacción solo si cambia; las salas, preasignadas de dos parejas (si el número es impar, una sala de tres parejas, que reparte los 35 minutos en tres turnos de 10 + 1 de marcar). El docente pega el enlace en el chat y abre las salas. Durante las salas, lee la hoja (el primer «No» aparece hacia el minuto 15) y visita primero las salas con algún «No». Con unas 12 parejas son unas 6 salas: de 3 a 4 minutos por sala.
 
 ## En la sala, cada pareja presenta y la otra marca la lista
 
@@ -690,6 +690,8 @@ Así se ensaya la coevaluación de la S5 con algo que no cuenta para la nota (D6
 | **Un primer modelo** | Corre en Colab y tiene su métrica **frente a la línea base** |
 | **El modelo de servicio** | IaaS, PaaS o SaaS, con su porqué frente a otra opción |
 | *De hoy (opcional, no se marca)* | *La tabla «Para Yarumo»: región, base legal y dos riesgos* |
+
+Si agrupas, en lugar de datos no vistos: la **silueta frente a un reparto al azar** y el **número de grupos justificado con la decisión**.
 
 ???
 Los cuatro primeros puntos son el hito de la S3 de la página del proyecto («la pregunta, la línea base, un primer modelo y el modelo de servicio elegido»). El quinto es lo que acaban de escribir: se presenta si hay tiempo, pero no se marca; va en el plan de nube. Recordar: la entrega es el jueves 19 de noviembre a las 23:59 (hora de Colombia), y la sustentación, el viernes 20.
@@ -719,7 +721,7 @@ Es la propuesta de partida de la página del proyecto, copiada tal cual. Los cri
 - La redacción acordada se publica en la página del proyecto antes de la sesión 5
 
 ???
-Consenso, como piden los syllabus, no votación: queda lo que nadie objeta (D6); se pide un «de acuerdo» explícito para no confundir el silencio con acuerdo. Si en 10 minutos no hay acuerdo sobre una propuesta, se conserva la redacción de partida. Después de la clase, el docente pasa la redacción acordada a la sesión maestra, que actualiza `proyecto.html` (y publica solo con su permiso).
+Consenso, como piden los syllabus, no votación: queda lo que nadie objeta (D6); se pide un «de acuerdo» explícito para no confundir el silencio con acuerdo. Si en 10 minutos no hay acuerdo sobre una propuesta, se conserva la redacción de partida. Después de la clase, el docente pasa la redacción acordada a la sesión maestra, que actualiza `proyecto.html` (y publica solo con su permiso).
 
 # Cierre {icono=fa-flag-checkered}
 
@@ -758,10 +760,10 @@ Leer las cinco en voz alta y cerrar con el lema: un grupo es una hipótesis, no 
 - **Antes del jueves 19**: el ejercicio 3 (lo atípico, con DBSCAN; el 4 es opcional), y con tu pareja, la región, la base legal y los dos riesgos en el plan de nube
 - **Lecturas, cuando puedas**: la introducción de Azure Monitor en Microsoft Learn y, para hojear, la sección 6.3 de *Deep Learning* (Goodfellow, Bengio y Courville)
 
-**Mañana a las 7:00:** redes neuronales y los datos de Yarumo en Azure: almacenamiento, monitoreo y Defender for Cloud. La cuenta de Azure solo hace falta para seguir el laboratorio opcional.
+**Mañana a las 7:00:** redes neuronales y los datos de Yarumo en Azure: almacenamiento, monitoreo y Defender for Cloud. La demostración del docente y el ejercicio de diseño son para todos; repetir los pasos en una cuenta propia de Azure es opcional.
 
 ???
-Goodfellow, Bengio y Courville (2016), *Deep Learning*, MIT Press, gratis en https://www.deeplearningbook.org/ (F-ML-40): la sec. 6.3, «Hidden Units», presenta la ReLU. La introducción de Azure Monitor (F-AZ-45). La S4 no depende de ninguna de las dos: son 9 horas después de esta clase. La S4 es el sábado 14 de noviembre, de 07:00 a 13:00, con un laboratorio en el que la demostración es del docente y el ejercicio de diseño es para todos.
+Goodfellow, Bengio y Courville (2016), *Deep Learning*, MIT Press, gratis en https://www.deeplearningbook.org/ (F-ML-40): la sec. 6.3, «Hidden Units», presenta la ReLU. La introducción de Azure Monitor (F-AZ-45). La S4 no depende de ninguna de las dos: son 9 horas después de esta clase. La S4 es el sábado 14 de noviembre, de 07:00 a 13:00, con un laboratorio en el que la demostración del docente y el ejercicio de diseño son para todos; repetirlo en una cuenta propia es opcional.
 
 ## Fuentes de esta sesión: agrupamiento {.denso .arriba}
 
