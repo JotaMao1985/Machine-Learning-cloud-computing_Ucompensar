@@ -77,15 +77,15 @@ Hitos de reloj (número de diapositiva en la esquina): la 3 a las 18:00 (bienven
 
 ## Se evalúa con un proyecto final en parejas, que se sustenta el 20 de noviembre
 
-- **Proyecto en parejas** (trío solo si el grupo es impar): un plan de adopción segura de Azure para el modelo de Yarumo
-- Tres partes: un cuaderno (*notebook*) con un modelo y sus métricas, un **plan de nube** y la **sustentación** en la S5
-- **El enunciado y la rúbrica se presentan en la S2**, mañana
+- **Proyecto en parejas** (trío solo si el grupo es impar): *Del dato crudo a la decisión*, un problema real con datos abiertos o propios. **El enunciado cambió el 14 de noviembre**: está en la página del proyecto
+- Tres partes: un cuaderno (*notebook*) con el ciclo completo, un **informe** y una **ficha de datos y gobierno**; y la **sustentación** en la S5
+- La entrega es el **viernes 20 de noviembre a las 16:00**, y la sustentación, ese día desde las 18:00
 - Los ejercicios de cada sesión son **formativos**: sirven para aprender y para avanzar el proyecto
 
 Tres miradas: **autoevaluación**, **coevaluación** y **heteroevaluación**.
 
 ???
-No adelantar pesos ni porcentajes: el enunciado y la rúbrica (con los criterios CR1 a CR3 de los dos syllabus) se presentan al final de la S2. El plan de nube incluirá el modelo de servicio, la responsabilidad compartida, los roles con privilegio mínimo, las directivas, el almacenamiento y el monitoreo, la privacidad y el costo en la capa gratuita: casi todo empieza hoy. Las tres miradas de la evaluación son las de la metodología de los dos syllabus.
+Actualización del 14 de noviembre (M9): el proyecto pasó a ser «Del dato crudo a la decisión»; esta diapositiva ya lo dice. Lo que sigue en esta nota es lo que se dijo el 6 de noviembre. No adelantar pesos ni porcentajes: el enunciado y la rúbrica (con los criterios CR1 a CR3 de los dos syllabus) se presentan al final de la S2. El plan de nube incluirá el modelo de servicio, la responsabilidad compartida, los roles con privilegio mínimo, las directivas, el almacenamiento y el monitoreo, la privacidad y el costo en la capa gratuita: casi todo empieza hoy. Las tres miradas de la evaluación son las de la metodología de los dos syllabus.
 
 ## Yarumo Fibra S.A.S.: un operador de internet que nos acompaña las cinco sesiones
 

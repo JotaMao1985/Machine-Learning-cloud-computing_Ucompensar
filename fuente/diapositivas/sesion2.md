@@ -1036,12 +1036,24 @@ Sobre TI, el matiz que más enseña: Microsoft recomienda autorizar con Entra ID
 
 # Proyecto final {icono=fa-diagram-project}
 
-> El plan de adopción segura de Azure para el modelo de Yarumo
+> Del dato crudo a la decisión (el enunciado cambió el 14 de noviembre)
 
 ???
 12:00. Cuarenta minutos: 15 para el enunciado y la rúbrica, 5 para preguntas y 20 para formar las parejas y escribir en el chat la pareja y una primera idea. La página del proyecto tiene todo; las diapositivas son el resumen. No se recorta.
 
-## Tres partes: el modelo, el plan de nube y su sustentación
+## El proyecto cambió el 14 de noviembre: ahora es «Del dato crudo a la decisión»
+
+- Un **problema real** con datos abiertos oficiales o propios, no los de Yarumo
+- Un **notebook** con el ciclo completo, un **informe** de dos páginas y una **ficha de datos y gobierno** de una página, sin proveedor de nube
+- La **ficha del problema**, hasta el domingo 15 a las 23:59; la **entrega**, el **viernes 20 a las 16:00**; la **sustentación**, ese día desde las 18:00
+- El enunciado, la lista mínima y la rúbrica están en la **página del proyecto**
+
+Las diapositivas que siguen son el **enunciado anterior**, como se presentó el 7 de noviembre.
+
+???
+Decisión M9 del docente (14 de noviembre). Esta diapositiva se agregó ese día para que nadie se guíe por el enunciado anterior; las siguientes se conservan como se dictaron.
+
+## Tres partes: el modelo, el plan de nube y su sustentación (enunciado anterior)
 
 ::: tarjetas {columnas=3}
 ### 1 · El notebook
@@ -1052,7 +1064,7 @@ Modelo de servicio, responsabilidad compartida, roles con **privilegio mínimo**
 En la sesión 5, el **viernes 20 de noviembre**: una **explicación auditable** del modelo y del plan.
 :::
 
-En **parejas** (un trío solo si el número es impar). La entrega es por la plataforma, **hasta el jueves 19 de noviembre a las 23:59** (hora de Colombia).
+En **parejas** (un trío solo si el número es impar). La entrega era por la plataforma, hasta el jueves 19 de noviembre a las 23:59. **Con el enunciado nuevo es el viernes 20 a las 16:00.**
 
 ???
 Es la decisión M6 del curso. «Explicación auditable» viene de los dos syllabus (Etapa 3, Transferencia): la sustentación presenta una explicación auditable de los principios estandarizados con las herramientas seleccionadas. Para el modelo, quiere decir que otra persona puede seguir cada cifra hasta su celda y entender por qué el modelo señala a un cliente; para el plan, que cada decisión de seguridad tiene su razón y su fuente. Lo de hoy (matriz de roles, directivas, métricas, umbral) es la mitad del proyecto.
@@ -1091,7 +1103,7 @@ Los criterios se alinean con los criterios de realización de los dos syllabus: 
 1. **Hoy** — las parejas y una primera idea del modelo
 2. **S3** — revisión del avance, en salas
 3. **S4** — almacenamiento y monitoreo; laboratorio opcional para quien tenga cuenta de Azure
-4. **19 de noviembre, 23:59** — la entrega por la plataforma (hora de Colombia)
+4. **Viernes 20 de noviembre, 16:00** — la entrega por la plataforma (con el enunciado nuevo; antes era el jueves 19)
 5. **S5** — la sustentación y la coevaluación
 :::
 

@@ -496,8 +496,8 @@ revisar_otra_columna(columnas=columnas5, grupos5=grupos5)
 #
 # ## Para Yarumo · Lo que llevas a las salas (sin código)
 #
-# Esta parte se hace con las diapositivas de la sesión y pasa directo al **plan de nube** del proyecto. Con
-# tu pareja, escribe una línea por fila. *Doble clic para escribir aquí.*
+# Esta parte se hace con las diapositivas de la sesión y te sirve para la **ficha de datos y gobierno** del
+# proyecto. Con tu pareja, escribe una línea por fila. *Doble clic para escribir aquí.*
 #
 # | Decisión | Lo que eligen | Por qué, y con qué fuente |
 # |---|---|---|

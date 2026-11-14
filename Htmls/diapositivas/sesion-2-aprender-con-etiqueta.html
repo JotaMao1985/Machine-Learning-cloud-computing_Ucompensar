@@ -116,7 +116,7 @@
         :root[data-tema="ucompensar"] .idea .etq-idea,
         :root[data-tema="ucompensar"] .ra-caja .etq { color: rgba(var(--primary-rgb), 0.85); }
         :root[data-tema="ucompensar"] .pie { color: #566B7F; }
-        :root[data-tema="ucompensar"] .cierre .pie { color: rgba(255, 255, 255, 0.62); }
+        :root[data-tema="ucompensar"] .cierre .pie, :root[data-tema="ucompensar"] .gancho .pie { color: rgba(255, 255, 255, 0.62); }
         :root[data-tema="ucompensar"] .item-seccion.hecha { color: rgba(255, 255, 255, 0.6); }
         :root[data-tema="ucompensar"] .item-seccion.actual,
         :root[data-tema="ucompensar"] #indice .item-seccion.actual,
@@ -129,7 +129,10 @@
         :root[data-tema="ucompensar"] .codigo.con-foco .linea.foco { background: rgba(var(--secondary-rgb), 0.10); }
         :root[data-tema="ucompensar"] .diapo.idea { background: linear-gradient(135deg, rgba(105, 30, 122, 0.06), rgba(244, 98, 1, 0.08)), #fff; }
         :root[data-tema="ucompensar"] .portada h1,
-        :root[data-tema="ucompensar"] .principal h2 { font-weight: 700; }
+        :root[data-tema="ucompensar"] .principal h2,
+        :root[data-tema="ucompensar"] .idea h2,
+        :root[data-tema="ucompensar"] .gancho h2 { font-weight: 700; }
+        :root[data-tema="ucompensar"] .dato .cifra, :root[data-tema="ucompensar"] .numero-grande { font-weight: 900; }
         :root[data-tema="ucompensar"] .cierre .cuerpo h3 { color: var(--gold); }
         :root[data-tema="ucompensar"] .caja.warn { border-color: #B84A00; background: #FFF7ED; }
         :root[data-tema="ucompensar"] .caja.warn .caja-etiqueta { background: #B84A00; }
@@ -140,7 +143,7 @@
         :root[data-tema="ucompensar"] .codigo.con-foco .linea { opacity: 0.85; }
         :root[data-tema="ucompensar"] .codigo.con-foco .linea.foco { opacity: 1; }
         :root[data-tema="ucompensar"] .pie .num { color: #566B7F; }
-        :root[data-tema="ucompensar"] .cierre .pie .num { color: rgba(255, 255, 255, 0.7); }
+        :root[data-tema="ucompensar"] .cierre .pie .num, :root[data-tema="ucompensar"] .gancho .pie .num { color: rgba(255, 255, 255, 0.7); }
         :root[data-tema="ucompensar"] .lateral .capitulo span { color: var(--gold); }
         :root[data-tema="ucompensar"] td mjx-container:not([display="true"]) { font-size: 125%; }
 
@@ -342,10 +345,16 @@
 
         .cuerpo mark { background: rgba(253, 185, 19, 0.35); color: inherit; padding: 0 0.15em; border-radius: 3px; }
 
+        /* Lo accesorio, de verdad pequeño: una aclaración no compite con la idea. */
+        .cuerpo small { font-size: 0.74em; color: var(--gris); }
+
+        /* La frase que remata la diapositiva: una banda, no un párrafo más. */
         .cita {
             margin: 0.4em 0 0.8em;
-            padding: 0.1em 0 0.1em 0.9em;
+            padding: 0.1em 0 0.1em 0.9em;   /* las medidas de antes: la banda no le quita ancho ni alto al texto */
             border-left: 4px solid var(--secondary);
+            border-radius: 0 12px 12px 0;
+            background: linear-gradient(90deg, rgba(var(--secondary-rgb), 0.09) 0%, rgba(var(--secondary-rgb), 0.02) 70%, transparent 100%);
             color: var(--primary);
             font-weight: 600;
             font-size: 1.08em;
@@ -355,12 +364,15 @@
         .cita p { margin: 0 0 0.3em; }
 
         /* --- Tablas: las de `prose-lp` -------------------------------- */
+        /* Proyectada, la rejilla completa pesa más que las cifras: solo filetes
+           horizontales y cabecera con el color del curso. Las medidas (cuerpo,
+           relleno) son las de antes: ninguna tabla que cabía deja de caber. */
         .cuerpo table {
             width: 100%;
             border-collapse: collapse;
             font-size: 0.82em;
             margin: 0.2em 0 0.8em;
-            background: #fff;
+            background: transparent;
         }
 
         .cuerpo th {
@@ -368,15 +380,20 @@
             color: var(--navy);
             text-align: left;
             padding: 0.5em 0.75em;
-            border: 1px solid var(--borde);
+            border: 0;
+            border-bottom: 2px solid var(--primary);
             font-weight: 700;
         }
 
         .cuerpo td {
             padding: 0.5em 0.75em;
-            border: 1px solid var(--borde);
+            border: 0;
+            border-bottom: 1px solid var(--borde);
             vertical-align: top;
         }
+
+        .cuerpo tbody tr:last-child td { border-bottom: 0; }
+        .cierre .cuerpo td { border-bottom-color: rgba(255, 255, 255, 0.14); }
 
         /* --- Columnas -------------------------------------------------- */
         .columnas {
@@ -668,11 +685,21 @@
             font-size: 11.5px;
             color: var(--gris-claro);
             letter-spacing: 0.02em;
+            z-index: 3;
         }
 
         .pie .num { font-weight: 700; color: var(--gris); font-variant-numeric: tabular-nums; }
         .pie .sello { display: inline-flex; align-items: center; gap: 10px; }
-        .pie .sello::before { content: ''; width: 22px; height: 3px; border-radius: 3px; background: var(--grad); }
+        .pie .sello::before { content: ''; width: 22px; height: 3px; border-radius: 3px; background: var(--grad); flex-shrink: 0; }
+
+        /* La cita bibliográfica (`fuente=`) vive aquí, no en el cuerpo: se puede
+           leer de cerca y no le quita sitio ni peso a lo que se proyecta. */
+        .pie.con-fuente { align-items: flex-end; gap: 28px; }
+        .pie .fuente { color: var(--gris); font-size: 12.5px; line-height: 1.35; letter-spacing: 0; max-width: 1010px; align-items: flex-start; }
+        .pie .fuente::before { margin-top: 7px; }
+        .pie .fuente code { font-size: 0.92em; }
+        .pie.con-fuente .num { white-space: nowrap; }
+        .cierre .pie .fuente, .gancho .pie .fuente { color: rgba(255, 255, 255, 0.62); }
 
         /* ============================================================
            PORTADA
@@ -803,6 +830,26 @@
         .principal .gancho { margin-top: 26px; font-size: 22px; line-height: 1.45; color: var(--primary); font-weight: 600; border-left: 3px solid var(--secondary); padding-left: 16px; }
         .principal .gancho p { margin: 0 0 0.3em; }
 
+        /* El divisor es un cambio de acto, no un índice: la barra lateral cede
+           ancho y el título de la sección manda en la lámina. */
+        .seccion .lateral { width: 340px; padding-right: 22px; }
+        .seccion .principal {
+            padding-left: 84px;
+            background:
+                radial-gradient(620px 440px at 100% 0%, rgba(var(--secondary-rgb), 0.11), transparent 70%),
+                radial-gradient(520px 380px at 0% 100%, rgba(var(--primary-rgb), 0.06), transparent 70%);
+        }
+        .seccion .parte { font-size: 12.5px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--secondary-texto); margin-bottom: 14px; }
+        .seccion .numero-grande { font-size: 156px; margin-bottom: 14px; }
+        .seccion .principal h2 { font-size: 54px; line-height: 1.06; max-width: 760px; }
+        .seccion .principal .gancho { font-size: 25px; line-height: 1.4; margin-top: 30px; border-left-width: 5px; padding-left: 20px; max-width: 740px; }
+        .seccion .enlace-material { left: 84px; }
+        .diapo.activa.seccion .numero-grande { animation: entrarNumero 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+        @keyframes entrarNumero {
+            from { opacity: 0; transform: translateY(26px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .enlace-material {
             position: absolute;
             left: 72px;
@@ -839,8 +886,76 @@
         .idea .marco { justify-content: center; padding: 60px 110px 70px; }
         .idea .etq-idea { display: flex; align-items: center; gap: 12px; font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.18em; font-weight: 700; color: rgba(var(--primary-rgb), 0.62); margin-bottom: 26px; }
         .idea .etq-idea .punto { width: 38px; height: 38px; border-radius: 999px; background: var(--grad); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 15px; box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.25); }
-        .idea h2 { margin: 0; font-size: 46px; line-height: 1.2; font-weight: 700; color: var(--primary); border-left: 6px solid var(--secondary); padding-left: 30px; letter-spacing: -0.01em; }
-        .idea .cuerpo { flex: 0 1 auto; margin-top: 28px; padding-left: 36px; color: #475569; font-size: calc(24px * var(--k)); }
+        .idea h2 { margin: 0; font-size: 50px; line-height: 1.16; font-weight: 800; color: var(--primary); border-left: 8px solid var(--secondary); padding-left: 30px; letter-spacing: -0.015em; }
+        .idea .cuerpo { flex: 0 1 auto; margin-top: 30px; padding-left: 38px; color: #475569; font-size: calc(25px * var(--k)); }
+        /* Que la regla que se llevan se reconozca desde el fondo del aula y en
+           la hoja de contactos: una banda del degradado a todo lo alto y un
+           brillo del color secundario en la esquina. */
+        .diapo.idea::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 14px; background: var(--grad); z-index: 1; }
+        .diapo.idea::after { content: ''; position: absolute; inset: 0; background: radial-gradient(680px 460px at 100% 100%, rgba(var(--secondary-rgb), 0.16), transparent 70%); pointer-events: none; }
+        .idea .marco, .pregunta .marco { z-index: 2; }
+
+        /* --- Pregunta: un lavado del color claro, para que se note el cambio -- */
+        .diapo.pregunta { background: linear-gradient(180deg, var(--lila) 0%, #fff 62%); }
+
+        /* --- Gancho: el problema o la pregunta que abre, a lámina completa -- */
+        .diapo.gancho { background: var(--grad-navy); color: #fff; }
+        .gancho .brillo {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(720px 460px at 100% 0%, rgba(var(--secondary-rgb), 0.30), transparent 70%),
+                radial-gradient(520px 420px at 0% 100%, rgba(var(--primary-rgb), 0.55), transparent 70%);
+            pointer-events: none;
+        }
+        .gancho .marco { justify-content: center; padding: 60px 110px 76px; }
+        .gancho .etq-gancho { display: flex; align-items: center; gap: 12px; font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.2em; font-weight: 700; color: var(--gold); margin-bottom: 28px; }
+        .gancho .etq-gancho .punto { width: 38px; height: 38px; border-radius: 999px; background: var(--grad); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 15px; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.18); }
+        .gancho h2 { margin: 0; font-size: 56px; line-height: 1.12; font-weight: 800; letter-spacing: -0.02em; color: #fff; max-width: 1000px; }
+        .gancho .cuerpo { flex: 0 1 auto; margin-top: 30px; color: rgba(255, 255, 255, 0.82); font-size: calc(26px * var(--k)); max-width: 940px; }
+        .gancho .cuerpo strong { color: #fff; }
+        .gancho .cuerpo li::marker { color: var(--gold); }
+        .gancho .cuerpo code:not(pre code) { background: rgba(255, 255, 255, 0.12); color: #fff; }
+        .gancho .cuerpo .cita { color: #fff; background: rgba(255, 255, 255, 0.07); }
+        .gancho .caja { color: var(--texto); }
+        .gancho .pie { color: rgba(255, 255, 255, 0.45); }
+        .gancho .pie .num { color: rgba(255, 255, 255, 0.7); }
+
+        /* --- Dato: una cifra que se lee desde la última fila --------------- */
+        .diapo.dato { background: linear-gradient(135deg, #fff 0%, #fff 55%, rgba(var(--secondary-rgb), 0.07) 100%); }
+        .dato .marco { justify-content: center; padding: 56px 110px 72px; }
+        .dato .antetitulo { margin-bottom: 6px; }
+        .dato .cifra {
+            width: fit-content;
+            max-width: 100%;
+            padding-right: 0.04em;
+            font-size: var(--cifra, 170px);
+            line-height: 1;
+            font-weight: 800;
+            letter-spacing: -0.045em;
+            font-variant-numeric: tabular-nums;
+            white-space: nowrap;
+            background: var(--grad);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 18px;
+        }
+        .dato h2 { margin: 0; font-size: 40px; line-height: 1.18; font-weight: 700; color: var(--tinta); letter-spacing: -0.01em; max-width: 980px; }
+        .dato .cuerpo { flex: 0 1 auto; margin-top: 20px; color: #475569; font-size: calc(24px * var(--k)); max-width: 940px; }
+        .diapo.activa.dato .cifra { animation: entrarNumero 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+
+        /* --- Plena: la figura manda; el título, arriba y compacto ---------- */
+        .plena .marco { padding: 26px 48px 52px; }
+        .plena .cabecera { border-bottom: 0; padding-bottom: 0; margin-bottom: 10px; gap: 0; }
+        .plena .ficha-icono { display: none; }
+        .plena .antetitulo { font-size: 11.5px; margin-bottom: 2px; }
+        .plena .cabecera h2 { font-size: 28px; }
+        .plena .figura { --alto: 520px; margin-bottom: 0.2em; }
+        .plena .cuerpo { font-size: calc(21px * var(--k)); }
+        .plena .cuerpo > p, .plena .cuerpo > .cita { text-align: center; }
+        .plena .cuerpo > .cita { border-left: 0; border-radius: 12px; background: rgba(var(--secondary-rgb), 0.07); }
+        .plena .pie { left: 48px; right: 48px; }
 
         .chip-ejercicio {
             display: inline-flex;
@@ -904,6 +1019,13 @@
         ============================================================ */
         #progreso { position: fixed; top: 0; left: 0; right: 0; height: 6px; background: rgba(226, 232, 240, 0.7); z-index: 20; }
         #progreso > div { height: 100%; background: var(--grad); transition: width 0.5s ease; width: 0; }
+        /* Una muesca donde empieza cada sección: cuánto falta se ve por actos. */
+        #progreso .muesca { position: absolute; top: 0; width: 2px; height: 100%; background: rgba(255, 255, 255, 0.85); box-shadow: 0 0 0 0.5px rgba(15, 23, 42, 0.18); }
+
+        @media (prefers-reduced-motion: reduce) {
+            .diapo.activa > .marco, .diapo.activa.seccion .numero-grande, .diapo.activa.dato .cifra { animation: none; }
+            .paso { transition: none; }
+        }
 
         .btn-redondo {
             position: fixed;
@@ -1049,7 +1171,7 @@
 
         body.revision #controles, body.revision #btn-menu { display: none; }
         body.revision .paso { transition: none; }
-        body.revision .diapo.activa > .marco { animation: none; }
+        body.revision .diapo.activa > .marco, body.revision .diapo.activa .numero-grande, body.revision .diapo.activa .cifra { animation: none; }
 
         /* Revisión: diapositivas que no caben */
         .aviso-revision {
@@ -1079,6 +1201,9 @@
         #panel-presentador .barra { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; font-size: 14px; color: rgba(255, 255, 255, 0.7); }
         #panel-presentador .reloj { font-size: 30px; font-weight: 700; color: #fff; font-variant-numeric: tabular-nums; }
         #panel-presentador .reloj small { font-size: 13px; color: var(--gold); font-weight: 600; margin-left: 8px; letter-spacing: 0.1em; text-transform: uppercase; }
+        #panel-presentador .ritmo { margin-left: 12px; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; background: rgba(255, 255, 255, 0.1); color: rgba(255, 255, 255, 0.85); }
+        #panel-presentador .ritmo:empty { display: none; }
+        #panel-presentador .ritmo.atras { background: var(--gold); color: #1E293B; }
         #panel-presentador .hueco { border-radius: 10px; }
         #panel-presentador .derecha { display: flex; flex-direction: column; gap: 14px; min-height: 0; pointer-events: auto; }
         #panel-presentador .etq { font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; font-weight: 700; color: var(--gold); margin-bottom: 6px; }
@@ -1151,7 +1276,7 @@
             <h2 style="margin-bottom:34px">Lo que vamos a construir hoy</h2>
             <div class="ra-caja"><div class="etq">Objetivo de la sesión</div><div class="ra">Entrenar y comparar modelos de regresión y de clasificación contra su línea base, elegir la métrica y el umbral que sirven a la decisión, reconocer el sobreajuste con la validación cruzada, y diseñar con privilegio mínimo quién puede ver qué datos de Yarumo en Azure.</div></div>
             <div class="chips"><span>Regresión</span><span>Clasificación</span><span>Métricas</span><span>Umbral</span><span>Validación cruzada</span><span>Entra ID</span><span>Azure RBAC</span><span>Azure Policy</span><span>Proyecto final</span></div>
-            <div class="pie" style="left:72px;right:72px"><span></span><span></span><span class="num">2 / 81</span></div>
+            <div class="pie" style="left:72px;right:72px"><span></span><span></span><span class="num">2 / 82</span></div>
         </div>
     </div>
 </section>
@@ -1165,11 +1290,12 @@
             <div class="lista-secciones"><div class="item-seccion actual"><i aria-hidden="true" class="fas fa-door-open"></i><span>Apertura</span></div><div class="item-seccion "><i aria-hidden="true" class="fas fa-chart-line"></i><span>Regresión</span></div><div class="item-seccion "><i aria-hidden="true" class="fas fa-user-xmark"></i><span>Clasificación</span></div><div class="item-seccion "><i aria-hidden="true" class="fas fa-shield-halved"></i><span>Nube</span></div><div class="item-seccion "><i aria-hidden="true" class="fas fa-diagram-project"></i><span>Proyecto final</span></div><div class="item-seccion "><i aria-hidden="true" class="fas fa-flag-checkered"></i><span>Cierre</span></div></div>
         </div>
         <div class="principal">
+            <div class="parte">Parte 1 de 6</div>
             <div class="numero-grande">01</div>
             <h2>Apertura</h2>
             <div class="gancho"><p>¿Cuántos GB consumirá cada cliente, quién va a cancelar y quién puede ver esos datos?</p></div>
             
-            <div class="pie" style="left:72px;right:72px"><span></span><span></span><span class="num">3 / 81</span></div>
+            <div class="pie" style="left:72px;right:72px"><span></span><span></span><span class="num">3 / 82</span></div>
         </div>
     </div>
 </section>
@@ -1196,7 +1322,7 @@
 <p>Pausas: <strong>15 min a las 08:45</strong> y <strong>10 min a las 10:40</strong>.</p></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">4 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">4 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -1213,7 +1339,7 @@
 <p>Hoy esas cuentas tienen nombre (matriz de confusión, precisión y sensibilidad) y las usamos con más modelos y más columnas.</p></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">5 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">5 / 82</span></div>
 </section>
 <section class="diapo pregunta">
     
@@ -1226,7 +1352,7 @@
 <div class="paso"><div class="caja respuesta"><span class="caja-etiqueta"><i aria-hidden="true" class="fas fa-check"></i>Respuesta</span><div class="caja-cuerpo"><p><strong>El primero.</strong> Cada llamada le rinde más: 186 de 284 (el 65 %) contra 215 de 509 (el 42 %). Con 509 llamadas, el primero encontraría a 276. Aun así, deja ir a 285: hoy lo arreglamos con el umbral y con un modelo mejor.</p></div></div></div></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">6 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">6 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -1243,7 +1369,7 @@
 <p>Las dos primeras son aprendizaje <strong>supervisado</strong> (como en la sesión 1): el modelo aprende de ejemplos que traen la respuesta, la <strong>etiqueta</strong>.</p></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">7 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">7 / 82</span></div>
 </section>
 <section class="diapo dividida seccion" data-tipo="seccion">
     <div class="marco">
@@ -1255,11 +1381,12 @@
             <div class="lista-secciones"><div class="item-seccion hecha"><i aria-hidden="true" class="fas fa-door-open"></i><span>Apertura</span></div><div class="item-seccion actual"><i aria-hidden="true" class="fas fa-chart-line"></i><span>Regresión</span></div><div class="item-seccion "><i aria-hidden="true" class="fas fa-user-xmark"></i><span>Clasificación</span></div><div class="item-seccion "><i aria-hidden="true" class="fas fa-shield-halved"></i><span>Nube</span></div><div class="item-seccion "><i aria-hidden="true" class="fas fa-diagram-project"></i><span>Proyecto final</span></div><div class="item-seccion "><i aria-hidden="true" class="fas fa-flag-checkered"></i><span>Cierre</span></div></div>
         </div>
         <div class="principal">
+            <div class="parte">Parte 2 de 6</div>
             <div class="numero-grande">02</div>
             <h2>Regresión</h2>
             <div class="gancho"><p>¿Cuántos GB al mes consumirá cada cliente?</p></div>
             
-            <div class="pie" style="left:72px;right:72px"><span></span><span></span><span class="num">8 / 81</span></div>
+            <div class="pie" style="left:72px;right:72px"><span></span><span></span><span class="num">8 / 82</span></div>
         </div>
     </div>
 </section>
@@ -1281,7 +1408,7 @@
 </div></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">9 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">9 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -1305,7 +1432,7 @@ X.loc[[0, 1, 2], ["contrato_24 meses", "contrato_Mes a mes"]]
 #&gt; 2                  1                   0</code></pre></div></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">10 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">10 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -1330,7 +1457,7 @@ print(f"R²   = {r2_score(y_prueba, pred_base):.3f}")
 </ul></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">11 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">11 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -1343,7 +1470,7 @@ print(f"R²   = {r2_score(y_prueba, pred_base):.3f}")
 <p>\(y_i\) es el consumo real del cliente \(i\); \(\hat y_i\), el que predijo el modelo, y \(n\), el número de clientes. El <strong>MAE</strong> (error absoluto medio) es el error promedio por cliente. La <strong>RMSE</strong> (raíz del error cuadrático medio) eleva al cuadrado antes de promediar: unos pocos errores enormes la suben mucho.</p></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">12 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">12 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -1356,7 +1483,7 @@ print(f"R²   = {r2_score(y_prueba, pred_base):.3f}")
 <p>La línea base da 0; un modelo perfecto, 1. Es la parte de la <strong>variación</strong> del consumo que el modelo reproduce, no un porcentaje de aciertos.</p></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">13 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">13 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -1379,7 +1506,7 @@ pd.DataFrame(resultados).T.round(3)
 #&gt; Lineal       90.962  139.069  0.708</code></pre></div></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">14 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">14 / 82</span></div>
 </section>
 <section class="diapo pregunta">
     
@@ -1399,7 +1526,7 @@ pd.DataFrame(resultados).T.round(3)
 <div class="paso"><div class="caja respuesta"><span class="caja-etiqueta"><i aria-hidden="true" class="fas fa-check"></i>Respuesta</span><div class="caja-cuerpo"><p><strong>C.</strong> De A a B hay 20 000 (pesos); de A a C, 38 (años): la factura decide sola, y C consume la octava parte. En desviaciones estándar, el vecino sería B.</p></div></div></div></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">15 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">15 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -1425,7 +1552,7 @@ print(f"Escalados:   A–B {distancia(escalados, 'C00053', 'C00611'):.2f}",
 </ul></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">16 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">16 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -1451,7 +1578,7 @@ pd.DataFrame(resultados).T.round(3)
 </div></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">17 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">17 / 82</span></div>
 </section>
 <section class="diapo pregunta">
     
@@ -1468,7 +1595,7 @@ print(f"KNN sin escalar: MAE {r_sin['MAE']:.1f} GB · R² {r_sin['R²']:.3f}")
 <p><strong>Un poco mejor.</strong> Sin escalar, la distancia la deciden la factura y el plan, que resumen bien el consumo. Es suerte de las unidades: <strong>se escala para no depender de ellas</strong>, no para ganar puntos.</p></div></div></div></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">18 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">18 / 82</span></div>
 </section>
 <section class="diapo pregunta">
     
@@ -1481,7 +1608,7 @@ print(f"KNN sin escalar: MAE {r_sin['MAE']:.1f} GB · R² {r_sin['R²']:.3f}")
 <div class="paso"><div class="caja respuesta"><span class="caja-etiqueta"><i aria-hidden="true" class="fas fa-check"></i>Respuesta</span><div class="caja-cuerpo"><p><strong>Perfecto en entrenamiento y peor en prueba</strong>: 1 y 0,56. La recta tenía 0,71.</p></div></div></div></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">19 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">19 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -1502,7 +1629,7 @@ print(f"R² en prueba:        {resultados['Árbol sin límite']['R²']:.3f}")
 </ul></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">20 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">20 / 82</span></div>
 </section>
 <section class="diapo idea">
     <div class="marco">
@@ -1510,7 +1637,7 @@ print(f"R² en prueba:        {resultados['Árbol sin límite']['R²']:.3f}")
         <h2>Aprender no es memorizar</h2>
         <div class="cuerpo"><p>Un modelo que acierta todo lo que vio y falla con lo que no vio no aprendió: memorizó. Por eso cada modelo se mide en la prueba, contra su línea base.</p></div>
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">21 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">21 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -1526,7 +1653,7 @@ print(f"R² en prueba:        {resultados['Árbol sin límite']['R²']:.3f}")
 <p>Lo que se elige antes de entrenar (cuántos árboles, qué tan profundos) son <strong>hiperparámetros</strong> (<em>hyperparameters</em>).</p></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">22 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">22 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -1549,7 +1676,7 @@ tabla_reg.round(3)
 #&gt; XGBoost            68.754  111.126  0.814</code></pre></div></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">23 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">23 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -1836,7 +1963,7 @@ L 603.973441 245.836395
 </svg></div><figcaption>El error absoluto medio en prueba de cada modelo (celda comparacion_reg)</figcaption></figure></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">24 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">24 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -2107,7 +2234,7 @@ L 480.401239 80.90875
 </ul></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">25 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">25 / 82</span></div>
 </section>
 <section class="diapo pregunta">
     
@@ -2127,7 +2254,7 @@ L 480.401239 80.90875
 <p><strong>La edad × usuarios</strong>: es una <strong>interacción</strong>. Cumplir años le quita más GB a un hogar de muchas personas. La recta solo suma efectos; los árboles combinan columnas solos.</p></div></div></div></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">26 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">26 / 82</span></div>
 </section>
 <section class="diapo pregunta">
     
@@ -2140,7 +2267,7 @@ L 480.401239 80.90875
 <div class="paso"><div class="caja respuesta"><span class="caja-etiqueta"><i aria-hidden="true" class="fas fa-check"></i>Respuesta</span><div class="caja-cuerpo"><p><strong>El MAE y la RMSE</strong>: las dos están en GB. El MAE es el error promedio; la RMSE pesa más los errores grandes, y sirve si le preocupan los clientes de consumo extremo. El R² no está en GB: dice qué parte de la variación reproduce el modelo.</p></div></div></div></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">27 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">27 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -2159,7 +2286,7 @@ L 480.401239 80.90875
 <p>Quince minutos, en el notebook: antes del ejercicio 1, haz clic en la celda del ejercicio → <strong>Entorno de ejecución → Ejecutar anteriores</strong>. Mientras quede un <code>...</code>, la celda da un error que menciona <code>Ellipsis</code>. El verificador da pistas sin dar la respuesta. Lo escrito va en «Tus respuestas».</p></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">28 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">28 / 82</span></div>
 </section>
 <section class="diapo idea">
     <div class="marco">
@@ -2167,7 +2294,7 @@ L 480.401239 80.90875
         <h2>Pausa de 15 minutos</h2>
         <div class="cuerpo"><p>Volvemos a las 09:00 con la clasificación: ¿quién va a cancelar?</p></div>
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">29 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">29 / 82</span></div>
 </section>
 <section class="diapo dividida seccion" data-tipo="seccion">
     <div class="marco">
@@ -2179,11 +2306,12 @@ L 480.401239 80.90875
             <div class="lista-secciones"><div class="item-seccion hecha"><i aria-hidden="true" class="fas fa-door-open"></i><span>Apertura</span></div><div class="item-seccion hecha"><i aria-hidden="true" class="fas fa-chart-line"></i><span>Regresión</span></div><div class="item-seccion actual"><i aria-hidden="true" class="fas fa-user-xmark"></i><span>Clasificación</span></div><div class="item-seccion "><i aria-hidden="true" class="fas fa-shield-halved"></i><span>Nube</span></div><div class="item-seccion "><i aria-hidden="true" class="fas fa-diagram-project"></i><span>Proyecto final</span></div><div class="item-seccion "><i aria-hidden="true" class="fas fa-flag-checkered"></i><span>Cierre</span></div></div>
         </div>
         <div class="principal">
+            <div class="parte">Parte 3 de 6</div>
             <div class="numero-grande">03</div>
             <h2>Clasificación</h2>
             <div class="gancho"><p>¿Quién va a cancelar?</p></div>
             
-            <div class="pie" style="left:72px;right:72px"><span></span><span></span><span class="num">30 / 81</span></div>
+            <div class="pie" style="left:72px;right:72px"><span></span><span></span><span class="num">30 / 82</span></div>
         </div>
     </div>
 </section>
@@ -2206,7 +2334,7 @@ print(f"Prueba: {len(yc_prueba)} clientes; cancelaron {yc_prueba.sum()}")
 </ul></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">31 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">31 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -2229,7 +2357,7 @@ print(f"Encontró a {encontrados_base} de los {yc_prueba.sum()}",
 </ul></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">32 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">32 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -2242,7 +2370,7 @@ print(f"Encontró a {encontrados_base} de los {yc_prueba.sum()}",
 <p>\(z\) es una suma como la de la regresión lineal; la curva en S la deja entre 0 y 1. Si pasa de <strong>0,5</strong>, el modelo decide «cancela». Ese 0,5 es el <strong>umbral</strong>.</p></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">33 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">33 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -2265,7 +2393,7 @@ confusion_matrix(yc_prueba, pred_log)
 </ul></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">34 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">34 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -2403,7 +2531,7 @@ L 345.418114 267.436395
 </div></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">35 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">35 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -2421,7 +2549,7 @@ L 345.418114 267.436395
 <p>\(n\) es el total de clientes de prueba; P, la precisión; S, la sensibilidad.</p></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">36 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">36 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -2446,7 +2574,7 @@ print(f"F1:           {f1_score(yc_prueba, pred_log):.3f}")
 </ul></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">37 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">37 / 82</span></div>
 </section>
 <section class="diapo pregunta">
     
@@ -2459,7 +2587,7 @@ print(f"F1:           {f1_score(yc_prueba, pred_log):.3f}")
 <div class="paso"><div class="caja respuesta"><span class="caja-etiqueta"><i aria-hidden="true" class="fas fa-check"></i>Respuesta</span><div class="caja-cuerpo"><p><strong>La sensibilidad</strong>: de los que se van, a cuántos encuentra. Con la <strong>precisión</strong> al lado, porque cada señalado que no se iba es una llamada perdida. La exactitud sola la engaña: la línea base tiene una exactitud del 76 %.</p></div></div></div></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">38 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">38 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -2481,7 +2609,7 @@ print(f"Exactitud en prueba:        "
 </ul></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">39 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">39 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -2509,7 +2637,7 @@ print(export_text(arbol2, feature_names=list(Xc.columns),
 </ul></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">40 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">40 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -2532,7 +2660,7 @@ pd.DataFrame(metricas).T.astype({"encontrados": int}).round(REDONDEO)
 #&gt; Bosque aleatorio     0.8125      0.658         0.425  0.516          200</code></pre></div></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">41 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">41 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -2548,7 +2676,7 @@ pd.DataFrame(metricas).T.astype({"encontrados": int}).round(REDONDEO)
 </div></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">42 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">42 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -2572,7 +2700,7 @@ print(f"Escalada:    exactitud {metricas['SVM']['exactitud']:.2%},",
 </ul></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">43 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">43 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -2596,7 +2724,7 @@ tabla_c.round(REDONDEO)
 #&gt; XGBoost              0.8235      0.675         0.484  0.564          228</code></pre></div></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">44 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">44 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -2623,7 +2751,7 @@ tabla_umbral.round({"precisión": 3, "sensibilidad": 3, "exactitud": 4})
 #&gt; 0.2       865          371      0.429         0.788     0.7030</code></pre></div></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">45 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">45 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -3020,7 +3148,7 @@ L 89.675625 226.882801
 </svg></div><figcaption>La precisión y la sensibilidad de la logística para cada umbral; la línea punteada es 0,5 (celda umbral_grafica)</figcaption></figure></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">46 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">46 / 82</span></div>
 </section>
 <section class="diapo idea">
     <div class="marco">
@@ -3028,7 +3156,7 @@ L 89.675625 226.882801
         <h2>La métrica la elige la decisión, no el modelo</h2>
         <div class="cuerpo"><p>La gerente no necesita acertar más: necesita encontrar a los que se van con las llamadas que puede pagar. Por eso se eligen la sensibilidad, la precisión y el umbral, no la exactitud.</p></div>
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">47 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">47 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -3051,7 +3179,7 @@ L 89.675625 226.882801
 </ul></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">48 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">48 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -3072,7 +3200,7 @@ print(f"F1 medio: {f1_xgb.mean():.3f} · desviación: {f1_xgb.std():.3f}")
 </ul></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">49 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">49 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -3426,7 +3554,7 @@ L 97.426875 61.307187
 </ul></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">50 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">50 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -3453,7 +3581,7 @@ tabla_llamadas.sort_values("llamadas para 7 de cada 10")
 </ul></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">51 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">51 / 82</span></div>
 </section>
 <section class="diapo pregunta">
     
@@ -3466,7 +3594,7 @@ tabla_llamadas.sort_values("llamadas para 7 de cada 10")
 <div class="paso"><div class="caja respuesta"><span class="caja-etiqueta"><i aria-hidden="true" class="fas fa-check"></i>Respuesta</span><div class="caja-cuerpo"><p><strong>XGBoost, con el umbral que salga de su meta</strong>: para encontrar a 7 de cada 10 necesita 613 llamadas; la logística, 686. El bosque queda casi empatado (634), y en la validación cruzada XGBoost queda primero, pero por poco. Y hay que poder <strong>explicar</strong> a quién llama: con las reglas de un árbol pequeño o con la logística al lado.</p></div></div></div></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">52 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">52 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -3485,7 +3613,7 @@ tabla_llamadas.sort_values("llamadas para 7 de cada 10")
 <p>Antes del ejercicio 2: haz clic en la celda del ejercicio → <strong>Entorno de ejecución → Ejecutar anteriores</strong>.</p></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">53 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">53 / 82</span></div>
 </section>
 <section class="diapo idea">
     <div class="marco">
@@ -3493,7 +3621,7 @@ tabla_llamadas.sort_values("llamadas para 7 de cada 10")
         <h2>Pausa de 10 minutos</h2>
         <div class="cuerpo"><p>Volvemos a las 10:50 con la nube: ¿quién puede ver qué en Azure? En la pausa, piensa con quién harás el proyecto: las parejas se forman a las 12:00.</p></div>
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">54 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">54 / 82</span></div>
 </section>
 <section class="diapo dividida seccion" data-tipo="seccion">
     <div class="marco">
@@ -3505,11 +3633,12 @@ tabla_llamadas.sort_values("llamadas para 7 de cada 10")
             <div class="lista-secciones"><div class="item-seccion hecha"><i aria-hidden="true" class="fas fa-door-open"></i><span>Apertura</span></div><div class="item-seccion hecha"><i aria-hidden="true" class="fas fa-chart-line"></i><span>Regresión</span></div><div class="item-seccion hecha"><i aria-hidden="true" class="fas fa-user-xmark"></i><span>Clasificación</span></div><div class="item-seccion actual"><i aria-hidden="true" class="fas fa-shield-halved"></i><span>Nube</span></div><div class="item-seccion "><i aria-hidden="true" class="fas fa-diagram-project"></i><span>Proyecto final</span></div><div class="item-seccion "><i aria-hidden="true" class="fas fa-flag-checkered"></i><span>Cierre</span></div></div>
         </div>
         <div class="principal">
+            <div class="parte">Parte 4 de 6</div>
             <div class="numero-grande">04</div>
             <h2>Nube</h2>
             <div class="gancho"><p>¿Quién puede ver qué en Azure?</p></div>
             
-            <div class="pie" style="left:72px;right:72px"><span></span><span></span><span class="num">55 / 81</span></div>
+            <div class="pie" style="left:72px;right:72px"><span></span><span></span><span class="num">55 / 82</span></div>
         </div>
     </div>
 </section>
@@ -3527,7 +3656,7 @@ tabla_llamadas.sort_values("llamadas para 7 de cada 10")
 </ul></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">56 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">56 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -3544,7 +3673,7 @@ tabla_llamadas.sort_values("llamadas para 7 de cada 10")
 <p><strong>Microsoft Entra ID</strong> (antes, Azure Active Directory) es el servicio de identidad y acceso en la nube: comprueba quién es cada persona o aplicación (la <strong>autentica</strong>).</p></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">57 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">57 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -3560,7 +3689,7 @@ tabla_llamadas.sort_values("llamadas para 7 de cada 10")
 <p>Con una <strong>identidad administrada</strong> (<em>managed identity</em>), la aplicación obtiene sus credenciales de Entra ID: ninguna clave queda escrita en el código. Sus permisos se dan con <strong>Azure RBAC</strong>, como a una persona.</p></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">58 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">58 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -3577,7 +3706,7 @@ tabla_llamadas.sort_values("llamadas para 7 de cada 10")
 <p><strong>Azure RBAC</strong>, el control de acceso basado en roles de Azure: Entra ID dice quién eres; RBAC, qué puedes hacer y dónde.</p></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">59 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">59 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -3601,7 +3730,7 @@ tabla_llamadas.sort_values("llamadas para 7 de cada 10")
 </ul></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">60 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">60 / 82</span></div>
 </section>
 <section class="diapo denso">
     
@@ -3621,7 +3750,7 @@ tabla_llamadas.sort_values("llamadas para 7 de cada 10")
 <p>Los cuatro primeros actúan sobre el <strong>plano de control</strong> (los recursos y su configuración); los dos de datos, sobre el <strong>plano de datos</strong> (el contenido).</p></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">61 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">61 / 82</span></div>
 </section>
 <section class="diapo pregunta">
     
@@ -3634,7 +3763,7 @@ tabla_llamadas.sort_values("llamadas para 7 de cada 10")
 <div class="paso"><div class="caja respuesta"><span class="caja-etiqueta"><i aria-hidden="true" class="fas fa-check"></i>Respuesta</span><div class="caja-cuerpo"><p><strong>No.</strong> Lector ve el recurso y su configuración (el plano de control), no el contenido de los blobs. Para leer los archivos hace falta un rol de datos, como <strong>Lector de datos de blobs de almacenamiento</strong>.</p></div></div></div></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">62 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">62 / 82</span></div>
 </section>
 <section class="diapo idea">
     <div class="marco">
@@ -3642,7 +3771,7 @@ tabla_llamadas.sort_values("llamadas para 7 de cada 10")
         <h2>Privilegio mínimo: cada quien, lo justo, donde lo necesita</h2>
         <div class="cuerpo"><p>El privilegio mínimo (<em>least privilege</em>): solo el acceso necesario, en el ámbito más estrecho posible, y por el tiempo que haga falta. Microsoft recomienda dar los roles a grupos, no a personas, y tener como máximo tres propietarios en la suscripción.</p></div>
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">63 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">63 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -3664,7 +3793,7 @@ tabla_llamadas.sort_values("llamadas para 7 de cada 10")
 </div></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">64 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">64 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -3680,7 +3809,7 @@ tabla_llamadas.sort_values("llamadas para 7 de cada 10")
 </div></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">65 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">65 / 82</span></div>
 </section>
 <section class="diapo pregunta">
     
@@ -3693,7 +3822,7 @@ tabla_llamadas.sort_values("llamadas para 7 de cada 10")
 <div class="paso"><div class="caja respuesta"><span class="caja-etiqueta"><i aria-hidden="true" class="fas fa-check"></i>Respuesta</span><div class="caja-cuerpo"><p><strong>Se bloquean los dos</strong>, por razones distintas. A la analista la frena <strong>RBAC</strong>: Lector no puede crear recursos. Al propietario lo frena <strong>Policy</strong>: Deny bloquea aunque quien lo pida tenga todos los permisos.</p></div></div></div></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">66 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">66 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -3716,7 +3845,7 @@ tabla_llamadas.sort_values("llamadas para 7 de cada 10")
 <p>Todo esto cabe en la capa gratuita: Entra ID Free, Azure RBAC y Azure Policy no se cobran.</p></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">67 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">67 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -3741,7 +3870,7 @@ tabla_llamadas.sort_values("llamadas para 7 de cada 10")
 </div></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">68 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">68 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -3761,7 +3890,7 @@ tabla_llamadas.sort_values("llamadas para 7 de cada 10")
 <p>Abran el documento de la sesión 1, la <strong>versión 0 del plan de nube</strong> (¿sube sus datos?, ¿con qué modelo?, ¿qué conserva?): hoy le suman la matriz de roles.</p></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">69 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">69 / 82</span></div>
 </section>
 <section class="diapo denso">
     
@@ -3780,7 +3909,7 @@ tabla_llamadas.sort_values("llamadas para 7 de cada 10")
 <p>Cada rol de datos, en <strong>su contenedor</strong>. TI administra con Colaborador y Administrador de acceso de usuario en el grupo de recursos; para que no lea el contenido, la cuenta <strong>no permite la clave compartida</strong>.</p></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">70 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">70 / 82</span></div>
 </section>
 <section class="diapo dividida seccion" data-tipo="seccion">
     <div class="marco">
@@ -3792,11 +3921,12 @@ tabla_llamadas.sort_values("llamadas para 7 de cada 10")
             <div class="lista-secciones"><div class="item-seccion hecha"><i aria-hidden="true" class="fas fa-door-open"></i><span>Apertura</span></div><div class="item-seccion hecha"><i aria-hidden="true" class="fas fa-chart-line"></i><span>Regresión</span></div><div class="item-seccion hecha"><i aria-hidden="true" class="fas fa-user-xmark"></i><span>Clasificación</span></div><div class="item-seccion hecha"><i aria-hidden="true" class="fas fa-shield-halved"></i><span>Nube</span></div><div class="item-seccion actual"><i aria-hidden="true" class="fas fa-diagram-project"></i><span>Proyecto final</span></div><div class="item-seccion "><i aria-hidden="true" class="fas fa-flag-checkered"></i><span>Cierre</span></div></div>
         </div>
         <div class="principal">
+            <div class="parte">Parte 5 de 6</div>
             <div class="numero-grande">05</div>
             <h2>Proyecto final</h2>
-            <div class="gancho"><p>El plan de adopción segura de Azure para el modelo de Yarumo</p></div>
+            <div class="gancho"><p>Del dato crudo a la decisión (el enunciado cambió el 14 de noviembre)</p></div>
             
-            <div class="pie" style="left:72px;right:72px"><span></span><span></span><span class="num">71 / 81</span></div>
+            <div class="pie" style="left:72px;right:72px"><span></span><span></span><span class="num">71 / 82</span></div>
         </div>
     </div>
 </section>
@@ -3805,17 +3935,35 @@ tabla_llamadas.sort_values("llamadas para 7 de cada 10")
     <div class="marco">
         <div class="cabecera">
             <div class="ficha-icono"><i aria-hidden="true" class="fas fa-diagram-project"></i></div>
-            <div><div class="antetitulo">Proyecto final</div><h2>Tres partes: el modelo, el plan de nube y su sustentación</h2></div>
+            <div><div class="antetitulo">Proyecto final</div><h2>El proyecto cambió el 14 de noviembre: ahora es «Del dato crudo a la decisión»</h2></div>
+        </div>
+        <div class="cuerpo"><ul>
+<li>Un <strong>problema real</strong> con datos abiertos oficiales o propios, no los de Yarumo</li>
+<li>Un <strong>notebook</strong> con el ciclo completo, un <strong>informe</strong> de dos páginas y una <strong>ficha de datos y gobierno</strong> de una página, sin proveedor de nube</li>
+<li>La <strong>ficha del problema</strong>, hasta el domingo 15 a las 23:59; la <strong>entrega</strong>, el <strong>viernes 20 a las 16:00</strong>; la <strong>sustentación</strong>, ese día desde las 18:00</li>
+<li>El enunciado, la lista mínima y la rúbrica están en la <strong>página del proyecto</strong></li>
+</ul>
+<p>Las diapositivas que siguen son el <strong>enunciado anterior</strong>, como se presentó el 7 de noviembre.</p></div>
+        
+    </div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">72 / 82</span></div>
+</section>
+<section class="diapo ">
+    
+    <div class="marco">
+        <div class="cabecera">
+            <div class="ficha-icono"><i aria-hidden="true" class="fas fa-diagram-project"></i></div>
+            <div><div class="antetitulo">Proyecto final</div><h2>Tres partes: el modelo, el plan de nube y su sustentación (enunciado anterior)</h2></div>
         </div>
         <div class="cuerpo"><div class="tarjetas" style="--n:3">
 <div class="tarjeta"><h3>1 · El notebook</h3><p>Un modelo <strong>supervisado</strong> o de <strong>agrupamiento</strong> (sesión 3) con los datos de Yarumo, con sus métricas y <strong>contra una línea base</strong>.</p></div>
 <div class="tarjeta"><h3>2 · El plan de nube</h3><p>Modelo de servicio, responsabilidad compartida, roles con <strong>privilegio mínimo</strong>, directivas, almacenamiento y monitoreo, privacidad según la <strong>Ley 1581</strong> y costo en la capa gratuita.</p></div>
 <div class="tarjeta"><h3>3 · La sustentación</h3><p>En la sesión 5, el <strong>viernes 20 de noviembre</strong>: una <strong>explicación auditable</strong> del modelo y del plan.</p></div>
 </div>
-<p>En <strong>parejas</strong> (un trío solo si el número es impar). La entrega es por la plataforma, <strong>hasta el jueves 19 de noviembre a las 23:59</strong> (hora de Colombia).</p></div>
+<p>En <strong>parejas</strong> (un trío solo si el número es impar). La entrega era por la plataforma, hasta el jueves 19 de noviembre a las 23:59. <strong>Con el enunciado nuevo es el viernes 20 a las 16:00.</strong></p></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">72 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">73 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -3834,7 +3982,7 @@ tabla_llamadas.sort_values("llamadas para 7 de cada 10")
 </ul></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">73 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">74 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -3854,7 +4002,7 @@ tabla_llamadas.sort_values("llamadas para 7 de cada 10")
 <p>Niveles: <strong>Inicial</strong>, <strong>En desarrollo</strong>, <strong>Logrado</strong> y <strong>Destacado</strong>. Los descriptores están en la página del proyecto.</p></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">74 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">75 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -3870,13 +4018,13 @@ tabla_llamadas.sort_values("llamadas para 7 de cada 10")
 <div class="flecha-flujo">→</div>
 <div class="paso-flujo"><span class="num">3</span><span class="t">S4</span><span class="d">almacenamiento y monitoreo; laboratorio opcional para quien tenga cuenta de Azure</span></div>
 <div class="flecha-flujo">→</div>
-<div class="paso-flujo"><span class="num">4</span><span class="t">19 de noviembre, 23:59</span><span class="d">la entrega por la plataforma (hora de Colombia)</span></div>
+<div class="paso-flujo"><span class="num">4</span><span class="t">Viernes 20 de noviembre, 16:00</span><span class="d">la entrega por la plataforma (con el enunciado nuevo; antes era el jueves 19)</span></div>
 <div class="flecha-flujo">→</div>
 <div class="paso-flujo"><span class="num">5</span><span class="t">S5</span><span class="d">la sustentación y la coevaluación</span></div>
 </div></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">75 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">76 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -3893,7 +4041,7 @@ tabla_llamadas.sort_values("llamadas para 7 de cada 10")
 <p><a href="https://jotamao1985.github.io/Machine-Learning-cloud-computing_Ucompensar/proyecto.html" target="_blank" rel="noopener">Página del proyecto final</a></p></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">76 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">77 / 82</span></div>
 </section>
 <section class="diapo dividida seccion" data-tipo="seccion">
     <div class="marco">
@@ -3905,11 +4053,12 @@ tabla_llamadas.sort_values("llamadas para 7 de cada 10")
             <div class="lista-secciones"><div class="item-seccion hecha"><i aria-hidden="true" class="fas fa-door-open"></i><span>Apertura</span></div><div class="item-seccion hecha"><i aria-hidden="true" class="fas fa-chart-line"></i><span>Regresión</span></div><div class="item-seccion hecha"><i aria-hidden="true" class="fas fa-user-xmark"></i><span>Clasificación</span></div><div class="item-seccion hecha"><i aria-hidden="true" class="fas fa-shield-halved"></i><span>Nube</span></div><div class="item-seccion hecha"><i aria-hidden="true" class="fas fa-diagram-project"></i><span>Proyecto final</span></div><div class="item-seccion actual"><i aria-hidden="true" class="fas fa-flag-checkered"></i><span>Cierre</span></div></div>
         </div>
         <div class="principal">
+            <div class="parte">Parte 6 de 6</div>
             <div class="numero-grande">06</div>
             <h2>Cierre</h2>
             <div class="gancho"><p>Lo que te llevas y lo que sigue.</p></div>
             
-            <div class="pie" style="left:72px;right:72px"><span></span><span></span><span class="num">77 / 81</span></div>
+            <div class="pie" style="left:72px;right:72px"><span></span><span></span><span class="num">78 / 82</span></div>
         </div>
     </div>
 </section>
@@ -3929,7 +4078,7 @@ tabla_llamadas.sort_values("llamadas para 7 de cada 10")
 <div class="paso"><div class="caja respuesta"><span class="caja-etiqueta"><i aria-hidden="true" class="fas fa-check"></i>Respuesta</span><div class="caja-cuerpo"><p><strong>1</strong> Falso: la línea base tiene una exactitud del 76 % y no encuentra a nadie · <strong>2</strong> Falso: el sin límite tuvo 0,56 en prueba · <strong>3</strong> Verdadero · <strong>4</strong> Verdadero: el rol vale solo en su ámbito</p></div></div></div></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">78 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">79 / 82</span></div>
 </section>
 <section class="diapo cierre">
     <div class="brillo"></div>
@@ -3947,7 +4096,7 @@ tabla_llamadas.sort_values("llamadas para 7 de cada 10")
 </ul></div>
         <div class="firma-cierre">Aprender no es memorizar. — Javier Mauricio Sierra</div>
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">79 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">80 / 82</span></div>
 </section>
 <section class="diapo ">
     
@@ -3964,7 +4113,7 @@ tabla_llamadas.sort_values("llamadas para 7 de cada 10")
 <p><strong>Próxima sesión:</strong> grupos sin etiqueta. Agrupamiento de clientes (<em>k-means</em> o k-medias, DBSCAN y jerárquico) y los riesgos, la regulación y la privacidad en la nube.</p></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">80 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">81 / 82</span></div>
 </section>
 <section class="diapo denso arriba">
     
@@ -3991,7 +4140,7 @@ tabla_llamadas.sort_values("llamadas para 7 de cada 10")
 </div></div>
         
     </div>
-    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">81 / 81</span></div>
+    <div class="pie"><span class="sello">Sesión 2 · Aprender con etiqueta</span><span>Machine Learning y Seguridad en la Nube · UCompensar</span><span class="num">82 / 82</span></div>
 </section>
         </div>
     </main>
@@ -4026,7 +4175,7 @@ tabla_llamadas.sort_values("llamadas para 7 de cada 10")
 
     <div id="panel-presentador">
         <div class="barra">
-            <div><span id="p-contador"></span> · <span id="p-titulo"></span></div>
+            <div><span id="p-contador"></span> · <span id="p-titulo"></span> <span id="p-ritmo" class="ritmo"></span></div>
             <div class="reloj"><span id="p-cronometro">00:00</span><small id="p-hora"></small></div>
         </div>
         <div class="hueco" id="p-hueco"></div>
@@ -4040,7 +4189,7 @@ tabla_llamadas.sort_values("llamadas para 7 de cada 10")
         </div>
     </div>
 
-    <script id="datos-mazo" type="application/json">{"config": {"asignatura": "Machine Learning y Seguridad en la Nube", "numero": "2", "titulo": "Aprender con etiqueta", "ra": "", "horas": "", "stack": [], "institucion": "Fundación Universitaria Compensar", "sigla": "UCompensar", "unidad": "Sesión", "storageKey": "ucompensar_machine_learning_y_seguridad_en_la_nube_2"}, "diapos": [{"titulo": "Portada", "seccion": "", "k": -1, "notas": ""}, {"titulo": "Hoja de ruta", "seccion": "", "k": -1, "notas": ""}, {"titulo": "Apertura", "seccion": "Apertura", "k": 0, "notas": "<p>07:00. Pedir desde ya que abran el notebook de la S2 (portada del curso → «Abrir en Colab»), que guarden una copia en Drive y que ejecuten la primera celda y [cargar]: la primera descarga los datos, como en la S1. Mientras tanto, la apertura.<\/p>"}, {"titulo": "Seis horas en seis bloques, con dos pausas", "seccion": "Apertura", "k": 0, "notas": "<p>Hitos de reloj, que no se mueven: la regresión empieza a las 07:15; la pausa larga, a las 08:45; la clasificación, a las 09:00; la pausa corta, a las 10:40; la nube, a las 10:50; el proyecto, a las 12:00, y el cierre, a las 12:40. Cada bloque trae en la nota de su divisor qué se recorta si se atrasa. Lo que no se recorta nunca: la matriz de confusión y el umbral, la demostración de RBAC y Policy, y el enunciado del proyecto con la formación de parejas. Durante la exposición solo miran; ejecutan en las prácticas.<\/p>"}, {"titulo": "En la sesión 1, la línea base acertó el 76,5 % y no encontró a nadie", "seccion": "Apertura", "k": 0, "notas": "<p>Es el puente de la S1: la misma partición (la cuarta parte para prueba, semilla 2026, estratificada), así que hoy los 471 son los mismos clientes. Las cifras salen de la celda [cifras]: 0,7645 para la línea base (la S1 lo dio redondeado: 76,5 %) y 0,7715 para el árbol de dos niveles con el contrato mes a mes y la antigüedad. En la S1 se prometió ver cómo funciona un árbol por dentro: hoy se ve. Preguntar en el chat: ¿qué le dirían a una gerencia que solo mira la exactitud? Dos o tres respuestas y seguir. La S1 dejó la pregunta «¿Comprarías un modelo que acierta en el 75 % de los clientes?»: la siguiente diapositiva la retoma con dos modelos de hoy.<\/p>"}, {"titulo": "Si cada llamada cuesta lo mismo, ¿cuál de los dos modelos le sirve más a la gerente?", "seccion": "Apertura", "k": 0, "notas": "<p>Tres minutos con la votación. El primero es la regresión logística (80,85 %, 186 encontrados con 284 llamadas); el segundo, el árbol sin límite de profundidad (72,5 %, 215 con 509). Si la logística llamara a los 509 clientes de más riesgo, encontraría a 276 (celda [cifras], «apertura»). No adelantar los nombres de los modelos si no lo preguntan: se ven en la clasificación. Lo que deben llevarse: la exactitud no basta para decidir, y encontrar más no basta si es a costa de llamar a muchos más; lo justo es comparar con el mismo número de llamadas.<\/p>"}, {"titulo": "Hoy, dos preguntas de aprendizaje automático y una de nube", "seccion": "Apertura", "k": 0, "notas": "<p>Supervisado, como en la S1: cada cliente trae la respuesta (cuánto consumió, si canceló) y el modelo aprende a predecirla con las demás columnas (ISLP, sec. 2.1.4, F-ML-05). La regresión y la clasificación solo cambian el tipo de etiqueta. La pregunta de nube cierra el hilo «ML en la nube»: si el modelo y los datos suben a Azure, ¿quién los puede ver? Transición: empezamos por el número.<\/p>"}, {"titulo": "Regresión", "seccion": "Regresión", "k": 1, "notas": "<p>07:15 a más tardar. Noventa minutos: unos 72 de exposición y 15 de práctica (ejercicio 1), con 3 de margen. Hitos: la línea base, hacia las 07:30; KNN y el escalado, hacia las 07:50; el árbol sin límite, hacia las 08:05; la recta con la edad × usuarios, hacia las 08:22; la práctica empieza a más tardar a las 08:30. Si a las 07:50 no se ha llegado a KNN, recortar en este orden: (1) la fórmula de R² pasa a una frase sobre la diapositiva de la regresión lineal (−3 min); (2) la pregunta de qué cifra darle al jefe de TI se dice en una frase (−3 min); (3) la pregunta de KNN sin escalar se responde en una frase (−2 min); (4) la curva de la edad se muestra sin comentarla (−2 min). No se recortan el escalado, el árbol sin límite, la interacción ni la práctica. Hay dos momentos de «predice antes de ver» (KNN sin escalar y la recta con la edad × usuarios): son lo más cercano a ejecutar que tiene la exposición.<\/p>"}, {"titulo": "Como en la sesión 1, el modelo aprende de 6000 clientes y se mide en 2000 que no vio", "seccion": "Regresión", "k": 1, "notas": "<p>Es el ciclo de la S1, ahora con un número como etiqueta. La partición es la misma idea: train_test_split con el 25 % para prueba y la semilla 2026 (F-ML-10). En regresión no se estratifica: no hay clases que equilibrar. Para el jefe de TI, saber el consumo esperado de cada cliente sirve para planear la capacidad de la red por ciudad; en el proyecto, el mismo modelo podría servir para recomendar un plan.<\/p>"}, {"titulo": "Las características, en números: cada categoría, una columna de 0 y 1", "seccion": "Regresión", "k": 1, "notas": "<p>Las <strong>características<\/strong> de la S1 son las columnas que el modelo puede mirar; en el código las llamamos <code>predictoras<\/code>. Hoy aparecen operaciones de pandas y numpy que el repaso de la S1 no cubrió (<code>.drop<\/code>, <code>.loc<\/code>, <code>.set_index<\/code>, <code>.assign<\/code>, <code>.T<\/code>, <code>.round<\/code>, <code>np.sqrt<\/code> y el formato <code>:.2%<\/code>): el notebook trae una tabla de repaso en la sección 1, después de [cargar]; mostrarla un minuto aquí. Es la codificación <strong><em>one-hot<\/strong><\/em>: una columna por categoría; la primera se omite, porque se deduce de las demás. <code>pd.get_dummies<\/code> la hace. Con <code>drop_first=True<\/code> omite la primera categoría de cada columna en orden alfabético: el primer cliente tiene contrato a 12 meses y las dos columnas valen 0; esa es la categoría de referencia. Lo mismo pasa con la ciudad (la referencia es Barranquilla), el medio de pago y las columnas Sí/No. Se quitan el seudónimo (no describe al cliente), la etiqueta de hoy y <code>cancelo<\/code>, que se supo después, entre julio y septiembre: usarla para predecir el consumo sería usar el futuro. Si preguntan por <code>ColumnTransformer<\/code>: es la forma de hacer lo mismo dentro de un <code>Pipeline<\/code> de scikit-learn, útil cuando el modelo va a producción; hoy basta con get_dummies, porque las categorías no cambian entre entrenamiento y prueba.<\/p>"}, {"titulo": "La línea base predice 299,7 GB para todos y se equivoca 173 GB por cliente", "seccion": "Regresión", "k": 1, "notas": "<p><code>DummyRegressor<\/code> ignora las columnas y predice el promedio del entrenamiento (F-ML-12: comparar con reglas simples es la verificación básica). La partición está en la celda [particion]: 6000 y 2000 clientes, con la semilla 2026. El R² sale −0,000 y no 0 porque el promedio es el del entrenamiento y se mide en la prueba: queda un poquito por debajo de cero. Transición: ¿qué miden esas tres cifras?<\/p>"}, {"titulo": "El MAE y la RMSE miden el error en GB; la RMSE castiga más los errores grandes", "seccion": "Regresión", "k": 1, "notas": "<p>Cómo se leen: «el MAE es el promedio de los errores en valor absoluto» y «la RMSE es la raíz del promedio de los errores al cuadrado». Las dos están en GB. La RMSE siempre es mayor o igual que el MAE; si es mucho mayor, hay pocos clientes con errores muy grandes. Aquí pasa: el consumo tiene una cola larga (la mediana es 243,6 GB y el máximo, 2500), así que hay clientes, sobre todo empresas pequeñas, muy lejos del promedio. En scikit-learn 1.6, la RMSE se calcula con <code>root_mean_squared_error<\/code>; el viejo <code>squared=False<\/code> ya no existe en las versiones nuevas (F-ML-19).<\/p>"}, {"titulo": "R² compara el error del modelo con el de predecir el promedio", "seccion": "Regresión", "k": 1, "notas": "<p>Cómo se lee: «R cuadrado es uno menos la suma de los errores al cuadrado del modelo entre la suma de las distancias al promedio al cuadrado». El denominador es el error de la línea base. Si el modelo se equivoca igual que el promedio, R² = 0; si se equivoca más, es negativo (scikit-learn, sec. 3.4.6.1 de la misma página de métricas que F-ML-12). Recortable 1: si hace falta tiempo, se dice en una frase sobre la diapositiva siguiente.<\/p>"}, {"titulo": "La regresión lineal se equivoca 91 GB por cliente y reproduce el 71 % de la variación", "seccion": "Regresión", "k": 1, "notas": "<p>La función <code>medir<\/code> junta lo de la diapositiva anterior para no repetirlo con cada modelo: entrena, predice la prueba y devuelve las tres métricas. La regresión lineal suma cada columna multiplicada por un coeficiente, y elige los coeficientes que dejan la menor suma de errores al cuadrado (F-ML-13). Baja el error de 173 a 91 GB. Transición: un modelo muy distinto, que no busca coeficientes sino vecinos.<\/p>"}, {"titulo": "¿Quién es el vecino más cercano de A: B o C?", "seccion": "Regresión", "k": 1, "notas": "<p>Dos minutos. Son tres clientes reales del archivo. «Parecido» es una distancia euclídea, la de la línea recta (F-ML-14: la distancia por defecto es Minkowski con p = 2, por lo que la escala importa). A consume 424,8 GB; C, 51,6: la octava parte (A consume unas 8,2 veces lo que C). Si alguien vota «empatan», preguntarle cuánto pesa una diferencia de 20 000 frente a una de 38 en la suma de cuadrados.<\/p>"}, {"titulo": "Sin escalar, 20 000 pesos pesan más que 38 años", "seccion": "Regresión", "k": 1, "notas": "<p>La desviación estándar del entrenamiento es de unos 37 296 pesos en la factura y de 14,9 años en la edad (celda [cifras]): 20 000 / 37 296 ≈ 0,54 y 38 / 14,9 ≈ 2,55. Para la distancia solo importa dividir: restar la media no cambia las diferencias. Escalar no es un truco para ganar puntos: es para que la distancia no dependa de si la factura está en pesos o en millones.<\/p>"}, {"titulo": "Escalar pone cada columna en desviaciones estándar del entrenamiento", "seccion": "Regresión", "k": 1, "notas": "<p><code>StandardScaler<\/code> aprende la media y la desviación de cada columna con el entrenamiento y las aplica a la prueba: nunca se ajusta nada con la prueba (F-ML-18, «never call fit on the test data»). <code>make_pipeline<\/code> encadena los dos pasos, y así es imposible olvidar escalar la prueba (F-ML-11). Con 24 columnas escaladas, las caídas, el medio de pago o los pagos tardíos pesan en la distancia tanto como la edad o los usuarios, y estorban. La diapositiva siguiente pregunta qué pasa sin escalar.<\/p>"}, {"titulo": "Sin escalar, ¿KNN saldrá mejor o peor?", "seccion": "Regresión", "k": 1, "notas": "<p>Recortable 3. Dos minutos. Es la respuesta honesta a lo que algún estudiante va a probar en Colab. Con la factura en millones, KNN sin escalar casi no cambia (MAE 92,6 y R² 0,655, celda [cifras]): el plan, en Mbps, toma el relevo, porque los dos dicen casi lo mismo. Lo que más explica el consumo es ser empresa pequeña, y la factura lo refleja en parte. En la clasificación veremos un caso en que no escalar es un desastre: la SVM.<\/p>"}, {"titulo": "¿Qué R² tendrá un árbol sin límite de profundidad?", "seccion": "Regresión", "k": 1, "notas": "<p>Un minuto. Un árbol de decisión parte a los clientes con preguntas sobre una columna («¿tiene más de 3 usuarios?») hasta formar grupos de consumo parecido y predice el promedio de cada grupo. Sin límite, sigue partiendo: este tiene 30 niveles y 5987 hojas para 6000 clientes de entrenamiento (celda [cifras]).<\/p>"}, {"titulo": "El árbol sin límite memorizó: R² de 1 en entrenamiento y de 0,56 en prueba", "seccion": "Regresión", "k": 1, "notas": "<p>Los árboles tienden al sobreajuste y son inestables: pequeñas variaciones en los datos cambian el árbol (F-ML-15). Se controla limitando la profundidad (<code>max_depth<\/code>) o pidiendo un mínimo de clientes por hoja (<code>min_samples_leaf<\/code>): la primera opción es el ejercicio 1. Transición: la idea de la sesión.<\/p>"}, {"titulo": "Aprender no es memorizar", "seccion": "Regresión", "k": 1, "notas": "<p>Es el lema de la sesión. Lo veremos tres veces más: en el árbol de clasificación (100 % en entrenamiento), en la curva de profundidad y en la validación cruzada. La documentación de scikit-learn lo dice desde la primera línea del capítulo de validación: evaluar con los mismos datos con que se entrenó es un error metodológico (F-ML-11).<\/p>"}, {"titulo": "El bosque promedia muchos árboles distintos; XGBoost los encadena", "seccion": "Regresión", "k": 1, "notas": "<p>Los dos son ensambles de árboles: el mismo tipo de modelo, entrenado de forma distinta (F-ML-20). El bosque reduce la varianza promediando muchos árboles (F-ML-16). En clasificación, <code>RandomForestClassifier<\/code> además sortea √p columnas en cada pregunta (<code>max_features=&#x27;sqrt&#x27;<\/code>, F-ML-16), lo que decorrelaciona los árboles (ISLP 8.2.2, F-ML-22); en regresión, <code>RandomForestRegressor<\/code> usa por defecto todas las columnas (<code>max_features=1.0<\/code>, que equivale a <em>bagging<\/em>), y aquí se dejó así. XGBoost (<em>Extreme Gradient Boosting<\/em>) agrega un árbol nuevo en cada paso y su objetivo suma la pérdida de entrenamiento y un término de regularización que castiga los árboles complejos (F-ML-20, F-ML-21). Hoy: 300 árboles; <code>learning_rate=0.05<\/code> dice cuánto corrige cada uno y <code>max_depth=4<\/code>, cuántas preguntas hace cada uno (los valores por defecto de XGBoost son 0,3 y 6).<\/p>"}, {"titulo": "El bosque y XGBoost se equivocan unos 70 GB por cliente; la recta, 91", "seccion": "Regresión", "k": 1, "notas": "<p>El bosque está en la celda [bosque]: <code>RandomForestRegressor(n_estimators=300, min_samples_leaf=5)<\/code>, con al menos 5 clientes por hoja. Cada uno tarda menos de un segundo en la réplica del docente (con las versiones de Colab, no en Colab). XGBoost baja el MAE un 60 % frente a la línea base. Los dos le ganan a la recta por unos 20 GB por cliente. En la RMSE pasa lo mismo: los errores grandes también bajan.<\/p>"}, {"titulo": "XGBoost se equivoca un 60 % menos que la línea base", "seccion": "Regresión", "k": 1, "notas": "<p>La barra gris es la línea base. Leer de abajo arriba: la línea base, 173 GB; el árbol sin límite y KNN, unos 102; la recta, 91; el bosque y XGBoost, unos 70. El árbol solo, sin límite, queda casi como KNN; un árbol parecido (con al menos 5 clientes por hoja), repetido 300 veces sobre muestras al azar y promediado, es de los mejores: es lo que hace el promedio.<\/p>"}, {"titulo": "La recta no sigue al consumo por edad; XGBoost sí", "seccion": "Regresión", "k": 1, "notas": "<p>Recortable 4: si falta tiempo, se muestra sin comentarla y se pasa a la pregunta. Son los clientes de prueba agrupados por edad: los puntos son el consumo real promedio de cada grupo, y las líneas, lo que predice cada modelo en promedio. La línea gris no es la recta de la edad sola: cada punto promedia las predicciones de un modelo de 24 columnas, y por eso no es recta. Los puntos reales también mezclan efectos: entre los 35 y los 39 años hay más hogares con muchos usuarios. Lo que la gráfica muestra es el síntoma; la causa está en la diapositiva siguiente.<\/p>"}, {"titulo": "¿Qué le agregas a la recta para que siga a los datos?", "seccion": "Regresión", "k": 1, "notas": "<p>Tres minutos. Los dos intentos están en la celda [interaccion] (las líneas que calculan el MAE y el R² no se proyectan). En los hogares (celda [cifras]): entre los 18 y los 29 años, los de 1 o 2 usuarios consumen 264 GB y los de 5 o más, 577; entre los 49 y los 59, 65 y 247. La misma subida de edad le quita 199 GB a un hogar pequeño y 330 a uno grande: la recta supone el mismo cambio para todos. La edad sí importa: sin ella, XGBoost queda en MAE 92,9 y R² 0,653, como la recta. Lo que la recta no puede es combinarla con los usuarios, y cada pregunta de un árbol se hace dentro del grupo que dejó la anterior.<\/p>"}, {"titulo": "¿Qué cifras le sirven al jefe de TI para saber cuánto se equivoca el modelo?", "seccion": "Regresión", "k": 1, "notas": "<p>Un minuto. Recortable 2. No hay una métrica «mejor»: cada una responde otra pregunta. El MAE de XGBoost es 68,8 GB, pero la mediana del error absoluto es 41,4 GB y el percentil 90, 156,9 GB (celda [cifras]): la mitad de los clientes se equivoca menos de 41 GB y unos pocos, mucho más, por la cola larga del consumo. Para planear la capacidad de la red, al jefe de TI le pueden importar los clientes de consumo muy alto; ahí la RMSE dice más. Lo que no se hace: dar el R² como si fuera un porcentaje de aciertos.<\/p>"}, {"titulo": "Práctica: ejercicio 1, un árbol con límite", "seccion": "Regresión", "k": 1, "notas": "<p>08:30 a más tardar. Clave: MAE de 77,8 GB, R² de 0,827 en entrenamiento y de 0,763 en prueba (el sin límite: 1 y 0,563). La brecha entre entrenamiento y prueba baja de 0,44 a 0,06: se sobreajusta mucho menos, aunque no llega al bosque. El verificador acepta ±0,5 GB en el MAE y ±0,005 en cada R², y reconoce el MAE del entrenamiento, la RMSE en lugar del MAE, los dos R² cruzados, el R² en porcentaje, <code>r2_score<\/code> con los argumentos al revés, el redondeo a un decimal y los valores de otra profundidad (decide con los tres valores juntos). Si alguien termina antes: que pruebe <code>max_depth=4<\/code> y <code>max_depth=10<\/code> y escriba qué pasa con la brecha. Ojo con la conclusión: menos brecha no es mejor modelo; el bosque tiene más brecha (0,908 frente a 0,809) y más R² en prueba.<\/p>"}, {"titulo": "Pausa de 15 minutos", "seccion": "Regresión", "k": 1, "notas": "<p>08:45. Si el ejercicio 1 no terminó, que lo terminen en la pausa o en casa: la clasificación no depende de él.<\/p>"}, {"titulo": "Clasificación", "seccion": "Clasificación", "k": 2, "notas": "<p>09:00. Cien minutos: unos 70 de exposición y 25 de práctica (ejercicios 2 y 3; el 4 es opcional), con 5 de margen. Hitos: la matriz de confusión, hacia las 09:15; el árbol sin límite, hacia las 09:25; XGBoost, hacia las 09:45; el umbral, hacia las 09:55; la práctica empieza a más tardar a las 10:15. Si a las 09:45 no se ha llegado a XGBoost, recortar en este orden: (1) la diapositiva de la SVM como idea pasa a una frase sobre la de la SVM sin escalar (−2 min); (2) la gráfica del umbral se muestra sin comentarla (−3 min); (3) el ejercicio 4 queda para la casa, como ya está previsto. No se recortan la matriz de confusión, el umbral, la validación cruzada ni la pregunta de qué modelo le sirve a la gerente.<\/p>"}, {"titulo": "Ahora la etiqueta es cancelo, con la misma prueba de la sesión 1", "seccion": "Clasificación", "k": 2, "notas": "<p>Las predictoras (las características) son ahora todas las demás columnas, y <code>consumo_gb<\/code> sí es una de ellas: se conocía el 30 de junio. <code>stratify=yc<\/code> deja la misma tasa de cancelación en el entrenamiento y en la prueba, como en la S1 (F-ML-10). Como la partición depende solo de la etiqueta y de la semilla, los 2000 clientes de prueba son los mismos de la S1 (comprobado en la celda [cifras]). <code>yc<\/code> es lo mismo que <code>cancelo_num<\/code> de la S1.<\/p>"}, {"titulo": "Decir «No» a todos acierta el 76,45 % y no encuentra a nadie", "seccion": "Clasificación", "k": 2, "notas": "<p>Es la línea base de la S1, con la misma cuenta de encontrados: predijo 1 y el cliente de verdad canceló. Hoy la exactitud sale con dos decimales: 76,45 % es lo que la S1 redondeó a 76,5 %. Transición: el primer modelo de hoy da una probabilidad.<\/p>"}, {"titulo": "La regresión logística convierte una suma en una probabilidad entre 0 y 1", "seccion": "Clasificación", "k": 2, "notas": "<p>Cómo se lee: «la probabilidad de cancelar es uno sobre uno más e a la menos z». Si z es muy grande, la probabilidad se acerca a 1; si es muy negativa, a 0; si z = 0, vale 0,5. Pese a su nombre, la regresión logística es un modelo de clasificación (F-ML-13). Escalamos antes, como con KNN: sin escalar, el optimizador no converge bien. El umbral de 0,5 no es una ley: lo cambiamos en una hora.<\/p>"}, {"titulo": "La logística acierta el 80,85 %, pero ¿a quién encontró?", "seccion": "Clasificación", "k": 2, "notas": "<p><code>max_iter=1000<\/code> le da al optimizador más iteraciones para converger. La matriz sale como un arreglo de 2 × 2: las filas son lo que pasó (0 y 1) y las columnas, lo que predijo. El orden importa: con los argumentos al revés, la matriz sale traspuesta, y los falsos positivos se cruzan con los falsos negativos. Es un error que el verificador del ejercicio 2 reconoce.<\/p>"}, {"titulo": "De los 471 que cancelaron, la logística encontró a 186", "seccion": "Clasificación", "k": 2, "notas": "<p>Verdaderos positivos, falsos negativos, falsos positivos y verdaderos negativos: las cuentas de la S1 con su nombre. «Señalar» a un cliente es predecir que cancela; en la campaña de la gerente, es llamarlo. Para la gerente, un FP es una llamada de retención a alguien que no se iba (cuesta la llamada y quizá un descuento); un FN es un cliente que se va sin que nadie lo llame. La matriz no dice cuál cuesta más: eso lo decide el negocio. La celda oscura arriba a la izquierda son los 1431 que no cancelaron y el modelo lo vio: la mayoría de los aciertos de la exactitud viene de ahí.<\/p>"}, {"titulo": "Cuatro métricas salen de la matriz, y cada una responde otra pregunta", "seccion": "Clasificación", "k": 2, "notas": "<p>Las cuentas son las de scikit-learn (F-ML-12): precision = tp / (tp + fp) y recall = tp / (tp + fn); F1 es la media armónica de la precisión (P) y la sensibilidad (S), y solo es alta si las dos lo son. Ojo con la palabra: en español, «precisión» es <em>precision<\/em>, nunca <em>accuracy<\/em>; a <em>accuracy<\/em> le decimos exactitud. La celda [metricas_c] las calcula a mano y con scikit-learn, y dan lo mismo.<\/p>"}, {"titulo": "Cuando la logística señala a alguien, acierta 2 de cada 3; pero deja ir a 6 de cada 10", "seccion": "Clasificación", "k": 2, "notas": "<p>Precisión 0,655: de cada 3 que señala, 2 cancelaron. Sensibilidad 0,395: de los 471 que cancelaron, encontró a 186; los otros 285, el 60,5 %, se van sin llamada. La celda [medir_c] junta estas métricas en una función, como <code>medir<\/code> en la regresión, y agrega <code>encontrados<\/code>.<\/p>"}, {"titulo": "La gerente quiere retener a los que se van. ¿Qué métrica mira primero?", "seccion": "Clasificación", "k": 2, "notas": "<p>Un minuto. Si alguien dice «la precisión», no está mal pensado: es la otra mitad. Lo que se discute es cuál va primero para esta decisión. Para una campaña con muy pocas llamadas posibles, la precisión pesa más; para no perder clientes, la sensibilidad. Transición: un modelo que encuentra más, pero mal.<\/p>"}, {"titulo": "El árbol sin límite: 100 % en entrenamiento y 72,5 % en prueba, menos que la línea base", "seccion": "Clasificación", "k": 2, "notas": "<p>Tiene 26 niveles y 977 hojas (celda [cifras]). Memorizó el entrenamiento, ruido incluido: el sobreajuste se ve en la brecha de 27,5 puntos. Su precisión es 0,422: de cada 5 que señala, cancelaron apenas 2. Por exactitud, pierde contra decir «No» a todos; por encontrados, le gana. Ninguna de las dos lecturas, sola, sirve para elegir.<\/p>"}, {"titulo": "Un árbol de dos niveles se lee: con contrato mes a mes y 29 años o menos, canceló el 62 %", "seccion": "Clasificación", "k": 2, "notas": "<p>Es la promesa de la S1: cómo funciona un árbol por dentro. Cada <code>|---<\/code> es una pregunta y cada hoja dice cuántos clientes del entrenamiento no cancelaron y cuántos sí. Las cuatro reglas, con el entrenamiento: con permanencia (12 o 24 meses) y velocidad medida de 69 % o menos, cancelaron 88 de 143 (61,5 %); con permanencia y mejor velocidad, 454 de 3878 (11,7 %); mes a mes y 29 años o menos, 471 de 757 (62,2 %); mes a mes y 30 o más, 400 de 1222 (32,7 %). <code>contrato_Mes a mes &lt;= 0.50<\/code> quiere decir que la columna vale 0: no es mes a mes. El 471 de la hoja «mes a mes y 29 años o menos» es una coincidencia: son clientes del entrenamiento, no los 471 que cancelaron en la prueba. Describe clientes, no juzga personas: los clientes jóvenes con contrato mes a mes cancelan más. Una regla que se lee es una explicación que se puede auditar: es lo que pide la sustentación del proyecto. La promesa de la S1: ¿por qué un árbol hace una pregunta si sus dos hojas dicen lo mismo? Porque cada pregunta busca grupos más <strong>puros<\/strong> (más parecidos entre sí en la etiqueta), medidos con un criterio como el índice de Gini, aunque no cambie la respuesta de la hoja (F-ML-15, sec. 1.10.7.1). Con el entrenamiento (celda [cifras], «pureza»): antes de preguntar cancelaron 1413 de 6000; con contrato mes a mes, el 44,0 % (871 de 1979); con permanencia, el 13,5 % (542 de 4021). El árbol elige la pregunta que más separa esos porcentajes. La regla de la S1 preguntaba por la antigüedad porque solo tenía dos columnas; hoy, con 25, la segunda pregunta es la velocidad o la edad.<\/p>"}, {"titulo": "Con 4 niveles, el árbol ya no memoriza; el bosque promedia 300", "seccion": "Clasificación", "k": 2, "notas": "<p>El árbol de 4 niveles acierta casi como la logística y encuentra a 15 más. El bosque es el de mejor exactitud hasta ahora, pero encuentra a 200: con el umbral de 0,5, todos los modelos se quedan cortos en sensibilidad. <code>n_jobs=-1<\/code> usa todos los procesadores de la máquina.<\/p>"}, {"titulo": "La SVM busca la frontera entre los que cancelan y los que no con el margen más ancho", "seccion": "Clasificación", "k": 2, "notas": "<p>Recortable 1: si falta tiempo, se dice en una frase sobre la diapositiva siguiente. La documentación de scikit-learn lo dice sin rodeos: se recomienda mucho escalar los datos (F-ML-17). La SVM no da probabilidades directamente (F-ML-17); su <code>decision_function<\/code> dice qué tan lejos de la frontera queda cada cliente, y eso sirve para ordenarlos por riesgo. Su entrenamiento crece al menos con el cuadrado del número de clientes: con 6000 tarda menos de un segundo en la réplica de Colab; con millones, no se usaría así.<\/p>"}, {"titulo": "Sin escalar, la SVM dice «No» a todos, como la línea base", "seccion": "Clasificación", "k": 2, "notas": "<p>Es el caso que prometimos en KNN: sin escalar, la distancia la deciden casi solo la factura y el consumo, que no separan a los que cancelan; el contrato, la antigüedad o la velocidad casi no cuentan, y la SVM termina prediciendo la clase más común. Mismo resultado que la línea base, con un modelo mucho más caro. Escalada, encuentra a 171: todavía menos que la logística, con el umbral de 0,5.<\/p>"}, {"titulo": "XGBoost encuentra a 228: el que más, con el umbral de 0,5", "seccion": "Clasificación", "k": 2, "notas": "<p>XGBoost tiene la mejor exactitud, la mejor precisión, la mejor sensibilidad y el mejor F1 de los siete. Pero aun así encuentra a menos de la mitad de los que cancelan: 228 de 471. Con el umbral de 0,5, el modelo solo señala a quien tiene más probabilidad de irse que de quedarse, y con una tasa de cancelación del 23,6 % eso deja fuera a muchos. Transición: movamos el umbral.<\/p>"}, {"titulo": "Con 0,5, la logística encuentra 4 de cada 10; con 0,2, casi 8, y llama a tres veces más", "seccion": "Clasificación", "k": 2, "notas": "<p><code>predict_proba<\/code> da la probabilidad de cada clase; la columna <code>[:, 1]<\/code> es la de cancelar. Con 0,2 llama a 865 clientes (tres veces los 284 de 0,5) y encuentra a 371. La exactitud baja de 0,8085 a 0,703, y a la gerente no le importa tanto: lo que le importa es cuántos encuentra y cuántas llamadas paga. En el ejercicio 3 hacen lo mismo con XGBoost, para una meta concreta.<\/p>"}, {"titulo": "Bajar el umbral encuentra más, con menos precisión", "seccion": "Clasificación", "k": 2, "notas": "<p>Recortable 2. A la derecha de la línea punteada, el modelo señala a pocos y acierta casi siempre con ellos; a la izquierda, señala a muchos, encuentra a casi todos y se equivoca más con cada llamada. El cruce no es el umbral «correcto»: el umbral sale de la decisión, de cuántas llamadas se pueden pagar o de qué fracción de los que se van hay que encontrar.<\/p>"}, {"titulo": "La métrica la elige la decisión, no el modelo", "seccion": "Clasificación", "k": 2, "notas": "<p>Es la segunda idea de la sesión, después del lema. La exactitud elige a la línea base antes que al árbol sin límite, y el umbral de 0,5 antes que el de 0,2: en los dos casos, contra lo que le sirve a la gerente. Transición: ¿y si los 2000 clientes de prueba tuvieron suerte?<\/p>"}, {"titulo": "La validación cruzada (cross-validation) entrena 5 veces y da 5 puntajes", "seccion": "Clasificación", "k": 2, "notas": "<p>Cada fila es un entrenamiento: con 4 pliegues se entrena y con el quinto se valida. <code>cross_val_score<\/code> devuelve un puntaje por pliegue (F-ML-11); <code>StratifiedKFold<\/code> conserva la tasa de cancelación en cada pliegue, lo que importa con clases desbalanceadas como la cancelación (<em>churn<\/em>). En la práctica se usa k = 5 o k = 10 (ISLP 5.1.4, F-ML-22). La prueba se guarda para medir al final. En esta sesión, para simplificar, comparamos los modelos y elegimos el umbral del ejercicio 3 mirando la prueba; en el proyecto, elijan modelo y umbral con validación cruzada sobre el entrenamiento y midan la prueba una sola vez.<\/p>"}, {"titulo": "Con 5 pliegues, el F1 de XGBoost va de 0,514 a 0,583", "seccion": "Clasificación", "k": 2, "notas": "<p>El F1 medio es 0,534, con una desviación de 0,025: el F1 de la prueba (0,564) cae dentro de lo que se ve entre pliegues. Con la validación cruzada, XGBoost también queda primero en F1 (celda [cifras]: 0,534, frente a 0,460 la logística, 0,515 el árbol de 4 niveles y 0,496 el bosque), aunque frente al árbol la diferencia es menor que la desviación entre pliegues. En el AUC (área bajo la curva ROC, que no vimos hoy) también queda primero: 0,839, frente a 0,824 el bosque y 0,810 la logística. La validación cruzada entrena cinco veces: con XGBoost tarda unos segundos en Colab.<\/p>"}, {"titulo": "Sesgo y varianza: con pocos niveles el árbol no aprende; con muchos, memoriza", "seccion": "Clasificación", "k": 2, "notas": "<p>Con 1 nivel, el árbol no aprende nada: dice «No» a todos, como la línea base (0,7645 en las dos curvas). Con 4 niveles, la validación cruzada llega a su máximo (0,8075). Con 20, el entrenamiento llega a 0,998 y la validación baja a 0,7375. La brecha entre las dos curvas es la varianza que se ve. ISLP lo formaliza en la sec. 2.2.2: el error de prueba esperado se descompone en varianza, sesgo al cuadrado y un error irreducible (F-ML-22). El ejercicio 4 elige la profundidad con el F1 de la validación cruzada.<\/p>"}, {"titulo": "Para encontrar a 7 de cada 10, XGBoost necesita 613 llamadas; la logística, 686", "seccion": "Clasificación", "k": 2, "notas": "<p>La gerente no decide con el umbral de 0,5: decide a cuántos llamar. La función baja el corte de riesgo de mayor a menor según cada modelo y cuenta cuántas llamadas hacen falta para encontrar a 330 de los 471 (el 70 %); los clientes con el mismo riesgo se llaman todos juntos. Un modelo que ordena mejor necesita menos llamadas. La SVM se ordena con su <code>decision_function<\/code>. El árbol de 4 niveles da solo 15 probabilidades distintas: sus clientes vienen en bloques, y por eso necesita 812. La diferencia entre XGBoost y la logística es de 73 llamadas para la misma meta; con el bosque, de 21, y con una sola partición esa diferencia no se puede dar por segura. En el ejercicio 3 saldrán 690 llamadas con XGBoost: es lo que cuesta la lista de umbrales de 0,05 en 0,05; con pasos de 0,01, el umbral 0,28 da 627 (celda [cifras]); ordenando por riesgo exacto bastan 613. Las líneas que arman la tabla no se proyectan.<\/p>"}, {"titulo": "¿Qué modelo le recomiendas a la gerente, y qué le dices de él?", "seccion": "Clasificación", "k": 2, "notas": "<p>Tres minutos. Las respuestas buenas traen una cifra (613 llamadas, 0,534 de F1 medio) y no usan la exactitud como argumento. La explicación importa por dos razones: la gerente tiene que confiar en el modelo para pagar las llamadas, y la sustentación del proyecto pide una «explicación auditable». Un modelo más simple que se explica bien puede ser una buena primera versión. Esta es la respuesta a la gerencia del notebook.<\/p>"}, {"titulo": "Práctica: ejercicios 2 y 3, y el 4 si queda tiempo", "seccion": "Clasificación", "k": 2, "notas": "<p>10:15 a más tardar. Clave del 2: VN 1425, FP 104, FN 271, VP 200 (la logística: 186 y 98; casi la misma precisión, y el bosque encuentra a 14 más); el verificador reconoce la matriz traspuesta (FP y FN cruzados), los números de otro modelo, la matriz del entrenamiento (suma 6000), la tupla de <code>.ravel()<\/code> en una sola variable, proporciones en lugar de conteos y un solo número mal. Clave del 3: el umbral de 0,25, con 690 llamadas y 350 encontrados (sensibilidad 0,743); con 0,30, la sensibilidad es 0,684 y no llega. La exactitud baja de 0,8235 (con 0,5) a 0,7695: casi la de decir «No» a todos (0,7645), y aun así encuentra a 350 de 471. Con 500 llamadas (pregunta de «Tus respuestas»), el umbral de 0,40 da 479 llamadas y una sensibilidad de 0,62: no cumple la meta. Con pasos de 0,01, el umbral 0,28 da 627 llamadas. El verificador rechaza un umbral que no llega, uno más bajo que también llega (llama de más), el umbral en %, las llamadas confundidas con los encontrados y las de la logística. Clave del 4: 4 niveles, F1 medio 0,515 (5 niveles: 0,511; empatan dentro del ruido, y entre empatados se elige el más simple). Si alguien usa <code>cv=5<\/code> en lugar de <code>cv=pliegues<\/code>, le sale otra profundidad: el verificador lo reconoce. No se elige con la prueba porque entonces la prueba deja de ser datos que el modelo no vio: se elegiría a la medida de esos 2000 clientes.<\/p>"}, {"titulo": "Pausa de 10 minutos", "seccion": "Clasificación", "k": 2, "notas": "<p>10:40. El docente aprovecha la pausa para dejar abierto el portal de Azure con la sesión iniciada y la asignación de directiva ya hecha (ver la nota de la demostración).<\/p>"}, {"titulo": "Nube", "seccion": "Nube", "k": 3, "notas": "<p>10:50. Setenta minutos: unos 25 de exposición, 15 de demostración del docente en el portal, 20 del ejercicio de diseño en salas y 10 de puesta en común. Hito: la demostración empieza a más tardar a las 11:15 y las salas, a las 11:30. Si se atrasa, recortar en este orden: (1) la pregunta de RBAC y Policy pasa a una frase sobre las tres directivas (−3 min); (2) la diapositiva de las identidades administradas se dice en una frase sobre la de Entra ID (−2 min). No se recortan la demostración ni la matriz de roles. Lo que se muestra cabe en la capa gratuita: Entra ID Free viene con la suscripción de Azure (F-AZ-14), Azure RBAC es gratis (F-AZ-15) y Azure Policy no se cobra en recursos de Azure (F-AZ-19a).<\/p>"}, {"titulo": "En cualquier modelo de nube, los datos y las identidades son de Yarumo", "seccion": "Nube", "k": 3, "notas": "<p>Es la cita de F-AZ-01 (<code>#division-of-responsibility<\/code>); el original: «For all cloud deployment types, you own your data and identities». La misma página dice que el cliente siempre conserva los datos, los puntos de conexión, las cuentas y la administración del acceso: RBAC, MFA y acceso condicional (<code>#responsibilities-you-always-retain<\/code>). Matiz de la S1: la unidad AZ-900 dice que en PaaS y SaaS la identidad y el acceso se comparten; el proveedor opera la plataforma de autenticación, pero los usuarios, los roles y las directivas los administra el cliente (F-AZ-02). Hoy vemos las herramientas de Azure para esa parte que siempre es de Yarumo.<\/p>"}, {"titulo": "Microsoft Entra ID guarda quién es quién en el inquilino de Yarumo", "seccion": "Nube", "k": 3, "notas": "<p>Microsoft Entra ID es el producto fundamental de la familia Entra: administración de identidades y acceso en la nube (F-AZ-10). Cada directorio nuevo trae un dominio inicial del tipo contoso.onmicrosoft.com; el de Yarumo es ficticio. Azure AD pasó a llamarse Microsoft Entra ID (se anunció el 11 de julio de 2023); solo cambió el nombre (F-AZ-11). Hay grupos de seguridad y de Microsoft 365; los de seguridad son los que dan acceso a recursos y admiten anidamiento (F-AZ-12). Los grupos dinámicos (que se llenan solos con una regla) piden la licencia P1: en la capa gratuita, grupos asignados a mano (F-AZ-12, F-AZ-14).<\/p>"}, {"titulo": "Una identidad administrada deja que la aplicación entre sin contraseñas", "seccion": "Nube", "k": 3, "notas": "<p>Recortable 2. Las identidades administradas eliminan la necesidad de que los desarrolladores administren secretos, certificados o claves, y no tienen costo adicional ni requisito de licencia (F-AZ-13, F-AZ-14). Para Yarumo: la aplicación que calcula el riesgo de cada cliente lee el modelo y la tabla del almacenamiento con su identidad administrada, sin una clave pegada en un notebook que alguien podría compartir. Es la quinta fila de la matriz de roles.<\/p>"}, {"titulo": "Una asignación de rol dice quién, qué y dónde", "seccion": "Nube", "k": 3, "notas": "<p>Los tres elementos de una asignación de roles son la entidad de seguridad, la definición de rol y el ámbito (F-AZ-15, <code>#how-azure-rbac-works<\/code>). Usar Azure RBAC es gratis (F-AZ-15). Una asignación a un grupo vale para todos sus miembros, también los de grupos anidados (F-AZ-15). Ejemplo para leer en voz alta: «el grupo Analítica (quién) es Lector de datos de blobs (qué) en el contenedor de clientes (dónde)».<\/p>"}, {"titulo": "Los permisos bajan: lo que se da arriba vale para todo lo de abajo", "seccion": "Nube", "k": 3, "notas": "<p>Cuatro niveles de ámbito, de mayor a menor, en relación padre-hijo (F-AZ-16, <code>#scope-levels<\/code>): «Lower levels inherit role permissions from higher levels». El modelo es aditivo (F-AZ-15, <code>#multiple-role-assignments<\/code>): un permiso que se da arriba no se quita abajo con un rol menor. Por eso los permisos amplios se dan lo más abajo posible. Los roles de datos de blobs se pueden asignar en la suscripción, el grupo de recursos, la cuenta de almacenamiento o un contenedor (F-AZ-19d). La excepción son las asignaciones de denegación, que bloquean aunque haya roles (F-AZ-15); no las vemos hoy.<\/p>"}, {"titulo": "Cuatro roles integrados actúan sobre los recursos y dos, sobre los archivos", "seccion": "Nube", "k": 3, "notas": "<p>Definiciones de F-AZ-17: Propietario, Colaborador y Administrador de acceso de usuario están en la categoría de roles con privilegios; Lector, en la general; los dos de blobs, en la de almacenamiento (el Colaborador de datos es el punto 6). Hay muchos más roles integrados; estos alcanzan para la matriz de hoy. Si el portal está en español, puede mostrar los nombres en inglés: los dos valen. Ojo: el Colaborador de datos de blobs también permite borrar el contenedor; es un matiz para la discusión del privilegio mínimo.<\/p>"}, {"titulo": "Con el rol Lector, ¿el proveedor puede leer la tabla de clientes?", "seccion": "Nube", "k": 3, "notas": "<p>Un minuto. Es el punto que más confunde: «Lector» suena a «puede leer todo». Lector sí ve el contenedor como recurso; lo que no ve es lo que hay dentro. La definición de F-AZ-17 lo dice: Lector (plano de control) no da acceso al contenido de los blobs. «Solo los nombres de los archivos» también es incorrecta: listar los blobs es una acción del plano de datos, que el Lector de datos de blobs sí permite (leer y enumerar contenedores y blobs, F-AZ-17). Transición: entonces, ¿qué rol darle a cada quien?<\/p>"}, {"titulo": "Privilegio mínimo: cada quien, lo justo, donde lo necesita", "seccion": "Nube", "k": 3, "notas": "<p>Las tres prácticas son de Microsoft (F-AZ-18): conceder solo el acceso necesario en el ámbito más estrecho; asignar roles a grupos, no a usuarios; y tener como máximo 3 propietarios de suscripción, para que un propietario comprometido no lo comprometa todo. «Por el tiempo que haga falta»: Microsoft recomienda el acceso justo a tiempo con Privileged Identity Management (F-AZ-18), que pide licencias de pago (las asignaciones elegibles requieren P2 o Microsoft Entra ID Governance, F-AZ-19e); en la capa gratuita, se retira la asignación a mano cuando termina el trabajo. Es la tercera idea de la sesión.<\/p>"}, {"titulo": "Azure Policy decide qué se puede crear, sin importar quién lo crea", "seccion": "Nube", "k": 3, "notas": "<p>F-AZ-19a: Policy evalúa las propiedades de los recursos contra reglas de negocio; las definiciones se asignan a un ámbito, y las asignaciones se heredan. Se evalúa al crear o actualizar recursos, al asignar o actualizar directivas y en un ciclo estándar cada 24 horas. F-AZ-19b: Deny responde con un 403 antes de que la solicitud llegue al proveedor de recursos; Audit registra una advertencia en el registro de actividad. Hay más efectos (Modify, DeployIfNotExists, Disabled…); hoy, estos dos. Microsoft recomienda empezar con Audit antes de bloquear (F-AZ-19a): así se ve qué se rompería.<\/p>"}, {"titulo": "Tres directivas integradas fijan dónde y cómo se guardan los datos de Yarumo", "seccion": "Nube", "k": 3, "notas": "<p>Las tres están en la lista de definiciones integradas, con sus GUID (F-AZ-19c). Ubicaciones permitidas sirve para requisitos de geocumplimiento; no aplica a los grupos de recursos (para eso hay otra, <em>Allowed locations for resource groups<\/em>). Qué región elegir, y si los datos pueden salir de Colombia, es tema de la S3 con la Ley 1581 (F-LEY-01, art. 26). La etiqueta obligatoria no aplica a los grupos de recursos. No confundir la tercera con <em>Storage accounts should disable public network access<\/em>, que es otra cosa: el acceso por red.<\/p>"}, {"titulo": "Dos intentos de crear un almacenamiento: ¿cuál se bloquea?", "seccion": "Nube", "k": 3, "notas": "<p>Recortable 1. Es la diferencia de F-AZ-19a (<code>#azure-policy-and-azure-rbac<\/code>): RBAC controla qué acciones puede hacer un usuario; Policy controla el estado de los recursos sin importar quién hace el cambio. Si el efecto fuera Audit, el del propietario pasaría, pero quedaría marcado como no conforme (F-AZ-19b). Microsoft lo resume: la combinación de RBAC y Policy da el control completo. Transición: veámoslo en el portal.<\/p>"}, {"titulo": "Demostración: un grupo, un rol y una directiva en el portal de Azure", "seccion": "Nube", "k": 3, "notas": "<p>11:15 a más tardar; 15 min. Usar la cuenta del docente con el rol <strong>Propietario<\/strong> de la suscripción (la cuenta con que se creó): si «Agregar asignación de rol» sale deshabilitada, faltan permisos (F-AZ-19e). No usar una cuenta con datos reales ni mostrar en pantalla contraseñas, claves ni el identificador de la suscripción.<\/p>\n<p><strong>Antes de la clase<\/strong> (la noche anterior, o al menos 30 minutos antes: las asignaciones de roles pueden tardar hasta 30 minutos en propagarse, F-AZ-19g): cambiar el idioma del portal a español si se quiere (Configuración del portal → Idioma y región); crear el usuario <code>analista.demo<\/code> y el grupo de seguridad <code>g-yarumo-analitica<\/code> (para mostrarlos ya hechos); crear el grupo de recursos <code>rg-yarumo-demo<\/code> en la región que se usará como permitida, con la etiqueta <code>clasificacion-datos = personales<\/code>, y <strong>asignarle ya<\/strong> la directiva <em>Allowed locations<\/em> con solo esa región: una asignación nueva tarda unos cinco minutos en aplicarse (F-AZ-19f). Como respaldo, un segundo grupo <code>rg-yarumo-respaldo<\/code> con la misma asignación.<\/p>\n<p>Guion en vivo:<\/p>\n<ol>\n<li><strong>Entra ID.<\/strong> Buscar «Microsoft Entra ID» → Información general: el nombre del inquilino y el dominio <code>….onmicrosoft.com<\/code> (F-AZ-10). Usuarios: mostrar <code>analista.demo<\/code> y abrir <strong>Nuevo usuario → Crear nuevo usuario<\/strong> sin completarlo (contraseña generada automáticamente, sin mostrarla). Grupos: mostrar <code>g-yarumo-analitica<\/code>, de tipo <strong>Seguridad<\/strong> y pertenencia <strong>asignada<\/strong> (la dinámica pide P1, F-AZ-12), con el usuario como miembro; si se crea en vivo, dejar «Se pueden asignar roles de Microsoft Entra al grupo» en No.<\/li>\n<li><strong>RBAC.<\/strong> En <code>rg-yarumo-demo<\/code> → <strong>Control de acceso (IAM)<\/strong> → <strong>Agregar &gt; Agregar asignación de rol<\/strong> → rol <strong>Lector<\/strong> → <strong>Siguiente<\/strong> → pestaña <strong>Miembros<\/strong>: «Usuario, grupo o entidad de servicio» → <strong>Seleccionar miembros<\/strong> → <code>g-yarumo-analitica<\/code> → <strong>Seleccionar<\/strong> → <strong>Revisar y asignar<\/strong> (F-AZ-19e; el portal puede decir «asignación de rol» o «de roles»). Mostrar la pestaña <strong>Asignaciones de roles<\/strong> y decir los tres elementos: el grupo (quién), Lector (qué), el grupo de recursos (dónde). <strong>Comprobar acceso<\/strong> con el usuario muestra lo que tiene en ese ámbito; probarlo antes de clase.<\/li>\n<li><strong>Policy.<\/strong> Buscar «Directiva» (Azure Policy) → <strong>Asignaciones<\/strong>: mostrar la asignación ya hecha y abrirla. Para enseñar cómo se crea, <strong>Asignar directiva<\/strong> → pestaña <strong>Aspectos básicos<\/strong>: <strong>Ámbito<\/strong> (con «…») y <strong>Definición de directiva<\/strong> (con «…», buscar <em>Allowed locations<\/em>, «Ubicaciones permitidas»), sin crearla (F-AZ-19f). Abrir también la definición <em>Storage account public access should be disallowed<\/em> para ver sus efectos permitidos, sin asignarla.<\/li>\n<li><strong>La prueba.<\/strong> Cuentas de almacenamiento → Crear → grupo <code>rg-yarumo-demo<\/code>, un nombre cualquiera y <strong>otra región<\/strong> → Revisar y crear: la validación falla porque la directiva no lo permite (Deny, F-AZ-19b). Si la validación <strong>pasa<\/strong> (la directiva aún no se aplicó), <strong>no hacer clic en Crear<\/strong>: repetir en <code>rg-yarumo-respaldo<\/code>. Revisar y crear solo valida; el costo aparecería solo si se creara la cuenta.<\/li>\n<li><strong>Limpieza.<\/strong> Borrar los grupos de recursos (sus asignaciones de directiva y de roles se van con ellos), el grupo y el usuario. Con Entra ID Free, Azure RBAC y Azure Policy, nada de esto se cobra (F-AZ-14, F-AZ-15, F-AZ-19a).<\/li>\n<\/ol>\n<p>Si el portal falla o no hay conexión: mostrar las capturas que el docente haya tomado al preparar, y hacer el paso 2 en voz alta con la diapositiva de «quién, qué y dónde». Si algún estudiante creó una cuenta de Azure for Students, puede encontrar ya asignada una directiva de ubicaciones; no hay documentación oficial que lo confirme (FUENTES, sección 4): que revise Azure Policy → Asignaciones.<\/p>"}, {"titulo": "Ejercicio de diseño: tres contenedores, cinco grupos y un solo dueño de los datos", "seccion": "Nube", "k": 3, "notas": "<p>11:30 a más tardar. Leer el escenario en voz alta: está igual en el notebook (parte 3), para las salas. <code>datos-clientes<\/code> sigue siendo dato personal aunque esté seudonimizada (Ley 1581, F-LEY-01, art. 3).<\/p>"}, {"titulo": "La matriz de roles de Yarumo: un rol y su ámbito para cada casilla", "seccion": "Nube", "k": 3, "notas": "<p>Salas de cuatro personas (o de tres) que arma el docente; pueden ser las mismas salas de la S1, para que retomen su documento. Pedir que justifiquen cada «sin acceso» tanto como cada rol. Lo que se pregunta en la puesta en común: ¿quién puede asignar roles?, ¿alguien quedó con Propietario?, ¿en qué ámbito?, ¿qué pasa con el proveedor cuando termina el mes?<\/p>"}, {"titulo": "Una propuesta: los datos personales, solo para quien los necesita", "seccion": "Nube", "k": 3, "notas": "<p>10 min de puesta en común; no es la única respuesta buena. Lo que la hace defendible: nadie del negocio ve datos personales si no los necesita; el proveedor externo ve el modelo, no los datos, y su acceso se retira al terminar (si necesitara datos, irían agregados o anonimizados, con un contrato de transmisión: Decreto 1377 de 2013, art. 25, compilado en el art. 2.2.2.25.5.2 del Decreto 1074 de 2015, F-LEY-03; es tema de la S3); la gerencia ve resultados; la aplicación lee lo que necesita para predecir y escribe sus resultados; Analítica guarda el modelo y lee los informes. Todo se asigna a grupos (F-AZ-18) y a la identidad administrada (F-AZ-13). El Colaborador de datos de blobs lee, escribe y elimina contenedores y blobs (F-AZ-17), y los roles de datos se asignan en el ámbito de un contenedor (F-AZ-19d).<\/p>\n<p>Sobre TI, el matiz que más enseña: Microsoft recomienda autorizar con Entra ID y no permitir la clave compartida, que viene permitida por defecto (F-AZ-42). Mientras esté permitida, Colaborador y Propietario, que incluyen <code>listKeys<\/code>, pueden leer los blobs con la clave de la cuenta aunque no tengan rol de datos, y el portal usa esa clave si el usuario la tiene (F-AZ-19g). Por eso la propuesta desactiva la clave compartida (<code>AllowSharedKeyAccess = false<\/code>, F-AZ-42) y lo impone con la directiva integrada <em>Storage accounts should prevent shared key access<\/em>, con efecto Audit o Deny (F-AZ-19c, punto 4). Y quien asigna roles podría asignarse uno de datos: por eso son pocos y se revisa el registro de actividad. Para ver blobs en el portal con Entra ID, además del rol de datos hace falta un rol como Lector en la cuenta (F-AZ-19d, F-AZ-19g); por código basta el rol de datos. Las asignaciones de roles pueden tardar hasta 30 minutos en propagarse (F-AZ-19g).<\/p>"}, {"titulo": "Proyecto final", "seccion": "Proyecto final", "k": 4, "notas": "<p>12:00. Cuarenta minutos: 15 para el enunciado y la rúbrica, 5 para preguntas y 20 para formar las parejas y escribir en el chat la pareja y una primera idea. La página del proyecto tiene todo; las diapositivas son el resumen. No se recorta.<\/p>"}, {"titulo": "Tres partes: el modelo, el plan de nube y su sustentación", "seccion": "Proyecto final", "k": 4, "notas": "<p>Es la decisión M6 del curso. «Explicación auditable» viene de los dos syllabus (Etapa 3, Transferencia): la sustentación presenta una explicación auditable de los principios estandarizados con las herramientas seleccionadas. Para el modelo, quiere decir que otra persona puede seguir cada cifra hasta su celda y entender por qué el modelo señala a un cliente; para el plan, que cada decisión de seguridad tiene su razón y su fuente. Lo de hoy (matriz de roles, directivas, métricas, umbral) es la mitad del proyecto.<\/p>"}, {"titulo": "La lista mínima: sin estos elementos, el proyecto no se evalúa", "seccion": "Proyecto final", "k": 4, "notas": "<p>Es la lista mínima de la página del proyecto, resumida. «Al menos dos directivas», el formato de la entrega y la fecha de cierre los aprobó el docente el 6 de noviembre. La calidad de cada elemento se valora con la rúbrica. Lo de almacenamiento y monitoreo se ve en la S4 (Blob Storage, Azure SQL, Monitor y Defender for Cloud) y la privacidad, en la S3: hoy basta con saber que van en el plan. Si una pareja quiere usar un modelo de agrupamiento en lugar de uno supervisado, su línea base y su métrica se ven en la S3.<\/p>"}, {"titulo": "La rúbrica: seis criterios, en cuatro niveles", "seccion": "Proyecto final", "k": 4, "notas": "<p>Los criterios se alinean con los criterios de realización de los dos syllabus: en Machine Learning, CR1 (fundamentos de ML en la analítica y el gobierno de datos) y CR2 (integridad, custodia y confidencialidad del dato); el CR3 de ML (redes neuronales) se ve en la S4 y en el proyecto es un «Destacado» opcional. En Seguridad en Cloud Computing, CR1 (responsabilidad compartida), CR2 (servicios y seguridad que cumplen los estándares internos y de gobierno) y CR3 (servicios para el plan de seguridad y uso de la suscripción académica); la privacidad no está en un CR, sino en el tema 4.3 del syllabus («Regulaciones aplicables en entorno cloud: privacidad»). La primera frase del CR2 de ML (álgebra lineal y cálculo multivariable) no se evalúa en el proyecto. La evaluación es auto, co y heteroevaluación, como dicen los dos syllabus. Los pesos de la nota los fija el docente.<\/p>"}, {"titulo": "Cinco pasos hasta la sustentación", "seccion": "Proyecto final", "k": 4, "notas": "<p>Los hitos salen del plan del curso. La revisión del avance en la S3 es en salas. El laboratorio de la S4 es para quien tenga la cuenta de Azure; nadie está obligado a crear recursos de pago, y el plan de nube se puede escribir completo sin crear nada (F-AZ-20, F-AZ-21: la cuenta gratuita pide tarjeta y Azure for Students exige ser estudiante de tiempo completo). Lo que cada hito pide en detalle está en la página del proyecto.<\/p>"}, {"titulo": "Formen las parejas: escriban en el chat sus nombres y la pregunta de su modelo", "seccion": "Proyecto final", "k": 4, "notas": "<p>20 min. El docente arma las parejas que falten con quienes no tengan. La pregunta del modelo puede ser la de hoy (cancelación o consumo) u otra que se responda con los datos de Yarumo; la de segmentos se ve en la S3. La coevaluación se hace en la S5, después de cada sustentación, con los criterios de la página.<\/p>"}, {"titulo": "Cierre", "seccion": "Cierre", "k": 5, "notas": "<p>12:40. Veinte minutos: 5 de autoevaluación, 5 para «lo que te llevas» y 10 para el trabajo independiente, la próxima sesión y las preguntas.<\/p>"}, {"titulo": "¿Verdadero o falso?", "seccion": "Cierre", "k": 5, "notas": "<p>Autoevaluación: tres minutos, y en el chat las cuatro respuestas en una línea. Las mismas preguntas están en «Tus respuestas» del notebook. No siguen el orden de la clase a propósito. Al revelar, completar: en la 1, la exactitud mezcla a los que no cancelan, que son la mayoría; en la 2, memorizó: se mira la prueba; en la 3, es la gráfica del umbral; en la 4, el ámbito es el contenedor <code>modelos<\/code> y RBAC solo suma lo que se asigna (F-AZ-15, F-AZ-19d), siempre que la cuenta no permita la clave compartida.<\/p>"}, {"titulo": "Lo que te llevas hoy", "seccion": "Cierre", "k": 5, "notas": "<p>Leer las cinco en voz alta y preguntar cuál les costó más. Cerrar con el lema: aprender no es memorizar.<\/p>"}, {"titulo": "Para la sesión 3: tu pareja, tu pregunta y dos lecturas", "seccion": "Cierre", "k": 5, "notas": "<p><em>An Introduction to Statistical Learning, with Applications in Python<\/em> (James, Witten, Hastie, Tibshirani y Taylor, 2023) es de acceso gratuito desde https://www.statlearning.com/ (F-ML-05, F-ML-22): la sec. 2.2.2 empieza en la p. 31. La página de RBAC: https://learn.microsoft.com/es-es/azure/role-based-access-control/overview (F-AZ-15), es una traducción automática; la versión en inglés es la de referencia. La S3 es el viernes 13 de noviembre, de 18:00 a 22:00, e incluye la revisión del avance del proyecto en salas. Recordar lo de la S1 sobre la cuenta de Azure: es opcional y para el laboratorio de la S4.<\/p>"}, {"titulo": "Fuentes de esta sesión", "seccion": "Cierre", "k": 5, "notas": "<p>Las referencias completas, con URL y fecha de consulta (6 de noviembre de 2026), están en el banco de fuentes del curso: F-ML-05, F-ML-09 a F-ML-23, F-AZ-01, F-AZ-02, F-AZ-10 a F-AZ-19g, F-AZ-20, F-AZ-21, F-AZ-42, F-LEY-01 y F-LEY-03. La guía de scikit-learn se cita en la versión 1.6.1, la de Colab: allí «Common pitfalls» es el capítulo 10 (F-ML-23). Las páginas de Microsoft Learn en español son traducciones automáticas; ante una duda, la versión en inglés manda.<\/p>"}], "secciones": [{"titulo": "Apertura", "icono": "fa-door-open", "primera": 2, "diapos": [2, 3, 4, 5, 6]}, {"titulo": "Regresión", "icono": "fa-chart-line", "primera": 7, "diapos": [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28]}, {"titulo": "Clasificación", "icono": "fa-user-xmark", "primera": 29, "diapos": [29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]}, {"titulo": "Nube", "icono": "fa-shield-halved", "primera": 54, "diapos": [54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69]}, {"titulo": "Proyecto final", "icono": "fa-diagram-project", "primera": 70, "diapos": [70, 71, 72, 73, 74, 75]}, {"titulo": "Cierre", "icono": "fa-flag-checkered", "primera": 76, "diapos": [76, 77, 78, 79, 80]}], "iconos": {}, "graficas": {}}</script>
+    <script id="datos-mazo" type="application/json">{"config": {"asignatura": "Machine Learning y Seguridad en la Nube", "numero": "2", "titulo": "Aprender con etiqueta", "ra": "", "horas": "", "stack": [], "institucion": "Fundación Universitaria Compensar", "sigla": "UCompensar", "unidad": "Sesión", "storageKey": "ucompensar_machine_learning_y_seguridad_en_la_nube_2"}, "diapos": [{"titulo": "Portada", "seccion": "", "k": -1, "notas": ""}, {"titulo": "Hoja de ruta", "seccion": "", "k": -1, "notas": ""}, {"titulo": "Apertura", "seccion": "Apertura", "k": 0, "notas": "<p>07:00. Pedir desde ya que abran el notebook de la S2 (portada del curso → «Abrir en Colab»), que guarden una copia en Drive y que ejecuten la primera celda y [cargar]: la primera descarga los datos, como en la S1. Mientras tanto, la apertura.<\/p>"}, {"titulo": "Seis horas en seis bloques, con dos pausas", "seccion": "Apertura", "k": 0, "notas": "<p>Hitos de reloj, que no se mueven: la regresión empieza a las 07:15; la pausa larga, a las 08:45; la clasificación, a las 09:00; la pausa corta, a las 10:40; la nube, a las 10:50; el proyecto, a las 12:00, y el cierre, a las 12:40. Cada bloque trae en la nota de su divisor qué se recorta si se atrasa. Lo que no se recorta nunca: la matriz de confusión y el umbral, la demostración de RBAC y Policy, y el enunciado del proyecto con la formación de parejas. Durante la exposición solo miran; ejecutan en las prácticas.<\/p>"}, {"titulo": "En la sesión 1, la línea base acertó el 76,5 % y no encontró a nadie", "seccion": "Apertura", "k": 0, "notas": "<p>Es el puente de la S1: la misma partición (la cuarta parte para prueba, semilla 2026, estratificada), así que hoy los 471 son los mismos clientes. Las cifras salen de la celda [cifras]: 0,7645 para la línea base (la S1 lo dio redondeado: 76,5 %) y 0,7715 para el árbol de dos niveles con el contrato mes a mes y la antigüedad. En la S1 se prometió ver cómo funciona un árbol por dentro: hoy se ve. Preguntar en el chat: ¿qué le dirían a una gerencia que solo mira la exactitud? Dos o tres respuestas y seguir. La S1 dejó la pregunta «¿Comprarías un modelo que acierta en el 75 % de los clientes?»: la siguiente diapositiva la retoma con dos modelos de hoy.<\/p>"}, {"titulo": "Si cada llamada cuesta lo mismo, ¿cuál de los dos modelos le sirve más a la gerente?", "seccion": "Apertura", "k": 0, "notas": "<p>Tres minutos con la votación. El primero es la regresión logística (80,85 %, 186 encontrados con 284 llamadas); el segundo, el árbol sin límite de profundidad (72,5 %, 215 con 509). Si la logística llamara a los 509 clientes de más riesgo, encontraría a 276 (celda [cifras], «apertura»). No adelantar los nombres de los modelos si no lo preguntan: se ven en la clasificación. Lo que deben llevarse: la exactitud no basta para decidir, y encontrar más no basta si es a costa de llamar a muchos más; lo justo es comparar con el mismo número de llamadas.<\/p>"}, {"titulo": "Hoy, dos preguntas de aprendizaje automático y una de nube", "seccion": "Apertura", "k": 0, "notas": "<p>Supervisado, como en la S1: cada cliente trae la respuesta (cuánto consumió, si canceló) y el modelo aprende a predecirla con las demás columnas (ISLP, sec. 2.1.4, F-ML-05). La regresión y la clasificación solo cambian el tipo de etiqueta. La pregunta de nube cierra el hilo «ML en la nube»: si el modelo y los datos suben a Azure, ¿quién los puede ver? Transición: empezamos por el número.<\/p>"}, {"titulo": "Regresión", "seccion": "Regresión", "k": 1, "notas": "<p>07:15 a más tardar. Noventa minutos: unos 72 de exposición y 15 de práctica (ejercicio 1), con 3 de margen. Hitos: la línea base, hacia las 07:30; KNN y el escalado, hacia las 07:50; el árbol sin límite, hacia las 08:05; la recta con la edad × usuarios, hacia las 08:22; la práctica empieza a más tardar a las 08:30. Si a las 07:50 no se ha llegado a KNN, recortar en este orden: (1) la fórmula de R² pasa a una frase sobre la diapositiva de la regresión lineal (−3 min); (2) la pregunta de qué cifra darle al jefe de TI se dice en una frase (−3 min); (3) la pregunta de KNN sin escalar se responde en una frase (−2 min); (4) la curva de la edad se muestra sin comentarla (−2 min). No se recortan el escalado, el árbol sin límite, la interacción ni la práctica. Hay dos momentos de «predice antes de ver» (KNN sin escalar y la recta con la edad × usuarios): son lo más cercano a ejecutar que tiene la exposición.<\/p>"}, {"titulo": "Como en la sesión 1, el modelo aprende de 6000 clientes y se mide en 2000 que no vio", "seccion": "Regresión", "k": 1, "notas": "<p>Es el ciclo de la S1, ahora con un número como etiqueta. La partición es la misma idea: train_test_split con el 25 % para prueba y la semilla 2026 (F-ML-10). En regresión no se estratifica: no hay clases que equilibrar. Para el jefe de TI, saber el consumo esperado de cada cliente sirve para planear la capacidad de la red por ciudad; en el proyecto, el mismo modelo podría servir para recomendar un plan.<\/p>"}, {"titulo": "Las características, en números: cada categoría, una columna de 0 y 1", "seccion": "Regresión", "k": 1, "notas": "<p>Las <strong>características<\/strong> de la S1 son las columnas que el modelo puede mirar; en el código las llamamos <code>predictoras<\/code>. Hoy aparecen operaciones de pandas y numpy que el repaso de la S1 no cubrió (<code>.drop<\/code>, <code>.loc<\/code>, <code>.set_index<\/code>, <code>.assign<\/code>, <code>.T<\/code>, <code>.round<\/code>, <code>np.sqrt<\/code> y el formato <code>:.2%<\/code>): el notebook trae una tabla de repaso en la sección 1, después de [cargar]; mostrarla un minuto aquí. Es la codificación <strong><em>one-hot<\/strong><\/em>: una columna por categoría; la primera se omite, porque se deduce de las demás. <code>pd.get_dummies<\/code> la hace. Con <code>drop_first=True<\/code> omite la primera categoría de cada columna en orden alfabético: el primer cliente tiene contrato a 12 meses y las dos columnas valen 0; esa es la categoría de referencia. Lo mismo pasa con la ciudad (la referencia es Barranquilla), el medio de pago y las columnas Sí/No. Se quitan el seudónimo (no describe al cliente), la etiqueta de hoy y <code>cancelo<\/code>, que se supo después, entre julio y septiembre: usarla para predecir el consumo sería usar el futuro. Si preguntan por <code>ColumnTransformer<\/code>: es la forma de hacer lo mismo dentro de un <code>Pipeline<\/code> de scikit-learn, útil cuando el modelo va a producción; hoy basta con get_dummies, porque las categorías no cambian entre entrenamiento y prueba.<\/p>"}, {"titulo": "La línea base predice 299,7 GB para todos y se equivoca 173 GB por cliente", "seccion": "Regresión", "k": 1, "notas": "<p><code>DummyRegressor<\/code> ignora las columnas y predice el promedio del entrenamiento (F-ML-12: comparar con reglas simples es la verificación básica). La partición está en la celda [particion]: 6000 y 2000 clientes, con la semilla 2026. El R² sale −0,000 y no 0 porque el promedio es el del entrenamiento y se mide en la prueba: queda un poquito por debajo de cero. Transición: ¿qué miden esas tres cifras?<\/p>"}, {"titulo": "El MAE y la RMSE miden el error en GB; la RMSE castiga más los errores grandes", "seccion": "Regresión", "k": 1, "notas": "<p>Cómo se leen: «el MAE es el promedio de los errores en valor absoluto» y «la RMSE es la raíz del promedio de los errores al cuadrado». Las dos están en GB. La RMSE siempre es mayor o igual que el MAE; si es mucho mayor, hay pocos clientes con errores muy grandes. Aquí pasa: el consumo tiene una cola larga (la mediana es 243,6 GB y el máximo, 2500), así que hay clientes, sobre todo empresas pequeñas, muy lejos del promedio. En scikit-learn 1.6, la RMSE se calcula con <code>root_mean_squared_error<\/code>; el viejo <code>squared=False<\/code> ya no existe en las versiones nuevas (F-ML-19).<\/p>"}, {"titulo": "R² compara el error del modelo con el de predecir el promedio", "seccion": "Regresión", "k": 1, "notas": "<p>Cómo se lee: «R cuadrado es uno menos la suma de los errores al cuadrado del modelo entre la suma de las distancias al promedio al cuadrado». El denominador es el error de la línea base. Si el modelo se equivoca igual que el promedio, R² = 0; si se equivoca más, es negativo (scikit-learn, sec. 3.4.6.1 de la misma página de métricas que F-ML-12). Recortable 1: si hace falta tiempo, se dice en una frase sobre la diapositiva siguiente.<\/p>"}, {"titulo": "La regresión lineal se equivoca 91 GB por cliente y reproduce el 71 % de la variación", "seccion": "Regresión", "k": 1, "notas": "<p>La función <code>medir<\/code> junta lo de la diapositiva anterior para no repetirlo con cada modelo: entrena, predice la prueba y devuelve las tres métricas. La regresión lineal suma cada columna multiplicada por un coeficiente, y elige los coeficientes que dejan la menor suma de errores al cuadrado (F-ML-13). Baja el error de 173 a 91 GB. Transición: un modelo muy distinto, que no busca coeficientes sino vecinos.<\/p>"}, {"titulo": "¿Quién es el vecino más cercano de A: B o C?", "seccion": "Regresión", "k": 1, "notas": "<p>Dos minutos. Son tres clientes reales del archivo. «Parecido» es una distancia euclídea, la de la línea recta (F-ML-14: la distancia por defecto es Minkowski con p = 2, por lo que la escala importa). A consume 424,8 GB; C, 51,6: la octava parte (A consume unas 8,2 veces lo que C). Si alguien vota «empatan», preguntarle cuánto pesa una diferencia de 20 000 frente a una de 38 en la suma de cuadrados.<\/p>"}, {"titulo": "Sin escalar, 20 000 pesos pesan más que 38 años", "seccion": "Regresión", "k": 1, "notas": "<p>La desviación estándar del entrenamiento es de unos 37 296 pesos en la factura y de 14,9 años en la edad (celda [cifras]): 20 000 / 37 296 ≈ 0,54 y 38 / 14,9 ≈ 2,55. Para la distancia solo importa dividir: restar la media no cambia las diferencias. Escalar no es un truco para ganar puntos: es para que la distancia no dependa de si la factura está en pesos o en millones.<\/p>"}, {"titulo": "Escalar pone cada columna en desviaciones estándar del entrenamiento", "seccion": "Regresión", "k": 1, "notas": "<p><code>StandardScaler<\/code> aprende la media y la desviación de cada columna con el entrenamiento y las aplica a la prueba: nunca se ajusta nada con la prueba (F-ML-18, «never call fit on the test data»). <code>make_pipeline<\/code> encadena los dos pasos, y así es imposible olvidar escalar la prueba (F-ML-11). Con 24 columnas escaladas, las caídas, el medio de pago o los pagos tardíos pesan en la distancia tanto como la edad o los usuarios, y estorban. La diapositiva siguiente pregunta qué pasa sin escalar.<\/p>"}, {"titulo": "Sin escalar, ¿KNN saldrá mejor o peor?", "seccion": "Regresión", "k": 1, "notas": "<p>Recortable 3. Dos minutos. Es la respuesta honesta a lo que algún estudiante va a probar en Colab. Con la factura en millones, KNN sin escalar casi no cambia (MAE 92,6 y R² 0,655, celda [cifras]): el plan, en Mbps, toma el relevo, porque los dos dicen casi lo mismo. Lo que más explica el consumo es ser empresa pequeña, y la factura lo refleja en parte. En la clasificación veremos un caso en que no escalar es un desastre: la SVM.<\/p>"}, {"titulo": "¿Qué R² tendrá un árbol sin límite de profundidad?", "seccion": "Regresión", "k": 1, "notas": "<p>Un minuto. Un árbol de decisión parte a los clientes con preguntas sobre una columna («¿tiene más de 3 usuarios?») hasta formar grupos de consumo parecido y predice el promedio de cada grupo. Sin límite, sigue partiendo: este tiene 30 niveles y 5987 hojas para 6000 clientes de entrenamiento (celda [cifras]).<\/p>"}, {"titulo": "El árbol sin límite memorizó: R² de 1 en entrenamiento y de 0,56 en prueba", "seccion": "Regresión", "k": 1, "notas": "<p>Los árboles tienden al sobreajuste y son inestables: pequeñas variaciones en los datos cambian el árbol (F-ML-15). Se controla limitando la profundidad (<code>max_depth<\/code>) o pidiendo un mínimo de clientes por hoja (<code>min_samples_leaf<\/code>): la primera opción es el ejercicio 1. Transición: la idea de la sesión.<\/p>"}, {"titulo": "Aprender no es memorizar", "seccion": "Regresión", "k": 1, "notas": "<p>Es el lema de la sesión. Lo veremos tres veces más: en el árbol de clasificación (100 % en entrenamiento), en la curva de profundidad y en la validación cruzada. La documentación de scikit-learn lo dice desde la primera línea del capítulo de validación: evaluar con los mismos datos con que se entrenó es un error metodológico (F-ML-11).<\/p>"}, {"titulo": "El bosque promedia muchos árboles distintos; XGBoost los encadena", "seccion": "Regresión", "k": 1, "notas": "<p>Los dos son ensambles de árboles: el mismo tipo de modelo, entrenado de forma distinta (F-ML-20). El bosque reduce la varianza promediando muchos árboles (F-ML-16). En clasificación, <code>RandomForestClassifier<\/code> además sortea √p columnas en cada pregunta (<code>max_features=&#x27;sqrt&#x27;<\/code>, F-ML-16), lo que decorrelaciona los árboles (ISLP 8.2.2, F-ML-22); en regresión, <code>RandomForestRegressor<\/code> usa por defecto todas las columnas (<code>max_features=1.0<\/code>, que equivale a <em>bagging<\/em>), y aquí se dejó así. XGBoost (<em>Extreme Gradient Boosting<\/em>) agrega un árbol nuevo en cada paso y su objetivo suma la pérdida de entrenamiento y un término de regularización que castiga los árboles complejos (F-ML-20, F-ML-21). Hoy: 300 árboles; <code>learning_rate=0.05<\/code> dice cuánto corrige cada uno y <code>max_depth=4<\/code>, cuántas preguntas hace cada uno (los valores por defecto de XGBoost son 0,3 y 6).<\/p>"}, {"titulo": "El bosque y XGBoost se equivocan unos 70 GB por cliente; la recta, 91", "seccion": "Regresión", "k": 1, "notas": "<p>El bosque está en la celda [bosque]: <code>RandomForestRegressor(n_estimators=300, min_samples_leaf=5)<\/code>, con al menos 5 clientes por hoja. Cada uno tarda menos de un segundo en la réplica del docente (con las versiones de Colab, no en Colab). XGBoost baja el MAE un 60 % frente a la línea base. Los dos le ganan a la recta por unos 20 GB por cliente. En la RMSE pasa lo mismo: los errores grandes también bajan.<\/p>"}, {"titulo": "XGBoost se equivoca un 60 % menos que la línea base", "seccion": "Regresión", "k": 1, "notas": "<p>La barra gris es la línea base. Leer de abajo arriba: la línea base, 173 GB; el árbol sin límite y KNN, unos 102; la recta, 91; el bosque y XGBoost, unos 70. El árbol solo, sin límite, queda casi como KNN; un árbol parecido (con al menos 5 clientes por hoja), repetido 300 veces sobre muestras al azar y promediado, es de los mejores: es lo que hace el promedio.<\/p>"}, {"titulo": "La recta no sigue al consumo por edad; XGBoost sí", "seccion": "Regresión", "k": 1, "notas": "<p>Recortable 4: si falta tiempo, se muestra sin comentarla y se pasa a la pregunta. Son los clientes de prueba agrupados por edad: los puntos son el consumo real promedio de cada grupo, y las líneas, lo que predice cada modelo en promedio. La línea gris no es la recta de la edad sola: cada punto promedia las predicciones de un modelo de 24 columnas, y por eso no es recta. Los puntos reales también mezclan efectos: entre los 35 y los 39 años hay más hogares con muchos usuarios. Lo que la gráfica muestra es el síntoma; la causa está en la diapositiva siguiente.<\/p>"}, {"titulo": "¿Qué le agregas a la recta para que siga a los datos?", "seccion": "Regresión", "k": 1, "notas": "<p>Tres minutos. Los dos intentos están en la celda [interaccion] (las líneas que calculan el MAE y el R² no se proyectan). En los hogares (celda [cifras]): entre los 18 y los 29 años, los de 1 o 2 usuarios consumen 264 GB y los de 5 o más, 577; entre los 49 y los 59, 65 y 247. La misma subida de edad le quita 199 GB a un hogar pequeño y 330 a uno grande: la recta supone el mismo cambio para todos. La edad sí importa: sin ella, XGBoost queda en MAE 92,9 y R² 0,653, como la recta. Lo que la recta no puede es combinarla con los usuarios, y cada pregunta de un árbol se hace dentro del grupo que dejó la anterior.<\/p>"}, {"titulo": "¿Qué cifras le sirven al jefe de TI para saber cuánto se equivoca el modelo?", "seccion": "Regresión", "k": 1, "notas": "<p>Un minuto. Recortable 2. No hay una métrica «mejor»: cada una responde otra pregunta. El MAE de XGBoost es 68,8 GB, pero la mediana del error absoluto es 41,4 GB y el percentil 90, 156,9 GB (celda [cifras]): la mitad de los clientes se equivoca menos de 41 GB y unos pocos, mucho más, por la cola larga del consumo. Para planear la capacidad de la red, al jefe de TI le pueden importar los clientes de consumo muy alto; ahí la RMSE dice más. Lo que no se hace: dar el R² como si fuera un porcentaje de aciertos.<\/p>"}, {"titulo": "Práctica: ejercicio 1, un árbol con límite", "seccion": "Regresión", "k": 1, "notas": "<p>08:30 a más tardar. Clave: MAE de 77,8 GB, R² de 0,827 en entrenamiento y de 0,763 en prueba (el sin límite: 1 y 0,563). La brecha entre entrenamiento y prueba baja de 0,44 a 0,06: se sobreajusta mucho menos, aunque no llega al bosque. El verificador acepta ±0,5 GB en el MAE y ±0,005 en cada R², y reconoce el MAE del entrenamiento, la RMSE en lugar del MAE, los dos R² cruzados, el R² en porcentaje, <code>r2_score<\/code> con los argumentos al revés, el redondeo a un decimal y los valores de otra profundidad (decide con los tres valores juntos). Si alguien termina antes: que pruebe <code>max_depth=4<\/code> y <code>max_depth=10<\/code> y escriba qué pasa con la brecha. Ojo con la conclusión: menos brecha no es mejor modelo; el bosque tiene más brecha (0,908 frente a 0,809) y más R² en prueba.<\/p>"}, {"titulo": "Pausa de 15 minutos", "seccion": "Regresión", "k": 1, "notas": "<p>08:45. Si el ejercicio 1 no terminó, que lo terminen en la pausa o en casa: la clasificación no depende de él.<\/p>"}, {"titulo": "Clasificación", "seccion": "Clasificación", "k": 2, "notas": "<p>09:00. Cien minutos: unos 70 de exposición y 25 de práctica (ejercicios 2 y 3; el 4 es opcional), con 5 de margen. Hitos: la matriz de confusión, hacia las 09:15; el árbol sin límite, hacia las 09:25; XGBoost, hacia las 09:45; el umbral, hacia las 09:55; la práctica empieza a más tardar a las 10:15. Si a las 09:45 no se ha llegado a XGBoost, recortar en este orden: (1) la diapositiva de la SVM como idea pasa a una frase sobre la de la SVM sin escalar (−2 min); (2) la gráfica del umbral se muestra sin comentarla (−3 min); (3) el ejercicio 4 queda para la casa, como ya está previsto. No se recortan la matriz de confusión, el umbral, la validación cruzada ni la pregunta de qué modelo le sirve a la gerente.<\/p>"}, {"titulo": "Ahora la etiqueta es cancelo, con la misma prueba de la sesión 1", "seccion": "Clasificación", "k": 2, "notas": "<p>Las predictoras (las características) son ahora todas las demás columnas, y <code>consumo_gb<\/code> sí es una de ellas: se conocía el 30 de junio. <code>stratify=yc<\/code> deja la misma tasa de cancelación en el entrenamiento y en la prueba, como en la S1 (F-ML-10). Como la partición depende solo de la etiqueta y de la semilla, los 2000 clientes de prueba son los mismos de la S1 (comprobado en la celda [cifras]). <code>yc<\/code> es lo mismo que <code>cancelo_num<\/code> de la S1.<\/p>"}, {"titulo": "Decir «No» a todos acierta el 76,45 % y no encuentra a nadie", "seccion": "Clasificación", "k": 2, "notas": "<p>Es la línea base de la S1, con la misma cuenta de encontrados: predijo 1 y el cliente de verdad canceló. Hoy la exactitud sale con dos decimales: 76,45 % es lo que la S1 redondeó a 76,5 %. Transición: el primer modelo de hoy da una probabilidad.<\/p>"}, {"titulo": "La regresión logística convierte una suma en una probabilidad entre 0 y 1", "seccion": "Clasificación", "k": 2, "notas": "<p>Cómo se lee: «la probabilidad de cancelar es uno sobre uno más e a la menos z». Si z es muy grande, la probabilidad se acerca a 1; si es muy negativa, a 0; si z = 0, vale 0,5. Pese a su nombre, la regresión logística es un modelo de clasificación (F-ML-13). Escalamos antes, como con KNN: sin escalar, el optimizador no converge bien. El umbral de 0,5 no es una ley: lo cambiamos en una hora.<\/p>"}, {"titulo": "La logística acierta el 80,85 %, pero ¿a quién encontró?", "seccion": "Clasificación", "k": 2, "notas": "<p><code>max_iter=1000<\/code> le da al optimizador más iteraciones para converger. La matriz sale como un arreglo de 2 × 2: las filas son lo que pasó (0 y 1) y las columnas, lo que predijo. El orden importa: con los argumentos al revés, la matriz sale traspuesta, y los falsos positivos se cruzan con los falsos negativos. Es un error que el verificador del ejercicio 2 reconoce.<\/p>"}, {"titulo": "De los 471 que cancelaron, la logística encontró a 186", "seccion": "Clasificación", "k": 2, "notas": "<p>Verdaderos positivos, falsos negativos, falsos positivos y verdaderos negativos: las cuentas de la S1 con su nombre. «Señalar» a un cliente es predecir que cancela; en la campaña de la gerente, es llamarlo. Para la gerente, un FP es una llamada de retención a alguien que no se iba (cuesta la llamada y quizá un descuento); un FN es un cliente que se va sin que nadie lo llame. La matriz no dice cuál cuesta más: eso lo decide el negocio. La celda oscura arriba a la izquierda son los 1431 que no cancelaron y el modelo lo vio: la mayoría de los aciertos de la exactitud viene de ahí.<\/p>"}, {"titulo": "Cuatro métricas salen de la matriz, y cada una responde otra pregunta", "seccion": "Clasificación", "k": 2, "notas": "<p>Las cuentas son las de scikit-learn (F-ML-12): precision = tp / (tp + fp) y recall = tp / (tp + fn); F1 es la media armónica de la precisión (P) y la sensibilidad (S), y solo es alta si las dos lo son. Ojo con la palabra: en español, «precisión» es <em>precision<\/em>, nunca <em>accuracy<\/em>; a <em>accuracy<\/em> le decimos exactitud. La celda [metricas_c] las calcula a mano y con scikit-learn, y dan lo mismo.<\/p>"}, {"titulo": "Cuando la logística señala a alguien, acierta 2 de cada 3; pero deja ir a 6 de cada 10", "seccion": "Clasificación", "k": 2, "notas": "<p>Precisión 0,655: de cada 3 que señala, 2 cancelaron. Sensibilidad 0,395: de los 471 que cancelaron, encontró a 186; los otros 285, el 60,5 %, se van sin llamada. La celda [medir_c] junta estas métricas en una función, como <code>medir<\/code> en la regresión, y agrega <code>encontrados<\/code>.<\/p>"}, {"titulo": "La gerente quiere retener a los que se van. ¿Qué métrica mira primero?", "seccion": "Clasificación", "k": 2, "notas": "<p>Un minuto. Si alguien dice «la precisión», no está mal pensado: es la otra mitad. Lo que se discute es cuál va primero para esta decisión. Para una campaña con muy pocas llamadas posibles, la precisión pesa más; para no perder clientes, la sensibilidad. Transición: un modelo que encuentra más, pero mal.<\/p>"}, {"titulo": "El árbol sin límite: 100 % en entrenamiento y 72,5 % en prueba, menos que la línea base", "seccion": "Clasificación", "k": 2, "notas": "<p>Tiene 26 niveles y 977 hojas (celda [cifras]). Memorizó el entrenamiento, ruido incluido: el sobreajuste se ve en la brecha de 27,5 puntos. Su precisión es 0,422: de cada 5 que señala, cancelaron apenas 2. Por exactitud, pierde contra decir «No» a todos; por encontrados, le gana. Ninguna de las dos lecturas, sola, sirve para elegir.<\/p>"}, {"titulo": "Un árbol de dos niveles se lee: con contrato mes a mes y 29 años o menos, canceló el 62 %", "seccion": "Clasificación", "k": 2, "notas": "<p>Es la promesa de la S1: cómo funciona un árbol por dentro. Cada <code>|---<\/code> es una pregunta y cada hoja dice cuántos clientes del entrenamiento no cancelaron y cuántos sí. Las cuatro reglas, con el entrenamiento: con permanencia (12 o 24 meses) y velocidad medida de 69 % o menos, cancelaron 88 de 143 (61,5 %); con permanencia y mejor velocidad, 454 de 3878 (11,7 %); mes a mes y 29 años o menos, 471 de 757 (62,2 %); mes a mes y 30 o más, 400 de 1222 (32,7 %). <code>contrato_Mes a mes &lt;= 0.50<\/code> quiere decir que la columna vale 0: no es mes a mes. El 471 de la hoja «mes a mes y 29 años o menos» es una coincidencia: son clientes del entrenamiento, no los 471 que cancelaron en la prueba. Describe clientes, no juzga personas: los clientes jóvenes con contrato mes a mes cancelan más. Una regla que se lee es una explicación que se puede auditar: es lo que pide la sustentación del proyecto. La promesa de la S1: ¿por qué un árbol hace una pregunta si sus dos hojas dicen lo mismo? Porque cada pregunta busca grupos más <strong>puros<\/strong> (más parecidos entre sí en la etiqueta), medidos con un criterio como el índice de Gini, aunque no cambie la respuesta de la hoja (F-ML-15, sec. 1.10.7.1). Con el entrenamiento (celda [cifras], «pureza»): antes de preguntar cancelaron 1413 de 6000; con contrato mes a mes, el 44,0 % (871 de 1979); con permanencia, el 13,5 % (542 de 4021). El árbol elige la pregunta que más separa esos porcentajes. La regla de la S1 preguntaba por la antigüedad porque solo tenía dos columnas; hoy, con 25, la segunda pregunta es la velocidad o la edad.<\/p>"}, {"titulo": "Con 4 niveles, el árbol ya no memoriza; el bosque promedia 300", "seccion": "Clasificación", "k": 2, "notas": "<p>El árbol de 4 niveles acierta casi como la logística y encuentra a 15 más. El bosque es el de mejor exactitud hasta ahora, pero encuentra a 200: con el umbral de 0,5, todos los modelos se quedan cortos en sensibilidad. <code>n_jobs=-1<\/code> usa todos los procesadores de la máquina.<\/p>"}, {"titulo": "La SVM busca la frontera entre los que cancelan y los que no con el margen más ancho", "seccion": "Clasificación", "k": 2, "notas": "<p>Recortable 1: si falta tiempo, se dice en una frase sobre la diapositiva siguiente. La documentación de scikit-learn lo dice sin rodeos: se recomienda mucho escalar los datos (F-ML-17). La SVM no da probabilidades directamente (F-ML-17); su <code>decision_function<\/code> dice qué tan lejos de la frontera queda cada cliente, y eso sirve para ordenarlos por riesgo. Su entrenamiento crece al menos con el cuadrado del número de clientes: con 6000 tarda menos de un segundo en la réplica de Colab; con millones, no se usaría así.<\/p>"}, {"titulo": "Sin escalar, la SVM dice «No» a todos, como la línea base", "seccion": "Clasificación", "k": 2, "notas": "<p>Es el caso que prometimos en KNN: sin escalar, la distancia la deciden casi solo la factura y el consumo, que no separan a los que cancelan; el contrato, la antigüedad o la velocidad casi no cuentan, y la SVM termina prediciendo la clase más común. Mismo resultado que la línea base, con un modelo mucho más caro. Escalada, encuentra a 171: todavía menos que la logística, con el umbral de 0,5.<\/p>"}, {"titulo": "XGBoost encuentra a 228: el que más, con el umbral de 0,5", "seccion": "Clasificación", "k": 2, "notas": "<p>XGBoost tiene la mejor exactitud, la mejor precisión, la mejor sensibilidad y el mejor F1 de los siete. Pero aun así encuentra a menos de la mitad de los que cancelan: 228 de 471. Con el umbral de 0,5, el modelo solo señala a quien tiene más probabilidad de irse que de quedarse, y con una tasa de cancelación del 23,6 % eso deja fuera a muchos. Transición: movamos el umbral.<\/p>"}, {"titulo": "Con 0,5, la logística encuentra 4 de cada 10; con 0,2, casi 8, y llama a tres veces más", "seccion": "Clasificación", "k": 2, "notas": "<p><code>predict_proba<\/code> da la probabilidad de cada clase; la columna <code>[:, 1]<\/code> es la de cancelar. Con 0,2 llama a 865 clientes (tres veces los 284 de 0,5) y encuentra a 371. La exactitud baja de 0,8085 a 0,703, y a la gerente no le importa tanto: lo que le importa es cuántos encuentra y cuántas llamadas paga. En el ejercicio 3 hacen lo mismo con XGBoost, para una meta concreta.<\/p>"}, {"titulo": "Bajar el umbral encuentra más, con menos precisión", "seccion": "Clasificación", "k": 2, "notas": "<p>Recortable 2. A la derecha de la línea punteada, el modelo señala a pocos y acierta casi siempre con ellos; a la izquierda, señala a muchos, encuentra a casi todos y se equivoca más con cada llamada. El cruce no es el umbral «correcto»: el umbral sale de la decisión, de cuántas llamadas se pueden pagar o de qué fracción de los que se van hay que encontrar.<\/p>"}, {"titulo": "La métrica la elige la decisión, no el modelo", "seccion": "Clasificación", "k": 2, "notas": "<p>Es la segunda idea de la sesión, después del lema. La exactitud elige a la línea base antes que al árbol sin límite, y el umbral de 0,5 antes que el de 0,2: en los dos casos, contra lo que le sirve a la gerente. Transición: ¿y si los 2000 clientes de prueba tuvieron suerte?<\/p>"}, {"titulo": "La validación cruzada (cross-validation) entrena 5 veces y da 5 puntajes", "seccion": "Clasificación", "k": 2, "notas": "<p>Cada fila es un entrenamiento: con 4 pliegues se entrena y con el quinto se valida. <code>cross_val_score<\/code> devuelve un puntaje por pliegue (F-ML-11); <code>StratifiedKFold<\/code> conserva la tasa de cancelación en cada pliegue, lo que importa con clases desbalanceadas como la cancelación (<em>churn<\/em>). En la práctica se usa k = 5 o k = 10 (ISLP 5.1.4, F-ML-22). La prueba se guarda para medir al final. En esta sesión, para simplificar, comparamos los modelos y elegimos el umbral del ejercicio 3 mirando la prueba; en el proyecto, elijan modelo y umbral con validación cruzada sobre el entrenamiento y midan la prueba una sola vez.<\/p>"}, {"titulo": "Con 5 pliegues, el F1 de XGBoost va de 0,514 a 0,583", "seccion": "Clasificación", "k": 2, "notas": "<p>El F1 medio es 0,534, con una desviación de 0,025: el F1 de la prueba (0,564) cae dentro de lo que se ve entre pliegues. Con la validación cruzada, XGBoost también queda primero en F1 (celda [cifras]: 0,534, frente a 0,460 la logística, 0,515 el árbol de 4 niveles y 0,496 el bosque), aunque frente al árbol la diferencia es menor que la desviación entre pliegues. En el AUC (área bajo la curva ROC, que no vimos hoy) también queda primero: 0,839, frente a 0,824 el bosque y 0,810 la logística. La validación cruzada entrena cinco veces: con XGBoost tarda unos segundos en Colab.<\/p>"}, {"titulo": "Sesgo y varianza: con pocos niveles el árbol no aprende; con muchos, memoriza", "seccion": "Clasificación", "k": 2, "notas": "<p>Con 1 nivel, el árbol no aprende nada: dice «No» a todos, como la línea base (0,7645 en las dos curvas). Con 4 niveles, la validación cruzada llega a su máximo (0,8075). Con 20, el entrenamiento llega a 0,998 y la validación baja a 0,7375. La brecha entre las dos curvas es la varianza que se ve. ISLP lo formaliza en la sec. 2.2.2: el error de prueba esperado se descompone en varianza, sesgo al cuadrado y un error irreducible (F-ML-22). El ejercicio 4 elige la profundidad con el F1 de la validación cruzada.<\/p>"}, {"titulo": "Para encontrar a 7 de cada 10, XGBoost necesita 613 llamadas; la logística, 686", "seccion": "Clasificación", "k": 2, "notas": "<p>La gerente no decide con el umbral de 0,5: decide a cuántos llamar. La función baja el corte de riesgo de mayor a menor según cada modelo y cuenta cuántas llamadas hacen falta para encontrar a 330 de los 471 (el 70 %); los clientes con el mismo riesgo se llaman todos juntos. Un modelo que ordena mejor necesita menos llamadas. La SVM se ordena con su <code>decision_function<\/code>. El árbol de 4 niveles da solo 15 probabilidades distintas: sus clientes vienen en bloques, y por eso necesita 812. La diferencia entre XGBoost y la logística es de 73 llamadas para la misma meta; con el bosque, de 21, y con una sola partición esa diferencia no se puede dar por segura. En el ejercicio 3 saldrán 690 llamadas con XGBoost: es lo que cuesta la lista de umbrales de 0,05 en 0,05; con pasos de 0,01, el umbral 0,28 da 627 (celda [cifras]); ordenando por riesgo exacto bastan 613. Las líneas que arman la tabla no se proyectan.<\/p>"}, {"titulo": "¿Qué modelo le recomiendas a la gerente, y qué le dices de él?", "seccion": "Clasificación", "k": 2, "notas": "<p>Tres minutos. Las respuestas buenas traen una cifra (613 llamadas, 0,534 de F1 medio) y no usan la exactitud como argumento. La explicación importa por dos razones: la gerente tiene que confiar en el modelo para pagar las llamadas, y la sustentación del proyecto pide una «explicación auditable». Un modelo más simple que se explica bien puede ser una buena primera versión. Esta es la respuesta a la gerencia del notebook.<\/p>"}, {"titulo": "Práctica: ejercicios 2 y 3, y el 4 si queda tiempo", "seccion": "Clasificación", "k": 2, "notas": "<p>10:15 a más tardar. Clave del 2: VN 1425, FP 104, FN 271, VP 200 (la logística: 186 y 98; casi la misma precisión, y el bosque encuentra a 14 más); el verificador reconoce la matriz traspuesta (FP y FN cruzados), los números de otro modelo, la matriz del entrenamiento (suma 6000), la tupla de <code>.ravel()<\/code> en una sola variable, proporciones en lugar de conteos y un solo número mal. Clave del 3: el umbral de 0,25, con 690 llamadas y 350 encontrados (sensibilidad 0,743); con 0,30, la sensibilidad es 0,684 y no llega. La exactitud baja de 0,8235 (con 0,5) a 0,7695: casi la de decir «No» a todos (0,7645), y aun así encuentra a 350 de 471. Con 500 llamadas (pregunta de «Tus respuestas»), el umbral de 0,40 da 479 llamadas y una sensibilidad de 0,62: no cumple la meta. Con pasos de 0,01, el umbral 0,28 da 627 llamadas. El verificador rechaza un umbral que no llega, uno más bajo que también llega (llama de más), el umbral en %, las llamadas confundidas con los encontrados y las de la logística. Clave del 4: 4 niveles, F1 medio 0,515 (5 niveles: 0,511; empatan dentro del ruido, y entre empatados se elige el más simple). Si alguien usa <code>cv=5<\/code> en lugar de <code>cv=pliegues<\/code>, le sale otra profundidad: el verificador lo reconoce. No se elige con la prueba porque entonces la prueba deja de ser datos que el modelo no vio: se elegiría a la medida de esos 2000 clientes.<\/p>"}, {"titulo": "Pausa de 10 minutos", "seccion": "Clasificación", "k": 2, "notas": "<p>10:40. El docente aprovecha la pausa para dejar abierto el portal de Azure con la sesión iniciada y la asignación de directiva ya hecha (ver la nota de la demostración).<\/p>"}, {"titulo": "Nube", "seccion": "Nube", "k": 3, "notas": "<p>10:50. Setenta minutos: unos 25 de exposición, 15 de demostración del docente en el portal, 20 del ejercicio de diseño en salas y 10 de puesta en común. Hito: la demostración empieza a más tardar a las 11:15 y las salas, a las 11:30. Si se atrasa, recortar en este orden: (1) la pregunta de RBAC y Policy pasa a una frase sobre las tres directivas (−3 min); (2) la diapositiva de las identidades administradas se dice en una frase sobre la de Entra ID (−2 min). No se recortan la demostración ni la matriz de roles. Lo que se muestra cabe en la capa gratuita: Entra ID Free viene con la suscripción de Azure (F-AZ-14), Azure RBAC es gratis (F-AZ-15) y Azure Policy no se cobra en recursos de Azure (F-AZ-19a).<\/p>"}, {"titulo": "En cualquier modelo de nube, los datos y las identidades son de Yarumo", "seccion": "Nube", "k": 3, "notas": "<p>Es la cita de F-AZ-01 (<code>#division-of-responsibility<\/code>); el original: «For all cloud deployment types, you own your data and identities». La misma página dice que el cliente siempre conserva los datos, los puntos de conexión, las cuentas y la administración del acceso: RBAC, MFA y acceso condicional (<code>#responsibilities-you-always-retain<\/code>). Matiz de la S1: la unidad AZ-900 dice que en PaaS y SaaS la identidad y el acceso se comparten; el proveedor opera la plataforma de autenticación, pero los usuarios, los roles y las directivas los administra el cliente (F-AZ-02). Hoy vemos las herramientas de Azure para esa parte que siempre es de Yarumo.<\/p>"}, {"titulo": "Microsoft Entra ID guarda quién es quién en el inquilino de Yarumo", "seccion": "Nube", "k": 3, "notas": "<p>Microsoft Entra ID es el producto fundamental de la familia Entra: administración de identidades y acceso en la nube (F-AZ-10). Cada directorio nuevo trae un dominio inicial del tipo contoso.onmicrosoft.com; el de Yarumo es ficticio. Azure AD pasó a llamarse Microsoft Entra ID (se anunció el 11 de julio de 2023); solo cambió el nombre (F-AZ-11). Hay grupos de seguridad y de Microsoft 365; los de seguridad son los que dan acceso a recursos y admiten anidamiento (F-AZ-12). Los grupos dinámicos (que se llenan solos con una regla) piden la licencia P1: en la capa gratuita, grupos asignados a mano (F-AZ-12, F-AZ-14).<\/p>"}, {"titulo": "Una identidad administrada deja que la aplicación entre sin contraseñas", "seccion": "Nube", "k": 3, "notas": "<p>Recortable 2. Las identidades administradas eliminan la necesidad de que los desarrolladores administren secretos, certificados o claves, y no tienen costo adicional ni requisito de licencia (F-AZ-13, F-AZ-14). Para Yarumo: la aplicación que calcula el riesgo de cada cliente lee el modelo y la tabla del almacenamiento con su identidad administrada, sin una clave pegada en un notebook que alguien podría compartir. Es la quinta fila de la matriz de roles.<\/p>"}, {"titulo": "Una asignación de rol dice quién, qué y dónde", "seccion": "Nube", "k": 3, "notas": "<p>Los tres elementos de una asignación de roles son la entidad de seguridad, la definición de rol y el ámbito (F-AZ-15, <code>#how-azure-rbac-works<\/code>). Usar Azure RBAC es gratis (F-AZ-15). Una asignación a un grupo vale para todos sus miembros, también los de grupos anidados (F-AZ-15). Ejemplo para leer en voz alta: «el grupo Analítica (quién) es Lector de datos de blobs (qué) en el contenedor de clientes (dónde)».<\/p>"}, {"titulo": "Los permisos bajan: lo que se da arriba vale para todo lo de abajo", "seccion": "Nube", "k": 3, "notas": "<p>Cuatro niveles de ámbito, de mayor a menor, en relación padre-hijo (F-AZ-16, <code>#scope-levels<\/code>): «Lower levels inherit role permissions from higher levels». El modelo es aditivo (F-AZ-15, <code>#multiple-role-assignments<\/code>): un permiso que se da arriba no se quita abajo con un rol menor. Por eso los permisos amplios se dan lo más abajo posible. Los roles de datos de blobs se pueden asignar en la suscripción, el grupo de recursos, la cuenta de almacenamiento o un contenedor (F-AZ-19d). La excepción son las asignaciones de denegación, que bloquean aunque haya roles (F-AZ-15); no las vemos hoy.<\/p>"}, {"titulo": "Cuatro roles integrados actúan sobre los recursos y dos, sobre los archivos", "seccion": "Nube", "k": 3, "notas": "<p>Definiciones de F-AZ-17: Propietario, Colaborador y Administrador de acceso de usuario están en la categoría de roles con privilegios; Lector, en la general; los dos de blobs, en la de almacenamiento (el Colaborador de datos es el punto 6). Hay muchos más roles integrados; estos alcanzan para la matriz de hoy. Si el portal está en español, puede mostrar los nombres en inglés: los dos valen. Ojo: el Colaborador de datos de blobs también permite borrar el contenedor; es un matiz para la discusión del privilegio mínimo.<\/p>"}, {"titulo": "Con el rol Lector, ¿el proveedor puede leer la tabla de clientes?", "seccion": "Nube", "k": 3, "notas": "<p>Un minuto. Es el punto que más confunde: «Lector» suena a «puede leer todo». Lector sí ve el contenedor como recurso; lo que no ve es lo que hay dentro. La definición de F-AZ-17 lo dice: Lector (plano de control) no da acceso al contenido de los blobs. «Solo los nombres de los archivos» también es incorrecta: listar los blobs es una acción del plano de datos, que el Lector de datos de blobs sí permite (leer y enumerar contenedores y blobs, F-AZ-17). Transición: entonces, ¿qué rol darle a cada quien?<\/p>"}, {"titulo": "Privilegio mínimo: cada quien, lo justo, donde lo necesita", "seccion": "Nube", "k": 3, "notas": "<p>Las tres prácticas son de Microsoft (F-AZ-18): conceder solo el acceso necesario en el ámbito más estrecho; asignar roles a grupos, no a usuarios; y tener como máximo 3 propietarios de suscripción, para que un propietario comprometido no lo comprometa todo. «Por el tiempo que haga falta»: Microsoft recomienda el acceso justo a tiempo con Privileged Identity Management (F-AZ-18), que pide licencias de pago (las asignaciones elegibles requieren P2 o Microsoft Entra ID Governance, F-AZ-19e); en la capa gratuita, se retira la asignación a mano cuando termina el trabajo. Es la tercera idea de la sesión.<\/p>"}, {"titulo": "Azure Policy decide qué se puede crear, sin importar quién lo crea", "seccion": "Nube", "k": 3, "notas": "<p>F-AZ-19a: Policy evalúa las propiedades de los recursos contra reglas de negocio; las definiciones se asignan a un ámbito, y las asignaciones se heredan. Se evalúa al crear o actualizar recursos, al asignar o actualizar directivas y en un ciclo estándar cada 24 horas. F-AZ-19b: Deny responde con un 403 antes de que la solicitud llegue al proveedor de recursos; Audit registra una advertencia en el registro de actividad. Hay más efectos (Modify, DeployIfNotExists, Disabled…); hoy, estos dos. Microsoft recomienda empezar con Audit antes de bloquear (F-AZ-19a): así se ve qué se rompería.<\/p>"}, {"titulo": "Tres directivas integradas fijan dónde y cómo se guardan los datos de Yarumo", "seccion": "Nube", "k": 3, "notas": "<p>Las tres están en la lista de definiciones integradas, con sus GUID (F-AZ-19c). Ubicaciones permitidas sirve para requisitos de geocumplimiento; no aplica a los grupos de recursos (para eso hay otra, <em>Allowed locations for resource groups<\/em>). Qué región elegir, y si los datos pueden salir de Colombia, es tema de la S3 con la Ley 1581 (F-LEY-01, art. 26). La etiqueta obligatoria no aplica a los grupos de recursos. No confundir la tercera con <em>Storage accounts should disable public network access<\/em>, que es otra cosa: el acceso por red.<\/p>"}, {"titulo": "Dos intentos de crear un almacenamiento: ¿cuál se bloquea?", "seccion": "Nube", "k": 3, "notas": "<p>Recortable 1. Es la diferencia de F-AZ-19a (<code>#azure-policy-and-azure-rbac<\/code>): RBAC controla qué acciones puede hacer un usuario; Policy controla el estado de los recursos sin importar quién hace el cambio. Si el efecto fuera Audit, el del propietario pasaría, pero quedaría marcado como no conforme (F-AZ-19b). Microsoft lo resume: la combinación de RBAC y Policy da el control completo. Transición: veámoslo en el portal.<\/p>"}, {"titulo": "Demostración: un grupo, un rol y una directiva en el portal de Azure", "seccion": "Nube", "k": 3, "notas": "<p>11:15 a más tardar; 15 min. Usar la cuenta del docente con el rol <strong>Propietario<\/strong> de la suscripción (la cuenta con que se creó): si «Agregar asignación de rol» sale deshabilitada, faltan permisos (F-AZ-19e). No usar una cuenta con datos reales ni mostrar en pantalla contraseñas, claves ni el identificador de la suscripción.<\/p>\n<p><strong>Antes de la clase<\/strong> (la noche anterior, o al menos 30 minutos antes: las asignaciones de roles pueden tardar hasta 30 minutos en propagarse, F-AZ-19g): cambiar el idioma del portal a español si se quiere (Configuración del portal → Idioma y región); crear el usuario <code>analista.demo<\/code> y el grupo de seguridad <code>g-yarumo-analitica<\/code> (para mostrarlos ya hechos); crear el grupo de recursos <code>rg-yarumo-demo<\/code> en la región que se usará como permitida, con la etiqueta <code>clasificacion-datos = personales<\/code>, y <strong>asignarle ya<\/strong> la directiva <em>Allowed locations<\/em> con solo esa región: una asignación nueva tarda unos cinco minutos en aplicarse (F-AZ-19f). Como respaldo, un segundo grupo <code>rg-yarumo-respaldo<\/code> con la misma asignación.<\/p>\n<p>Guion en vivo:<\/p>\n<ol>\n<li><strong>Entra ID.<\/strong> Buscar «Microsoft Entra ID» → Información general: el nombre del inquilino y el dominio <code>….onmicrosoft.com<\/code> (F-AZ-10). Usuarios: mostrar <code>analista.demo<\/code> y abrir <strong>Nuevo usuario → Crear nuevo usuario<\/strong> sin completarlo (contraseña generada automáticamente, sin mostrarla). Grupos: mostrar <code>g-yarumo-analitica<\/code>, de tipo <strong>Seguridad<\/strong> y pertenencia <strong>asignada<\/strong> (la dinámica pide P1, F-AZ-12), con el usuario como miembro; si se crea en vivo, dejar «Se pueden asignar roles de Microsoft Entra al grupo» en No.<\/li>\n<li><strong>RBAC.<\/strong> En <code>rg-yarumo-demo<\/code> → <strong>Control de acceso (IAM)<\/strong> → <strong>Agregar &gt; Agregar asignación de rol<\/strong> → rol <strong>Lector<\/strong> → <strong>Siguiente<\/strong> → pestaña <strong>Miembros<\/strong>: «Usuario, grupo o entidad de servicio» → <strong>Seleccionar miembros<\/strong> → <code>g-yarumo-analitica<\/code> → <strong>Seleccionar<\/strong> → <strong>Revisar y asignar<\/strong> (F-AZ-19e; el portal puede decir «asignación de rol» o «de roles»). Mostrar la pestaña <strong>Asignaciones de roles<\/strong> y decir los tres elementos: el grupo (quién), Lector (qué), el grupo de recursos (dónde). <strong>Comprobar acceso<\/strong> con el usuario muestra lo que tiene en ese ámbito; probarlo antes de clase.<\/li>\n<li><strong>Policy.<\/strong> Buscar «Directiva» (Azure Policy) → <strong>Asignaciones<\/strong>: mostrar la asignación ya hecha y abrirla. Para enseñar cómo se crea, <strong>Asignar directiva<\/strong> → pestaña <strong>Aspectos básicos<\/strong>: <strong>Ámbito<\/strong> (con «…») y <strong>Definición de directiva<\/strong> (con «…», buscar <em>Allowed locations<\/em>, «Ubicaciones permitidas»), sin crearla (F-AZ-19f). Abrir también la definición <em>Storage account public access should be disallowed<\/em> para ver sus efectos permitidos, sin asignarla.<\/li>\n<li><strong>La prueba.<\/strong> Cuentas de almacenamiento → Crear → grupo <code>rg-yarumo-demo<\/code>, un nombre cualquiera y <strong>otra región<\/strong> → Revisar y crear: la validación falla porque la directiva no lo permite (Deny, F-AZ-19b). Si la validación <strong>pasa<\/strong> (la directiva aún no se aplicó), <strong>no hacer clic en Crear<\/strong>: repetir en <code>rg-yarumo-respaldo<\/code>. Revisar y crear solo valida; el costo aparecería solo si se creara la cuenta.<\/li>\n<li><strong>Limpieza.<\/strong> Borrar los grupos de recursos (sus asignaciones de directiva y de roles se van con ellos), el grupo y el usuario. Con Entra ID Free, Azure RBAC y Azure Policy, nada de esto se cobra (F-AZ-14, F-AZ-15, F-AZ-19a).<\/li>\n<\/ol>\n<p>Si el portal falla o no hay conexión: mostrar las capturas que el docente haya tomado al preparar, y hacer el paso 2 en voz alta con la diapositiva de «quién, qué y dónde». Si algún estudiante creó una cuenta de Azure for Students, puede encontrar ya asignada una directiva de ubicaciones; no hay documentación oficial que lo confirme (FUENTES, sección 4): que revise Azure Policy → Asignaciones.<\/p>"}, {"titulo": "Ejercicio de diseño: tres contenedores, cinco grupos y un solo dueño de los datos", "seccion": "Nube", "k": 3, "notas": "<p>11:30 a más tardar. Leer el escenario en voz alta: está igual en el notebook (parte 3), para las salas. <code>datos-clientes<\/code> sigue siendo dato personal aunque esté seudonimizada (Ley 1581, F-LEY-01, art. 3).<\/p>"}, {"titulo": "La matriz de roles de Yarumo: un rol y su ámbito para cada casilla", "seccion": "Nube", "k": 3, "notas": "<p>Salas de cuatro personas (o de tres) que arma el docente; pueden ser las mismas salas de la S1, para que retomen su documento. Pedir que justifiquen cada «sin acceso» tanto como cada rol. Lo que se pregunta en la puesta en común: ¿quién puede asignar roles?, ¿alguien quedó con Propietario?, ¿en qué ámbito?, ¿qué pasa con el proveedor cuando termina el mes?<\/p>"}, {"titulo": "Una propuesta: los datos personales, solo para quien los necesita", "seccion": "Nube", "k": 3, "notas": "<p>10 min de puesta en común; no es la única respuesta buena. Lo que la hace defendible: nadie del negocio ve datos personales si no los necesita; el proveedor externo ve el modelo, no los datos, y su acceso se retira al terminar (si necesitara datos, irían agregados o anonimizados, con un contrato de transmisión: Decreto 1377 de 2013, art. 25, compilado en el art. 2.2.2.25.5.2 del Decreto 1074 de 2015, F-LEY-03; es tema de la S3); la gerencia ve resultados; la aplicación lee lo que necesita para predecir y escribe sus resultados; Analítica guarda el modelo y lee los informes. Todo se asigna a grupos (F-AZ-18) y a la identidad administrada (F-AZ-13). El Colaborador de datos de blobs lee, escribe y elimina contenedores y blobs (F-AZ-17), y los roles de datos se asignan en el ámbito de un contenedor (F-AZ-19d).<\/p>\n<p>Sobre TI, el matiz que más enseña: Microsoft recomienda autorizar con Entra ID y no permitir la clave compartida, que viene permitida por defecto (F-AZ-42). Mientras esté permitida, Colaborador y Propietario, que incluyen <code>listKeys<\/code>, pueden leer los blobs con la clave de la cuenta aunque no tengan rol de datos, y el portal usa esa clave si el usuario la tiene (F-AZ-19g). Por eso la propuesta desactiva la clave compartida (<code>AllowSharedKeyAccess = false<\/code>, F-AZ-42) y lo impone con la directiva integrada <em>Storage accounts should prevent shared key access<\/em>, con efecto Audit o Deny (F-AZ-19c, punto 4). Y quien asigna roles podría asignarse uno de datos: por eso son pocos y se revisa el registro de actividad. Para ver blobs en el portal con Entra ID, además del rol de datos hace falta un rol como Lector en la cuenta (F-AZ-19d, F-AZ-19g); por código basta el rol de datos. Las asignaciones de roles pueden tardar hasta 30 minutos en propagarse (F-AZ-19g).<\/p>"}, {"titulo": "Proyecto final", "seccion": "Proyecto final", "k": 4, "notas": "<p>12:00. Cuarenta minutos: 15 para el enunciado y la rúbrica, 5 para preguntas y 20 para formar las parejas y escribir en el chat la pareja y una primera idea. La página del proyecto tiene todo; las diapositivas son el resumen. No se recorta.<\/p>"}, {"titulo": "El proyecto cambió el 14 de noviembre: ahora es «Del dato crudo a la decisión»", "seccion": "Proyecto final", "k": 4, "notas": "<p>Decisión M9 del docente (14 de noviembre). Esta diapositiva se agregó ese día para que nadie se guíe por el enunciado anterior; las siguientes se conservan como se dictaron.<\/p>"}, {"titulo": "Tres partes: el modelo, el plan de nube y su sustentación (enunciado anterior)", "seccion": "Proyecto final", "k": 4, "notas": "<p>Es la decisión M6 del curso. «Explicación auditable» viene de los dos syllabus (Etapa 3, Transferencia): la sustentación presenta una explicación auditable de los principios estandarizados con las herramientas seleccionadas. Para el modelo, quiere decir que otra persona puede seguir cada cifra hasta su celda y entender por qué el modelo señala a un cliente; para el plan, que cada decisión de seguridad tiene su razón y su fuente. Lo de hoy (matriz de roles, directivas, métricas, umbral) es la mitad del proyecto.<\/p>"}, {"titulo": "La lista mínima: sin estos elementos, el proyecto no se evalúa", "seccion": "Proyecto final", "k": 4, "notas": "<p>Es la lista mínima de la página del proyecto, resumida. «Al menos dos directivas», el formato de la entrega y la fecha de cierre los aprobó el docente el 6 de noviembre. La calidad de cada elemento se valora con la rúbrica. Lo de almacenamiento y monitoreo se ve en la S4 (Blob Storage, Azure SQL, Monitor y Defender for Cloud) y la privacidad, en la S3: hoy basta con saber que van en el plan. Si una pareja quiere usar un modelo de agrupamiento en lugar de uno supervisado, su línea base y su métrica se ven en la S3.<\/p>"}, {"titulo": "La rúbrica: seis criterios, en cuatro niveles", "seccion": "Proyecto final", "k": 4, "notas": "<p>Los criterios se alinean con los criterios de realización de los dos syllabus: en Machine Learning, CR1 (fundamentos de ML en la analítica y el gobierno de datos) y CR2 (integridad, custodia y confidencialidad del dato); el CR3 de ML (redes neuronales) se ve en la S4 y en el proyecto es un «Destacado» opcional. En Seguridad en Cloud Computing, CR1 (responsabilidad compartida), CR2 (servicios y seguridad que cumplen los estándares internos y de gobierno) y CR3 (servicios para el plan de seguridad y uso de la suscripción académica); la privacidad no está en un CR, sino en el tema 4.3 del syllabus («Regulaciones aplicables en entorno cloud: privacidad»). La primera frase del CR2 de ML (álgebra lineal y cálculo multivariable) no se evalúa en el proyecto. La evaluación es auto, co y heteroevaluación, como dicen los dos syllabus. Los pesos de la nota los fija el docente.<\/p>"}, {"titulo": "Cinco pasos hasta la sustentación", "seccion": "Proyecto final", "k": 4, "notas": "<p>Los hitos salen del plan del curso. La revisión del avance en la S3 es en salas. El laboratorio de la S4 es para quien tenga la cuenta de Azure; nadie está obligado a crear recursos de pago, y el plan de nube se puede escribir completo sin crear nada (F-AZ-20, F-AZ-21: la cuenta gratuita pide tarjeta y Azure for Students exige ser estudiante de tiempo completo). Lo que cada hito pide en detalle está en la página del proyecto.<\/p>"}, {"titulo": "Formen las parejas: escriban en el chat sus nombres y la pregunta de su modelo", "seccion": "Proyecto final", "k": 4, "notas": "<p>20 min. El docente arma las parejas que falten con quienes no tengan. La pregunta del modelo puede ser la de hoy (cancelación o consumo) u otra que se responda con los datos de Yarumo; la de segmentos se ve en la S3. La coevaluación se hace en la S5, después de cada sustentación, con los criterios de la página.<\/p>"}, {"titulo": "Cierre", "seccion": "Cierre", "k": 5, "notas": "<p>12:40. Veinte minutos: 5 de autoevaluación, 5 para «lo que te llevas» y 10 para el trabajo independiente, la próxima sesión y las preguntas.<\/p>"}, {"titulo": "¿Verdadero o falso?", "seccion": "Cierre", "k": 5, "notas": "<p>Autoevaluación: tres minutos, y en el chat las cuatro respuestas en una línea. Las mismas preguntas están en «Tus respuestas» del notebook. No siguen el orden de la clase a propósito. Al revelar, completar: en la 1, la exactitud mezcla a los que no cancelan, que son la mayoría; en la 2, memorizó: se mira la prueba; en la 3, es la gráfica del umbral; en la 4, el ámbito es el contenedor <code>modelos<\/code> y RBAC solo suma lo que se asigna (F-AZ-15, F-AZ-19d), siempre que la cuenta no permita la clave compartida.<\/p>"}, {"titulo": "Lo que te llevas hoy", "seccion": "Cierre", "k": 5, "notas": "<p>Leer las cinco en voz alta y preguntar cuál les costó más. Cerrar con el lema: aprender no es memorizar.<\/p>"}, {"titulo": "Para la sesión 3: tu pareja, tu pregunta y dos lecturas", "seccion": "Cierre", "k": 5, "notas": "<p><em>An Introduction to Statistical Learning, with Applications in Python<\/em> (James, Witten, Hastie, Tibshirani y Taylor, 2023) es de acceso gratuito desde https://www.statlearning.com/ (F-ML-05, F-ML-22): la sec. 2.2.2 empieza en la p. 31. La página de RBAC: https://learn.microsoft.com/es-es/azure/role-based-access-control/overview (F-AZ-15), es una traducción automática; la versión en inglés es la de referencia. La S3 es el viernes 13 de noviembre, de 18:00 a 22:00, e incluye la revisión del avance del proyecto en salas. Recordar lo de la S1 sobre la cuenta de Azure: es opcional y para el laboratorio de la S4.<\/p>"}, {"titulo": "Fuentes de esta sesión", "seccion": "Cierre", "k": 5, "notas": "<p>Las referencias completas, con URL y fecha de consulta (6 de noviembre de 2026), están en el banco de fuentes del curso: F-ML-05, F-ML-09 a F-ML-23, F-AZ-01, F-AZ-02, F-AZ-10 a F-AZ-19g, F-AZ-20, F-AZ-21, F-AZ-42, F-LEY-01 y F-LEY-03. La guía de scikit-learn se cita en la versión 1.6.1, la de Colab: allí «Common pitfalls» es el capítulo 10 (F-ML-23). Las páginas de Microsoft Learn en español son traducciones automáticas; ante una duda, la versión en inglés manda.<\/p>"}], "secciones": [{"titulo": "Apertura", "icono": "fa-door-open", "primera": 2, "diapos": [2, 3, 4, 5, 6]}, {"titulo": "Regresión", "icono": "fa-chart-line", "primera": 7, "diapos": [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28]}, {"titulo": "Clasificación", "icono": "fa-user-xmark", "primera": 29, "diapos": [29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]}, {"titulo": "Nube", "icono": "fa-shield-halved", "primera": 54, "diapos": [54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69]}, {"titulo": "Proyecto final", "icono": "fa-diagram-project", "primera": 70, "diapos": [70, 71, 72, 73, 74, 75, 76]}, {"titulo": "Cierre", "icono": "fa-flag-checkered", "primera": 77, "diapos": [77, 78, 79, 80, 81]}], "iconos": {}, "graficas": {}}</script>
 
     <script>
     (() => {
@@ -4179,6 +4328,28 @@ tabla_llamadas.sort_values("llamadas para 7 de cada 10")
             });
         };
 
+        /* Lo que queda corto crece. Tres viñetas a 23 px en una lámina de 720
+           dejan media pantalla vacía y un texto que no se lee desde el fondo:
+           si el cuerpo ocupa menos de `LLENO` (el 80 %) de su alto, se agranda de 4 en 4 %
+           hasta ocuparlo, hasta `K_MAX` o hasta que algo desborde (a lo ancho
+           también: un bloque de código no crece más allá de su columna). No
+           crecen las diapositivas con `escala=` o `.denso` (lo pidió la fuente),
+           ni las que no tienen cabecera corriente (idea, gancho, dato), ni
+           `.plena`, que ya reparte su alto. */
+        const K_MAX = 1.24;
+        const LLENO = 0.8;
+        const puedeCrecer = (d) => !d.dataset.k && !d.classList.contains('denso') && !d.classList.contains('plena')
+            && !!d.querySelector(':scope > .marco > .cabecera') && !!d.querySelector(':scope > .marco > .cuerpo');
+        const ocupacion = (d) => {
+            const c = d.querySelector(':scope > .marco > .cuerpo');
+            const hijos = Array.from(c.children).filter((el) => el.offsetHeight > 0);
+            if (!hijos.length) return 1;
+            const caja = c.getBoundingClientRect();
+            const arriba = Math.min(...hijos.map((el) => el.getBoundingClientRect().top));
+            const abajo = Math.max(...hijos.map((el) => el.getBoundingClientRect().bottom));
+            return caja.height > 0 ? (abajo - arriba) / caja.height : 1;
+        };
+
         const ajustar = () => {
             const informe = [];
             diapos.forEach((d, i) => {
@@ -4189,6 +4360,15 @@ tabla_llamadas.sort_values("llamadas para 7 de cada 10")
                     k = Math.max(K_MIN, +(k - 0.03).toFixed(3));
                     d.style.setProperty('--k', k);
                 }
+                if (k === 1 && puedeCrecer(d) && !desborda(d)) {
+                    while (k < K_MAX - 1e-6 && ocupacion(d) < LLENO) {
+                        const previo = k;
+                        k = Math.min(K_MAX, +(k + 0.04).toFixed(3));
+                        d.style.setProperty('--k', k);
+                        if (desborda(d)) { k = previo; d.style.setProperty('--k', k); break; }
+                    }
+                }
+                d.dataset.escala = k;
                 const sigue = desborda(d);
                 if (sigue || k < 0.88) informe.push({ n: i + 1, titulo: DATOS.diapos[i].titulo, escala: k, desborda: sigue });
                 if (MODO_REVISION && (sigue || k < 0.88)) {
@@ -4289,6 +4469,15 @@ tabla_llamadas.sort_values("llamadas para 7 de cada 10")
             });
             html += `</nav><div class="pie-indice"><p style="margin:0">${CFG.ra || ''}${CFG.horas ? ' · ' + CFG.horas + ' horas' : ''}</p><p style="margin:4px 0 0">${Array.isArray(CFG.stack) ? CFG.stack.join(' · ') : (CFG.stack || '')}</p></div>`;
             ind.innerHTML = html;
+            // Muescas de sección en la barra de progreso (no en la del presentador, que no la muestra)
+            const barra = $('progreso');
+            secciones.forEach((s) => {
+                if (s.primera <= 0 || N < 2) return;
+                const m = document.createElement('span');
+                m.className = 'muesca';
+                m.style.left = `calc(${(s.primera / N) * 100}% - 1px)`;
+                barra.appendChild(m);
+            });
             ind.addEventListener('click', (e) => {
                 const b = e.target.closest('[data-ir]');
                 if (!b) return;
@@ -4339,12 +4528,29 @@ tabla_llamadas.sort_values("llamadas para 7 de cada 10")
             escalarPresentador();
         };
 
+        /* Con `duracion:` en la fuente, el presentador ve si va al ritmo: la
+           lámina en la que debería ir a esta hora, repartiendo el tiempo por
+           igual, frente a la que tiene delante. Dos de margen no son retraso. */
+        const DURACION = parseFloat(CFG.duracion) || 0;
+        const pintarRitmo = () => {
+            const el = $('p-ritmo');
+            if (!el || !DURACION) return;
+            const min = (Date.now() - t0) / 60000;
+            const prevista = Math.min(N, Math.max(1, Math.round((min / DURACION) * N)));
+            const dif = (actual + 1) - prevista;
+            el.textContent = min > DURACION ? `tiempo cumplido (${DURACION} min)`
+                : Math.abs(dif) <= 2 ? `al ritmo · ${DURACION} min`
+                : dif > 0 ? `${dif} láminas por delante` : `${-dif} láminas por detrás`;
+            el.className = 'ritmo' + (min > DURACION || dif < -2 ? ' atras' : '');
+        };
+
         if (MODO_PRESENTADOR) {
             document.body.classList.add('presentador');
             setInterval(() => {
                 const s = Math.floor((Date.now() - t0) / 1000);
                 $('p-cronometro').textContent = `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
                 $('p-hora').textContent = new Date().toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit' });
+                pintarRitmo();
             }, 1000);
             mazo.style.boxShadow = 'none';
             mazo.style.borderRadius = '10px';

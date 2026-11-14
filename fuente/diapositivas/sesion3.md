@@ -655,7 +655,7 @@ No se recorta. Principio de responsabilidad de la IA responsable de Microsoft: �
 Cada uno con su control, de la sesión 2 o de hoy.
 :::
 
-Escríbelas en la tabla «Para Yarumo» del notebook: van al **plan de nube**.
+Escríbelas en la tabla «Para Yarumo» del notebook: te sirven para la **ficha de datos y gobierno** del proyecto.
 
 ???
 Seis minutos: que cada pareja escriba una línea por fila en el notebook (parte 2) y la lleve a la sala. La región, la base legal (responsable y encargado) y el modelo de servicio son de la lista mínima del proyecto; los dos riesgos con su control no son requisito, pero fortalecen el plan. No hay una sola respuesta correcta para la región; sí la hay para la base legal con Azure como encargado (transmisión con contrato).
@@ -694,7 +694,7 @@ Así se ensaya la coevaluación de la S5 con algo que no cuenta para la nota (D6
 Si agrupas, en lugar de datos no vistos: la **silueta frente a un reparto al azar** y el **número de grupos justificado con la decisión**.
 
 ???
-Los cuatro primeros puntos son el hito de la S3 de la página del proyecto («la pregunta, la línea base, un primer modelo y el modelo de servicio elegido»). El quinto es lo que acaban de escribir: se presenta si hay tiempo, pero no se marca; va en el plan de nube. Recordar: la entrega es el jueves 19 de noviembre a las 23:59 (hora de Colombia), y la sustentación, el viernes 20.
+Los cuatro primeros puntos son el hito de la S3 de la página del proyecto («la pregunta, la línea base, un primer modelo y el modelo de servicio elegido»). El quinto es lo que acaban de escribir: se presenta si hay tiempo, pero no se marca; va en el plan de nube. Así se dijo el 13 de noviembre: la entrega era el jueves 19 a las 23:59. Desde el 14 de noviembre (M9) el proyecto es otro: la entrega es el viernes 20 a las 16:00 y la sustentación, ese día desde las 18:00.
 
 ## Tres criterios para la coevaluación: ¿los conservamos así? {.denso}
 
@@ -755,9 +755,9 @@ Tres minutos, y en el chat las cuatro respuestas en una línea. Las mismas pregu
 ???
 Leer las cinco en voz alta y cerrar con el lema: un grupo es una hipótesis, no un hallazgo.
 
-## Esta semana: el ejercicio 3 y el plan de nube; antes de mañana, nada obligatorio
+## Esta semana: el ejercicio 3 y el proyecto; antes de mañana, nada obligatorio
 
-- **Antes del jueves 19**: el ejercicio 3 (lo atípico, con DBSCAN; el 4 es opcional), y con tu pareja, la región, la base legal y los dos riesgos en el plan de nube
+- **Antes del viernes 20**: el ejercicio 3 (lo atípico, con DBSCAN; el 4 es opcional) y, con tu pareja, el proyecto. **Su enunciado cambió el 14 de noviembre**: está en la página del proyecto
 - **Lecturas, cuando puedas**: la introducción de Azure Monitor en Microsoft Learn y, para hojear, la sección 6.3 de *Deep Learning* (Goodfellow, Bengio y Courville)
 
 **Mañana a las 7:00:** redes neuronales y los datos de Yarumo en Azure: almacenamiento, monitoreo y Defender for Cloud. La demostración del docente y el ejercicio de diseño son para todos; repetir los pasos en una cuenta propia de Azure es opcional.
