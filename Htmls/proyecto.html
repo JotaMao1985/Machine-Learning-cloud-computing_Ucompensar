@@ -148,6 +148,8 @@
     .aviso p:last-child { margin: 0; }
     .aviso strong { color: var(--uc-naranja-texto); }
 
+    .bases > li { margin-bottom: 1rem; }
+    .url-larga { overflow-wrap: anywhere; word-break: break-all; font-size: 0.8em; }
     .hitos { list-style: none; padding: 0 !important; display: grid; gap: 0.75rem; }
     @media (min-width: 768px) { .hitos { grid-template-columns: repeat(5, 1fr); } }
     .hitos li {
@@ -332,9 +334,91 @@
       <section class="bloque" id="bases" aria-labelledby="titulo-bases">
         <h2 id="titulo-bases">Bases sugeridas</h2>
         <!-- BASES: lista curada que comprueba la maestra (URL, filas, faltantes, licencia). -->
-        <p>Aquí se publica, hoy 14 de noviembre, una lista de bases abiertas revisadas para el curso: se descargan desde
-          Colab, tienen una etiqueta razonable y traen problemas reales de limpieza. Puedes elegir una de ellas o proponer
-          otra que cumpla con <a href="#datos">lo de arriba</a>.</p>
+        <p>Estas nueve bases abiertas se revisaron para el curso el 14 de noviembre de 2026: la URL responde, se descargan
+          desde Colab, tienen una etiqueta razonable y traen problemas reales de limpieza, medidos en una muestra. Todas
+          tienen licencia CC BY-SA 4.0 (se puede usar citando la fuente; lo que derives se comparte igual). Puedes elegir una
+          o proponer otra que cumpla con <a href="#datos">lo de arriba</a>. Las cifras son de la muestra revisada: las
+          tuyas pueden cambiar si el portal se actualiza.</p>
+        <ol class="bases">
+          <li><strong>Resultados de Saber 11</strong> · ICFES. 62 320 filas × 51 columnas (Atlántico, segundo semestre de 2022).
+            <ul>
+              <li><strong>Etiqueta sugerida:</strong> <code>punt_global</code> (regresión). La Secretaría de Educación decide qué colegios priorizar para tutorías.</li>
+              <li><strong>Lo que hay que limpiar y cuidar:</strong> Cada estudiante aparece dos veces (hay que deduplicar). La educación de los padres tiene vacíos y respuestas como «No sabe»; el estrato, vacíos y «Sin Estrato». Fuga: los puntajes por área suman el global. Trae fecha de nacimiento y colegio: pásala a edad y no imprimas filas (son menores).</li>
+              <li><a href="https://www.datos.gov.co/d/kgxf-xxbe" target="_blank" rel="noopener">Página del conjunto</a> ·
+                URL de descarga para Colab: <code class="url-larga">https://www.datos.gov.co/resource/kgxf-xxbe.csv?$limit=100000&amp;$where=periodo=%2720224%27%20AND%20cole_depto_ubicacion=%27ATLANTICO%27</code></li>
+            </ul>
+          </li>
+          <li><strong>Resultados de Saber Pro</strong> · ICFES. 97 889 filas × 57 columnas (segundo semestre de 2022).
+            <ul>
+              <li><strong>Etiqueta sugerida:</strong> <code>mod_razona_cuantitat_punt</code> (regresión). Una universidad decide a quién ofrecer refuerzo en razonamiento cuantitativo.</li>
+              <li><strong>Lo que hay que limpiar y cuidar:</strong> Nombres de programa escritos de varias formas; «DISTANCIA VITUAL»; puntajes en 0 que en realidad son vacíos (13 %). Fuga: los demás puntajes del examen. Trae fecha de nacimiento: pásala a edad.</li>
+              <li><a href="https://www.datos.gov.co/d/u37r-hjmu" target="_blank" rel="noopener">Página del conjunto</a> ·
+                URL de descarga para Colab: <code class="url-larga">https://www.datos.gov.co/resource/u37r-hjmu.csv?$limit=100000&amp;$where=periodo=%2720222%27</code></li>
+            </ul>
+          </li>
+          <li><strong>Contratos del SECOP II</strong> · Colombia Compra Eficiente. 15 519 filas × 35 columnas (Quindío, 2024; 35 columnas sin datos de los contratistas).
+            <ul>
+              <li><strong>Etiqueta sugerida:</strong> <code>dias_adicionados &gt; 0</code> (clasificación: 11 % con prórroga). Control interno decide qué contratos vigilar por riesgo de prórroga.</li>
+              <li><strong>Lo que hay que limpiar y cuidar:</strong> La duración viene como texto en cinco unidades («días», «meses»…); estados en mayúscula y minúscula; ciudad «No Definido»; valores en 0 y atípicos enormes. Fuga: la fecha de fin, el estado y lo pagado. Usa la URL de descarga de esta lista: la base completa trae nombres, documentos y cuentas bancarias.</li>
+              <li><a href="https://www.datos.gov.co/d/jbjy-vk9h" target="_blank" rel="noopener">Página del conjunto</a> ·
+                URL de descarga para Colab: <code class="url-larga">https://www.datos.gov.co/resource/jbjy-vk9h.csv?$select=id_contrato,nombre_entidad,departamento,ciudad,orden,sector,rama,entidad_centralizada,estado_contrato,codigo_de_categoria_principal,tipo_de_contrato,modalidad_de_contratacion,justificacion_modalidad_de,fecha_de_firma,fecha_de_inicio_del_contrato,fecha_de_fin_del_contrato,es_grupo,es_pyme,habilita_pago_adelantado,liquidaci_n,origen_de_los_recursos,destino_gasto,valor_del_contrato,valor_de_pago_adelantado,valor_facturado,valor_pagado,saldo_cdp,saldo_vigencia,dias_adicionados,el_contrato_puede_ser_prorrogado,duraci_n_del_contrato,presupuesto_general_de_la_nacion_pgn,sistema_general_de_participaciones,recursos_propios,recursos_de_credito&amp;$where=fecha_de_firma%20between%20%272024-01-01T00%3A00%3A00%27%20and%20%272024-12-31T23%3A59%3A59%27%20and%20departamento=%27Quind%C3%ADo%27&amp;$order=id_contrato&amp;$limit=50000</code></li>
+            </ul>
+          </li>
+          <li><strong>Emergencias atendidas</strong> · Unidad Nacional para la Gestión del Riesgo de Desastres (UNGRD). 25 857 filas × 71 columnas.
+            <ul>
+              <li><strong>Etiqueta sugerida:</strong> si recibió apoyo del fondo (clasificación: 3,4 %). La UNGRD decide qué emergencias apoyar con el fondo nacional.</li>
+              <li><strong>Lo que hay que limpiar y cuidar:</strong> Una tercera parte de las filas está repetida y no hay identificador del evento; 32 columnas de dinero como texto («$ 6,750,000.00»); «No registra» en muchas columnas; el tipo de evento escrito de varias formas. Fuga: las demás columnas de ayuda.</li>
+              <li><a href="https://www.datos.gov.co/d/wwkg-r6te" target="_blank" rel="noopener">Página del conjunto</a> ·
+                URL de descarga para Colab: <code class="url-larga">https://www.datos.gov.co/resource/wwkg-r6te.csv?$limit=50000</code></li>
+            </ul>
+          </li>
+          <li><strong>Calidad del aire, resumen anual por estación</strong> · IDEAM. 30 665 filas × 28 columnas.
+            <ul>
+              <li><strong>Etiqueta sugerida:</strong> si la estación excede el límite (clasificación). La autoridad ambiental decide dónde reforzar la vigilancia.</li>
+              <li><strong>Lo que hay que limpiar y cuidar:</strong> Casi la mitad de las filas son duplicados disfrazados por el formato («79» y «79.0»); la estación 99999; «BOGOTÁ, D.C.» y «BOGOTA, D.C.». Fuga: el porcentaje y los días de excedencia.</li>
+              <li><a href="https://www.datos.gov.co/d/kekd-7v7h" target="_blank" rel="noopener">Página del conjunto</a> ·
+                URL de descarga para Colab: <code class="url-larga">https://www.datos.gov.co/resource/kekd-7v7h.csv?$limit=50000</code></li>
+            </ul>
+          </li>
+          <li><strong>Evaluaciones agropecuarias municipales</strong> · UPRA. 166 732 filas × 18 columnas.
+            <ul>
+              <li><strong>Etiqueta sugerida:</strong> <code>rendimiento</code> en t/ha (regresión). La Secretaría de Agricultura decide dónde concentrar la asistencia técnica.</li>
+              <li><strong>Lo que hay que limpiar y cuidar:</strong> No hay vacíos, pero hay «sin dato» escrito como 0 (área y producción en 0); área cosechada mayor que la sembrada; el periodo mezcla «2024» y «2024A». Fuga: la producción (el rendimiento es producción entre área).</li>
+              <li><a href="https://www.datos.gov.co/d/uejq-wxrr" target="_blank" rel="noopener">Página del conjunto</a> ·
+                URL de descarga para Colab: <code class="url-larga">https://www.datos.gov.co/resource/uejq-wxrr.csv?$limit=200000</code></li>
+            </ul>
+          </li>
+          <li><strong>Las 10 000 empresas más grandes del país</strong> · Superintendencia de Sociedades. 50 000 filas × 14 columnas (5 años).
+            <ul>
+              <li><strong>Etiqueta sugerida:</strong> pérdidas el año siguiente (clasificación: 10 %). La Superintendencia decide qué empresas vigilar por riesgo financiero.</li>
+              <li><strong>Lo que hay que limpiar y cuidar:</strong> Las cifras vienen como texto en billones («$ 0.02»); ganancias en «$0.00» y «-$0.00» por redondeo; el NIT con «.00». Cada empresa aparece en varios años: parte por empresa o por año, no al azar. Fuga: la ganancia del mismo año. No uses la razón social ni el NIT como columnas.</li>
+              <li><a href="https://www.datos.gov.co/d/6cat-2gcs" target="_blank" rel="noopener">Página del conjunto</a> ·
+                URL de descarga para Colab: <code class="url-larga">https://www.datos.gov.co/resource/6cat-2gcs.csv?$limit=100000</code></li>
+            </ul>
+          </li>
+          <li><strong>Casos de dengue notificados al SIVIGILA, por municipio y semana</strong> · Instituto Nacional de Salud (INS). 200 577 filas × 9 columnas (dengue).
+            <ul>
+              <li><strong>Etiqueta sugerida:</strong> casos de la semana (regresión) o brote la semana siguiente (clasificación). La Secretaría de Salud decide dónde enviar brigadas.</li>
+              <li><strong>Lo que hay que limpiar y cuidar:</strong> Solo vienen las semanas con al menos un caso (los ceros faltan y hay que reconstruirlos); municipios desconocidos; semana 53; atípicos. Parte por tiempo, no al azar. Usa solo el filtro de dengue: la base trae otros eventos sensibles.</li>
+              <li><a href="https://www.datos.gov.co/d/4hyg-wa9d" target="_blank" rel="noopener">Página del conjunto</a> ·
+                URL de descarga para Colab: <code class="url-larga">https://www.datos.gov.co/resource/4hyg-wa9d.csv?$limit=300000&amp;$where=cod_eve=210</code></li>
+            </ul>
+          </li>
+          <li><strong>Deserción en la formación titulada</strong> · SENA. 42 080 filas × 15 columnas.
+            <ul>
+              <li><strong>Etiqueta sugerida:</strong> si la ficha tiene desertores (clasificación: 24 %). Un coordinador regional decide qué fichas de formación acompañar.</li>
+              <li><strong>Lo que hay que limpiar y cuidar:</strong> Comillas dentro del dato («"REGIONAL BOLIVAR"»); fechas como texto; nombres de programa con y sin punto final. Fuga: las demás columnas de resultado del año.</li>
+              <li><a href="https://www.datos.gov.co/d/u4ze-bi7k" target="_blank" rel="noopener">Página del conjunto</a> ·
+                URL de descarga para Colab: <code class="url-larga">https://www.datos.gov.co/resource/u4ze-bi7k.csv?$limit=100000</code></li>
+            </ul>
+          </li>
+        </ol>
+        <p>Dos cuidados para todas: lee los códigos (municipio, departamento) como texto (<code>dtype=str</code>) para no
+          perder el cero inicial, y descarga una vez y guarda una copia en Drive, porque algunas descargas tardan casi un
+          minuto. La base de accidentes de Bucaramanga es la del <a href="#plantilla">ejemplo resuelto</a>: no la puedes
+          elegir.</p>
+        <!-- Comprobadas por un subagente el 14-nov-2026 (descarga real, filas, columnas, faltantes y licencia en la API);
+             la maestra volvió a probar 4 URL. Licencia: metadatos de cada conjunto; términos del portal: F-DATOS-01. -->
       </section>
 
       <section class="bloque" id="plantilla" aria-labelledby="titulo-plantilla">
@@ -343,8 +427,15 @@
         <p>Un cuaderno (<em>notebook</em>) de Colab con el esqueleto del proyecto y un ejemplo resuelto con una base abierta
           real: cómo medir los faltantes, unificar categorías, convertir fechas, imputar dentro de un <code>Pipeline</code>
           con <code>ColumnTransformer</code>, comparar modelos con validación cruzada y leer la importancia por permutación.
-          Lo copias, cambias la base y la pregunta, y completas cada paso con tus decisiones. Se publica aquí hoy, 14 de
-          noviembre.</p>
+          Lo copias, cambias la base y la pregunta, y completas cada paso con tus decisiones.</p>
+        <div class="acciones">
+          <a class="boton principal" href="https://colab.research.google.com/github/JotaMao1985/Machine-Learning-cloud-computing_Ucompensar/blob/main/notebooks/plantilla-proyecto.ipynb"
+            target="_blank" rel="noopener"><i class="fas fa-laptop-code" aria-hidden="true"></i>Abrir la plantilla en
+            Colab<span class="sr-only"> (se abre en otra pestaña)</span></a>
+        </div>
+        <p>El ejemplo usa los accidentes de tránsito de Bucaramanga (Alcaldía de Bucaramanga, datos.gov.co, CC BY-SA 4.0) para
+          una pregunta de la central de Tránsito: ¿este accidente probablemente tiene heridos? Corre completo en uno o dos
+          minutos.</p>
       </section>
 
       <section class="bloque" id="partes" aria-labelledby="titulo-partes">
