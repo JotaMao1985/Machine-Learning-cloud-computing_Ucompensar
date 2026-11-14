@@ -45,7 +45,7 @@ agenda: si
 - **10:00** Los datos de Yarumo en Azure, y cuánto cuestan
 - **11:20** Laboratorio: demostración y ejercicio de diseño
 ### Proyecto y cierre
-- **12:15** La lista mínima frente a lo que llevan
+- **12:15** El proyecto nuevo y su lista mínima
 - **12:45** Cierre
 :::
 
@@ -938,7 +938,7 @@ Un minuto con la votación. Si alguien pregunta por Defender for Cloud: lo gratu
 Los registros de lectura se configuran **antes** de necesitarlos. El día que alguien pregunte quién abrió el archivo, ya es tarde para encenderlos.
 
 ???
-Es el lema de la sesión. Para el proyecto: el renglón «cómo se monitorean» pide decir qué se registra (la configuración de diagnóstico con `StorageRead`, hacia qué área de trabajo), qué alerta y a quién. Y la retención: 31 días incluidos sin costo en Log Analytics (F-AZ-62), que veremos en el costo.
+Es el lema de la sesión. En la ficha de datos y gobierno del proyecto, este es el renglón de «qué se registra»: con qué configuración se guardan las lecturas, qué alerta y a quién. Y la retención: 31 días incluidos sin costo en Log Analytics (F-AZ-62), que veremos en el costo.
 
 ## Defender for Cloud: la postura de seguridad gratis, la protección de pago
 
@@ -982,7 +982,7 @@ F-AZ-65 (`review-security-recommendations`): en Defender for Cloud > Recommendat
 No se pudo confirmar si los 5 GB cubren los registros de Storage, ni cuánto cuesta una alerta de búsqueda de registros.
 
 ???
-11:00. Consultada el 12 de noviembre de 2026 (F-AZ-59, versión es-es y en-gb; la tabla en-us no se pudo leer). Blob: F-AZ-59, punto 2. SQL: F-AZ-59 y F-AZ-60 («free tier»: 100 000 segundos de vCore, 32 GB de datos y 32 GB de copias por base, hasta 10 por suscripción, en la mayoría de los tipos de suscripción; sin SLA; al agotar se elige pausar hasta el mes siguiente o pagar; se pausa sola tras 15 minutos sin uso; Azure for Students Starter no es compatible; si aplica a la cuenta gratuita o a Azure for Students no se confirmó). Log Analytics: F-AZ-62 (los primeros 5 GB al mes por cuenta de facturación, en el nivel Analytics Logs; 31 días de retención sin cargo; los precios por GB no se citan porque no se pudieron leer). Defender: fila «Security Center» de F-AZ-59 (valoración de directivas y recomendaciones, siempre). Cómputo: la última fila es la que falta en casi todos los planes. Lo que cuesta depende de dónde viva el modelo, que cada pareja eligió ayer (S3): en una máquina virtual (IaaS), la B1s tiene 750 h al mes durante 12 meses en la cuenta gratuita (F-AZ-20); en Azure Machine Learning, el servicio no cobra, pero el cómputo y los recursos asociados sí, y el disco y la IP siguen cobrando con la instancia detenida (F-AZ-36). Si eligieron App Service, que lo comprueben en la misma página oficial: no está en el banco. Es el renglón del costo de la lista mínima del proyecto, y pide citar la página.
+11:00. Consultada el 12 de noviembre de 2026 (F-AZ-59, versión es-es y en-gb; la tabla en-us no se pudo leer). Blob: F-AZ-59, punto 2. SQL: F-AZ-59 y F-AZ-60 («free tier»: 100 000 segundos de vCore, 32 GB de datos y 32 GB de copias por base, hasta 10 por suscripción, en la mayoría de los tipos de suscripción; sin SLA; al agotar se elige pausar hasta el mes siguiente o pagar; se pausa sola tras 15 minutos sin uso; Azure for Students Starter no es compatible; si aplica a la cuenta gratuita o a Azure for Students no se confirmó). Log Analytics: F-AZ-62 (los primeros 5 GB al mes por cuenta de facturación, en el nivel Analytics Logs; 31 días de retención sin cargo; los precios por GB no se citan porque no se pudieron leer). Defender: fila «Security Center» de F-AZ-59 (valoración de directivas y recomendaciones, siempre). Cómputo: la última fila es la que falta en casi todos los planes. Lo que cuesta depende de dónde viva el modelo, que cada pareja eligió ayer (S3): en una máquina virtual (IaaS), la B1s tiene 750 h al mes durante 12 meses en la cuenta gratuita (F-AZ-20); en Azure Machine Learning, el servicio no cobra, pero el cómputo y los recursos asociados sí, y el disco y la IP siguen cobrando con la instancia detenida (F-AZ-36). Si eligieron App Service, que lo comprueben en la misma página oficial: no está en el banco. El costo no es un renglón del proyecto nuevo, pero sí del syllabus de nube (CR3): saber qué se puede probar sin pagar y qué cobra igual es parte de decidir si algo se lleva a la nube, y lo que se diga se cita de la página oficial.
 
 ## La cuenta gratuita tiene límites, y un presupuesto no frena el gasto
 
@@ -1050,7 +1050,7 @@ Si el portal falla o no hay conexión: las capturas, y el paso 3 con la diaposit
 | El modelo entrenado (`modelos`) | ? | ? | ? | ? | ? |
 | El riesgo de cada cliente (`predicciones`, nuevo) | ? | ? | ? | ? | ? |
 
-**En parejas:** la fila de `clientes.csv`, entera; en las otras dos, **solo lo que cambia**. La plantilla está en el notebook, parte 4, y va a la **parte 2 del proyecto**.
+**En parejas:** la fila de `clientes.csv`, entera; en las otras dos, **solo lo que cambia**. La plantilla está en el notebook, parte 4. Es el ensayo de la **ficha de datos y gobierno** de tu proyecto: dónde se guardaría, quién accede y qué se registra.
 
 ???
 11:45 a más tardar. Treinta minutos: 10 para la fila de `clientes.csv`, 7 para lo que cambia en las otras dos, 5 para que dos parejas lean su fila y 5 para la propuesta de la diapositiva siguiente (más el tiempo de entrar y salir de las salas). Cada pareja pega su fila de `clientes.csv` en una hoja compartida, como en la S3, y el docente visita primero las que tengan columnas vacías. Las tres filas van en Blob Storage, en contenedores distintos; quien prefiera una tabla en Azure SQL Database para el riesgo de cada cliente lo dice en una frase en la columna 1. Las predicciones son el riesgo de cada cliente, uno a uno: dato personal; por eso no van en `informes`, que la gerencia lee sin clientes uno a uno (matriz de la S2). Las cinco preguntas guía están en el notebook: ¿blob o tabla, y qué redundancia? ¿Qué rol y en qué ámbito (S2)? ¿Entra ID, clave, SAS o acceso anónimo? ¿Qué se registra, hacia dónde, y qué alerta y a quién? ¿Cabe en lo gratuito, por cuánto tiempo? Preguntas para recorrer las salas: ¿alguna fila usa la clave compartida o una SAS? ¿Qué pasa con una lectura que nadie registró? ¿La redundancia que eligieron saca los datos de la región? (S3, Ley 1581). ¿Qué cobra si se pasa de lo gratuito?
@@ -1070,36 +1070,51 @@ No es la única respuesta buena, y las otras dos filas son de ellos. Lo que la h
 
 # Proyecto final {icono=fa-diagram-project}
 
-> La lista mínima, frente a lo que llevan.
+> Cambia el proyecto: un problema real, con datos abiertos oficiales.
 
 ???
-12:15. Treinta minutos: 5 para la lista y los recordatorios, 20 para que cada pareja revise su entrega y anote lo que falta, y 5 de dudas generales. El docente resuelve dudas por el chat o en salas. No se recorta.
+12:15. Treinta minutos: 6 para el cambio de proyecto y sus preguntas, 5 para la lista mínima nueva, 14 para que cada pareja elija su problema y su fuente y empiece la ficha, y 5 de dudas y fechas. El docente resuelve dudas por el chat o en salas. No se recorta: es el anuncio del cambio, y la ficha del problema vence mañana.
+
+## Cambio en el proyecto final: del dato crudo a la decisión {.denso}
+
+::: tarjetas {columnas=3}
+### Qué cambia
+Ya no es Yarumo: cada pareja elige **un problema real** con **datos abiertos oficiales** de Colombia (datos.gov.co, DANE, ICFES, SECOP, IDEAM…) o datos propios anonimizados, con permiso escrito y sin datos sensibles. **No** valen Kaggle, UCI ni OpenML.
+### Qué se entrega
+El **notebook** (auditoría de la base, limpieza, imputación y una característica creada, todo en un `Pipeline`; línea base y **3 modelos** con validación cruzada; métrica y umbral por la decisión; interpretación), un **informe de 2 páginas** para quien decide y una **ficha de datos y gobierno** de 1 página.
+### Tres fechas
+**Domingo 15, 23:59:** la **ficha del problema** en una página (pregunta, decisión, fuente, columnas y etiqueta); el docente responde el lunes 16. **Viernes 20, 16:00:** la entrega. **Viernes 20, 18:00:** la sustentación, en la sesión 5.
+:::
+
+???
+12:15. Lo decidió el docente el 14 de noviembre; el enunciado completo, con la lista curada de bases abiertas comprobadas, está en la página del proyecto. Leer la diapositiva entera y dar 5 minutos para preguntas: es un cambio grande y a media clase. Lo que ya hicieron no se pierde: el modelo, las métricas y el umbral se llevan tal cual al problema nuevo, y lo de hoy (dónde se guardan los datos, quién accede y qué se registra) es la ficha de datos y gobierno. Lo más urgente es la ficha del problema, mañana domingo: insistir en que elijan la fuente hoy mismo, porque el docente responde el lunes y sin su visto bueno no arrancan. La ficha de datos y gobierno **no nombra un proveedor de nube**: se escribe con IaaS, PaaS o SaaS y con privilegio mínimo, que es lo que sabe el curso. Para «Destacado» basta una opción: comparar con una red neuronal (lo de hoy), segmentar con agrupamiento (S3) o revisar el error por subgrupo.
 
 ## La lista mínima: márquenla con Sí, En parte o No
 
-- El notebook **corre de principio a fin** en Colab, con los datos del curso
-- Una **línea base** y al menos un modelo, en datos que no vio, con la **métrica que sirve a la decisión** y su porqué. Si agrupan: la **silueta frente a un reparto al azar** y el número de grupos justificado
-- El **modelo de servicio** elegido, con su matriz de **responsabilidad compartida**
-- La **matriz de roles**: para cada grupo, el rol integrado y su ámbito, o «sin acceso», con una razón
-- Al menos **dos directivas** de Azure Policy, con su efecto
-- El **almacenamiento** y el **monitoreo** de los datos y del modelo: lo de hoy
-- La **privacidad**: responsable, encargado y región, según la Ley 1581
-- El **costo** en la capa gratuita, con la fuente oficial que lo respalda
-- Las **fuentes** de cada afirmación técnica o legal, y la **declaración del uso de IA**
+- El notebook **corre de principio a fin** en Colab y **descarga los datos de su URL oficial** (o lee el archivo anonimizado que adjunten)
+- La **ficha del problema** aprobada
+- La **limpieza**, la **imputación** y al menos **una característica creada**, dentro de un `Pipeline`
+- Una **línea base** y **3 modelos** con validación cruzada
+- La **métrica** y su porqué (con el **umbral**, si clasifica)
+- Una **interpretación** de qué pesa en el modelo
+- El **informe de 2 páginas**
+- La **ficha de datos y gobierno**
+- Las **fuentes** y la **declaración del uso de IA**
 
 ???
-Son los nueve elementos de la página del proyecto, textuales. Sin uno de ellos, el proyecto no se evalúa; qué tan bien está hecho cada uno lo valora la rúbrica. Los dos últimos son los que más se olvidan: las fuentes al final del PDF y una línea que diga qué herramienta de IA se usó y para qué. Pedir que la marquen en su documento con Sí, En parte o No, como en la revisión del avance de la S3, y que escriban en el chat el renglón que más les falta: el docente prioriza las dudas por ahí. Si una pareja usa una red neuronal, se le recomienda compararla con su línea base y con un modelo de árboles, como hoy.
+Son los nueve elementos del proyecto nuevo (14 de noviembre), textuales. Sin uno de ellos, el proyecto no se evalúa; qué tan bien está hecho cada uno lo valora la rúbrica de la página. Pedir que la marquen con Sí, En parte o No y que escriban en el chat el renglón que más les falta: el docente prioriza las dudas por ahí. Los que más se olvidan: la característica creada dentro del `Pipeline` (fuera, es fuga de datos: S2), la interpretación (importancia por permutación o las reglas de un árbol pequeño) y la declaración del uso de IA. Lo de hoy entra en la ficha de datos y gobierno: dónde se guardarían los datos y el modelo, con qué modelo de servicio, quién accede con privilegio mínimo y qué se registra.
 
-## Hasta el jueves 19, la entrega; el viernes 20, la sustentación y la coevaluación
+## Mañana la ficha del problema; el viernes 20, la entrega y la sustentación
 
-- **Entrega, hasta el jueves 19 de noviembre a las 23:59**, por la plataforma: el notebook ejecutado, el plan de nube en PDF con las fuentes al final y, si lo hay, el material de la sustentación
-- **Sustentación:** en la sesión 5, el **viernes 20**: 10 min por pareja, 6 de exposición y 4 de preguntas
+- **Mañana domingo 15, 23:59:** la **ficha del problema** en una página. El docente responde el **lunes 16**
+- **Entrega, viernes 20 de noviembre a las 16:00**, por la plataforma: el notebook ejecutado, el informe de 2 páginas y la ficha de datos y gobierno
+- **Sustentación:** ese mismo viernes, en la sesión 5, **desde las 18:00**: 10 min por pareja, 6 de exposición y 4 de preguntas
 - **IA:** se permite si se declara qué herramienta y para qué, sin pegar los datos en herramientas externas
-- **Para «Destacado»** basta una opción: comparar su modelo con una **red neuronal** (lo de hoy), revisar si **se equivoca más con algún grupo** de clientes, o proponer la **revisión periódica de los accesos**
+- **Para «Destacado»** basta una opción: comparar con una **red neuronal** (lo de hoy), **segmentar** con agrupamiento (sesión 3) o revisar el **error por subgrupo**
 - **Coevaluación:** los tres criterios que acordamos en la sesión 3 (la página del proyecto se actualiza con la redacción final), a cargo de la pareja que sustenta justo después
 
 ???
-Todo es de la decisión M7 del curso (6 de noviembre) y de la página del proyecto; la redacción de los criterios de la coevaluación es la que se acordó en la S3, y la página se actualiza con esa redacción. La rúbrica tiene seis criterios en cuatro niveles, y para «Destacado» basta una de sus opciones: comparar el modelo con una red neuronal (criterio 1, lo de hoy); revisar si el modelo se equivoca más con algún grupo de clientes, por ciudad, estrato o edad, y decir qué haría Yarumo con eso (criterio 2); o la revisión periódica de los accesos (criterio 4). El peso del proyecto en la nota lo fija el docente.
+Es el proyecto nuevo que el docente decidió el 14 de noviembre; el enunciado completo está en la página del proyecto. Ojo con las dos fechas del viernes 20: la entrega cierra a las 16:00 y la sustentación empieza a las 18:00, en la sesión 5. La ficha del problema de mañana es corta, pero sin ella no hay visto bueno: pregunta, decisión, fuente, columnas y etiqueta. La redacción de los criterios de la coevaluación es la que se acordó en la S3. El peso del proyecto en la nota lo fija el docente.
 
 # Cierre {icono=fa-flag-checkered}
 
@@ -1136,8 +1151,8 @@ Leer las cinco en voz alta y preguntar cuál les costó más. Cerrar con el lema
 ## Para la sesión 5: la entrega, la sustentación y una lectura
 
 - **Termina** los ejercicios del notebook (el 3, si quedó para la casa), la tabla del plan de almacenamiento y monitoreo y, si quedó pendiente, el ejercicio 3 de la sesión 3
-- **Con tu pareja**, junta en **un solo PDF** el plan de nube que vienen escribiendo desde la sesión 1 (modelo de servicio, roles y directivas, privacidad, y hoy almacenamiento, monitoreo y costo), con las fuentes al final
-- **Cierra la entrega**: **jueves 19 de noviembre, 23:59**
+- **Con tu pareja**, elige hoy el problema y la fuente de datos, y manda la **ficha del problema mañana domingo a las 23:59**
+- **Cierra la entrega**: **viernes 20 de noviembre, 16:00**; la sustentación es esa misma tarde, a las 18:00
 - **Lee** el capítulo 1 de *Reinforcement Learning: An Introduction* (Sutton y Barto), sobre el aprendizaje por refuerzo
 
 **Próxima sesión, viernes 20, 18:00:** aprender por ensayo y error (el aprendizaje por refuerzo), la sustentación y el cierre del curso.

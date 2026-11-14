@@ -26,7 +26,8 @@
 # Este notebook acompaña las [diapositivas de la sesión](https://jotamao1985.github.io/Machine-Learning-cloud-computing_Ucompensar/diapositivas/sesion-4-redes-y-datos-en-azure.html).
 # Cada celda lleva entre corchetes el mismo identificador que el código proyectado, así que puedes seguir
 # la clase celda a celda. La portada del curso está en https://jotamao1985.github.io/Machine-Learning-cloud-computing_Ucompensar/
-# y el enunciado del proyecto final, en [su página](https://jotamao1985.github.io/Machine-Learning-cloud-computing_Ucompensar/proyecto.html).
+# y el enunciado del proyecto final (**cambió el 14 de noviembre**: «Del dato crudo a la decisión»), en
+# [su página](https://jotamao1985.github.io/Machine-Learning-cloud-computing_Ucompensar/proyecto.html).
 #
 # 1. **Archivo → Guardar una copia en Drive** para que tus cambios no se pierdan.
 # 2. Ejecuta las celdas **en orden** con **Mayús + Enter**. Varias usan resultados de las anteriores.
@@ -698,8 +699,9 @@ pd.DataFrame({"MAE en prueba (Gbps)": errores}).round(2)
 #
 # ## Ejercicio de diseño · El plan de almacenamiento y monitoreo
 #
-# Este ejercicio no lleva código: se hace en parejas, con las diapositivas de la sesión, y va directo a la parte
-# 2 del proyecto. Para cada **activo** de Yarumo, completa las cinco columnas:
+# Este ejercicio no lleva código: se hace en parejas, con las diapositivas de la sesión. Es el ensayo de la
+# **ficha de datos y gobierno** del proyecto (dónde se guardarían los datos y el modelo, quién accede y qué se
+# registra), con el caso de Yarumo. Para cada **activo**, completa las cinco columnas:
 #
 # 1. **Servicio y redundancia**: ¿un blob en Blob Storage o una tabla en Azure SQL Database? ¿LRS, ZRS o GRS?
 # 2. **Quién lee**: el rol integrado y su ámbito (la matriz de roles de la sesión 2).
