@@ -9,224 +9,283 @@
   <title>Proyecto final: del dato crudo a la decisión · Machine Learning y Seguridad en la Nube</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
   <!--
-    Fuente de Htmls/proyecto.html (la construye precalculo/portada.py, que resuelve los marcadores del logo, de Colab y de los datos).
-    Las decisiones que no estaban en el PLAN las aprobó el docente el 6 de noviembre de 2026 («Sí, apruébalas»), junto con la
-    fecha de cierre de la entrega. Solo el peso en la nota queda pendiente (comentario PENDIENTE). Ver AUDITORIA_sesion2_2026-11-06.md.
-    Cada afirmación de Azure o de normas sale de fuentes/FUENTES.md (ID entre paréntesis en los comentarios).
+    Fuente de Htmls/proyecto.html (la construye precalculo/portada.py, que resuelve el marcador del logo).
+    Proyecto M9 del PLAN (14-nov-2026). Diseño del 14-nov: estructura del material de la Universidad El Bosque
+    (cabecera fija, índice lateral, tarjetas) con la paleta de UCompensar; aprobado por el docente en el lienzo
+    «Proyecto final rediseñado». Cada afirmación técnica o legal sale de fuentes/FUENTES.md.
   -->
   <style>
-    /* Paleta UCompensar (portada del syllabus). El naranja de marca y el ámbar solo van en
-       bordes, íconos y franjas; el texto naranja usa --uc-naranja-texto (5,2:1 sobre blanco). */
+    /* Paleta UCompensar. El naranja de marca y el ámbar van en bordes, fondos, íconos y franjas; el texto
+       naranja usa --uc-naranja-texto (5,2:1 sobre blanco). Estructura inspirada en el material de El Bosque. */
     :root {
       --uc-morado: #691E7A;
       --uc-morado-claro: #8A2E9E;
       --uc-morado-profundo: #3A0F47;
+      --uc-morado-noche: #2A0A33;
       --uc-naranja: #F46201;
       --uc-naranja-texto: #B84A00;
       --uc-ambar: #FAA012;
       --uc-pizarra: #566B7F;
+      --tinta: #1E1B24;
+      --texto: #3B3644;
+      --texto-suave: #5A5463;
+      --borde: #ECE6F0;
+      --lila: #FAF7FC;
+      --lila-2: #F1EAF4;
+      --crema: #FFF6EC;
+      --sombra: 0 4px 20px rgba(58, 15, 71, 0.06);
     }
 
     *, *::before, *::after { box-sizing: border-box; }
-
+    html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
     body {
       margin: 0;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      line-height: 1.6;
-      color: #1E293B;
-      background: #F8FAFC;
+      font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background: #F6F4F8;
+      color: var(--tinta);
+      line-height: 1.65;
     }
-
-    .contenedor { max-width: 72rem; margin: 0 auto; padding: 0 1rem; width: 100%; }
-    @media (min-width: 640px) { .contenedor { padding: 0 1.5rem; } }
-
-    .skip-link {
-      position: absolute; top: -100px; left: 1rem; z-index: 100;
-      background: white; color: var(--uc-morado); border: 2px solid var(--uc-morado);
-      padding: 0.75rem 1rem; border-radius: 0.5rem; font-weight: 500; text-decoration: none;
-      transition: top 0.2s;
-    }
-    .skip-link:focus { top: 1rem; }
-    .sr-only {
-      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
-      overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
-    }
-
-    .heroe { background: linear-gradient(135deg, #5C1A6C 0%, var(--uc-morado-profundo) 100%); color: white; }
-    .heroe .contenedor { padding-top: 2.5rem; padding-bottom: 2.5rem; }
-    .uc-logo {
-      display: inline-flex; align-items: center; background: white; border-radius: 999px;
-      padding: 0.35rem 0.9rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18); margin-bottom: 1.5rem;
-    }
-    .uc-logo img { height: 30px; width: auto; display: block; }
-    .antetitulo {
-      margin: 0; color: var(--uc-ambar); font-size: 0.85rem; font-weight: 700;
-      letter-spacing: 0.12em; text-transform: uppercase;
-    }
-    h1 { margin: 0.5rem 0 1rem; font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; line-height: 1.15; }
-    .heroe p.lead { margin: 0; max-width: 48rem; font-size: 1.125rem; color: rgba(255, 255, 255, 0.92); }
-    .heroe a.volver { color: white; font-weight: 500; }
-    .heroe p.migas { margin: 1.25rem 0 0; font-size: 0.95rem; }
-    .uc-franja {
-      height: 5px;
-      background: linear-gradient(90deg, var(--uc-naranja) 0%, var(--uc-ambar) 55%, var(--uc-pizarra) 100%);
-    }
-
-    main { flex-grow: 1; padding: 2.5rem 0; }
-
-    .indice {
-      background: white; border: 1px solid #E5E7EB; border-radius: 1rem; padding: 1.25rem 1.5rem;
-      margin-bottom: 2rem;
-    }
-    .indice h2 { margin: 0 0 0.5rem; font-size: 1rem; color: var(--uc-morado); }
-    .indice ol { margin: 0; padding-left: 1.4rem; columns: 2; column-gap: 2rem; }
-    @media (max-width: 640px) { .indice ol { columns: 1; } }
-    .indice a { color: var(--uc-morado); }
-
-    .bloque {
-      background: white; border: 1px solid #E5E7EB; border-radius: 1rem; padding: 1.5rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06); margin-bottom: 1.5rem;
-    }
-    .bloque h2 { margin: 0 0 0.75rem; font-size: 1.5rem; line-height: 1.25; color: var(--uc-morado); }
-    .bloque h3 { margin: 1.25rem 0 0.5rem; font-size: 1.1rem; color: var(--uc-morado-profundo); }
-    .bloque p { margin: 0 0 0.75rem; }
-    .bloque ul, .bloque ol { margin: 0.25rem 0 0.75rem; padding-left: 1.3rem; }
-    .bloque li { margin-bottom: 0.3rem; }
-    .bloque a { color: var(--uc-morado); }
-    .etiqueta {
-      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
-      color: var(--uc-naranja-texto);
-    }
-    .pregunta-grande {
-      margin: 0.25rem 0 0.75rem; font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 900;
-      line-height: 1.2; color: var(--uc-morado-profundo);
-    }
-    code {
-      font-family: ui-monospace, 'SFMono-Regular', Menlo, monospace; font-size: 0.88em;
-      background: #F1F5F9; border: 1px solid #E2E8F0; border-radius: 0.3rem; padding: 0.05em 0.35em;
-      overflow-wrap: anywhere;
-    }
-
-    table { width: 100%; border-collapse: collapse; margin: 0.5rem 0 1rem; font-size: 0.95rem; }
-    th, td { text-align: left; vertical-align: top; padding: 0.55rem 0.7rem; border: 1px solid #E5E7EB; }
-    thead th { background: #F5EEF7; color: var(--uc-morado-profundo); }
-    tbody th { background: #FAFAFB; color: var(--uc-morado-profundo); font-weight: 700; }
-
-    .partes { list-style: none; padding: 0 !important; display: grid; gap: 0.75rem; }
-    @media (min-width: 768px) { .partes { grid-template-columns: repeat(3, 1fr); } }
-    .partes li {
-      border: 1px solid #E5E7EB; border-top: 4px solid var(--uc-naranja); border-radius: 0.75rem;
-      padding: 0.75rem 1rem; margin: 0;
-    }
-    .partes strong { display: block; color: var(--uc-morado-profundo); }
-
-    .rubrica td { font-size: 0.9rem; }
-    .rubrica tbody th { width: 17%; }
-    .rubrica tbody th small { display: block; font-weight: 400; color: #475569; }
-    @media (max-width: 760px) {
-      .rubrica thead { display: none; }
-      .rubrica, .rubrica tbody, .rubrica tr, .rubrica th, .rubrica td { display: block; width: 100%; }
-      .rubrica tr { border: 1px solid #E5E7EB; border-radius: 0.75rem; margin-bottom: 1rem; overflow: hidden; }
-      .rubrica tbody th { width: 100%; border: 0; border-bottom: 1px solid #E5E7EB; }
-      .rubrica td { border: 0; border-bottom: 1px solid #F1F5F9; }
-      .rubrica td::before {
-        content: attr(data-nivel); display: block; font-size: 0.72rem; font-weight: 700;
-        letter-spacing: 0.05em; text-transform: uppercase; color: var(--uc-naranja-texto);
-      }
-    }
-
-    .aviso {
-      background: #FFF7ED; border-left: 4px solid var(--uc-naranja); padding: 1rem 1.25rem;
-      border-radius: 0 0.75rem 0.75rem 0; margin: 0.75rem 0 1rem;
-    }
-    .aviso p:last-child { margin: 0; }
-    .aviso strong { color: var(--uc-naranja-texto); }
-
-    .bases > li { margin-bottom: 1rem; }
+    a { color: var(--uc-morado); }
+    a:hover { color: var(--uc-morado-profundo); }
+    a:focus-visible, .boton:focus-visible { outline: 3px solid var(--uc-ambar); outline-offset: 2px; }
+    code { font-family: 'Fira Code', ui-monospace, monospace; font-size: 0.86em; background: var(--lila-2);
+      color: var(--uc-morado-profundo); padding: 1px 6px; border-radius: 6px; }
     .url-larga { overflow-wrap: anywhere; word-break: break-all; font-size: 0.8em; }
-    .hitos { list-style: none; padding: 0 !important; display: grid; gap: 0.75rem; }
-    @media (min-width: 768px) { .hitos { grid-template-columns: repeat(5, 1fr); } }
-    .hitos li {
-      border: 1px solid #E5E7EB; border-top: 4px solid var(--uc-morado); border-radius: 0.75rem;
-      padding: 0.75rem 1rem; margin: 0;
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+    .skip-link { position: absolute; left: -999px; top: 0.5rem; background: #FFFFFF; color: var(--uc-morado-profundo);
+      padding: 0.5rem 1rem; border-radius: 8px; z-index: 100; font-weight: 600; }
+    .skip-link:focus { left: 0.5rem; }
+    .contenedor { max-width: 78rem; margin: 0 auto; padding: 0 1.5rem; width: 100%; }
+    .fila { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; }
+
+    /* Cabecera fija */
+    .cabecera { position: sticky; top: 0; z-index: 20; background: linear-gradient(180deg, var(--uc-morado-profundo) 0%, var(--uc-morado-noche) 100%);
+      box-shadow: 0 6px 20px rgba(26, 6, 32, 0.25); }
+    .cabecera .fila { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+    .uc-logo { background: #FFFFFF; border-radius: 12px; padding: 0.35rem 0.6rem; display: inline-flex; }
+    .uc-logo img { height: 34px; width: auto; display: block; }
+    .cabecera-texto { flex: 1 1 16rem; }
+    .cabecera-titulo { margin: 0; color: #FFFFFF; font-weight: 700; font-size: 1.05rem; letter-spacing: -0.01em; }
+    .cabecera-sub { margin: 0; color: rgba(255, 255, 255, 0.75); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+
+    /* Botones */
+    .boton { display: inline-flex; align-items: center; gap: 0.5rem; min-height: 44px; padding: 0 1.4rem; border-radius: 999px;
+      font-weight: 700; font-size: 0.95rem; text-decoration: none; }
+    .boton.fantasma { border: 1px solid rgba(255, 255, 255, 0.4); color: #FFFFFF; font-weight: 600; }
+    .boton.fantasma:hover { background: rgba(255, 255, 255, 0.1); color: #FFFFFF; }
+    .boton.claro { background: #FFFFFF; color: var(--uc-morado-profundo); }
+    .boton.claro:hover { background: #F3EEF6; color: var(--uc-morado-profundo); }
+    .boton.principal { background: #FFFFFF; color: var(--uc-morado-profundo); }
+    .boton.principal:hover { background: #F3EEF6; color: var(--uc-morado-profundo); }
+    .acciones { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 1rem 0; }
+
+    /* Portada del proyecto */
+    .heroe { background: linear-gradient(140deg, var(--uc-morado) 0%, #4A1457 55%, var(--uc-morado-profundo) 100%); color: #FFFFFF; }
+    .heroe-fila { display: flex; flex-wrap: wrap; gap: 2.5rem; align-items: flex-end; padding-top: 3.5rem; padding-bottom: 2.5rem; }
+    .heroe-texto { flex: 999 1 32rem; min-width: 0; }
+    .chip { display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 0.35rem 0.9rem; border-radius: 999px; background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.25); }
+    .heroe h1 { margin: 1rem 0; font-size: clamp(2.2rem, 5vw, 3.3rem); line-height: 1.05; font-weight: 800; letter-spacing: -0.02em; }
+    .lead { margin: 0; font-size: 1.1rem; color: rgba(255, 255, 255, 0.88); max-width: 42rem; }
+    .fechas { flex: 1 1 18rem; display: flex; flex-direction: column; gap: 0.65rem; }
+    .fecha { background: rgba(255, 255, 255, 0.10); border: 1px solid rgba(255, 255, 255, 0.22); border-radius: 16px;
+      padding: 1rem 1.2rem; display: flex; flex-direction: column; }
+    .fecha span { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--uc-ambar); }
+    .fecha strong { font-size: 1.3rem; }
+    .uc-franja { height: 6px; background: linear-gradient(90deg, var(--uc-naranja) 0%, var(--uc-ambar) 55%, var(--uc-pizarra) 100%); }
+
+    /* Índice lateral y contenido */
+    .disposicion { display: flex; flex-wrap: wrap; gap: 1.75rem; align-items: flex-start; padding-top: 2rem; padding-bottom: 3rem; }
+    .indice-lateral { flex: 1 1 15rem; background: #FFFFFF; border: 1px solid var(--borde); border-radius: 16px;
+      box-shadow: var(--sombra); padding: 1.25rem; }
+    @media (min-width: 64rem) {
+      .indice-lateral { position: sticky; top: 6rem; max-height: calc(100vh - 7rem); overflow-y: auto; }
     }
-    .hitos strong { display: block; color: var(--uc-morado-profundo); }
+    .indice-titulo { margin: 0 0 0.6rem; padding-bottom: 0.6rem; border-bottom: 2px solid #F3EEF6; font-size: 0.75rem;
+      font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #6B6475; }
+    .indice-lateral ol { list-style: none; margin: 0; padding: 0; }
+    .indice-lateral a { display: flex; align-items: center; gap: 0.75rem; min-height: 40px; padding: 0 0.75rem; border-radius: 10px;
+      font-size: 0.9rem; font-weight: 500; color: #4A4453; text-decoration: none; }
+    .indice-lateral a::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #CFC6D6; flex-shrink: 0; }
+    .indice-lateral a:hover { background: var(--lila-2); color: var(--uc-morado-profundo); }
+    .indice-lateral a:hover::before { background: var(--uc-naranja); }
+    main { flex: 999 1 35rem; min-width: 0; display: flex; flex-direction: column; gap: 1.75rem; }
 
-    .boton {
-      display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.7rem 1.4rem;
-      border-radius: 999px; font-weight: 700; font-size: 0.92rem; text-decoration: none;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    /* Tarjetas de sección */
+    .bloque { background: #FFFFFF; border: 1px solid var(--borde); border-radius: 16px; box-shadow: var(--sombra);
+      padding: 2.25rem; color: var(--texto); }
+    .bloque h2 { margin: 0 0 1rem; font-size: 1.6rem; font-weight: 800; color: var(--uc-morado-profundo); letter-spacing: -0.01em; line-height: 1.25; }
+    .bloque h3 { margin: 1.75rem 0 0.6rem; font-size: 1.1rem; font-weight: 700; color: var(--uc-morado); }
+    .bloque p, .bloque li { font-size: 0.98rem; }
+    .bloque ul, .bloque ol { padding-left: 1.25rem; }
+    .bloque li + li { margin-top: 0.4rem; }
+    .bloque > *:last-child { margin-bottom: 0; }
+    .etiqueta { display: block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--uc-naranja-texto); margin-bottom: 0.5rem; }
+    .pregunta-grande { margin: 0 0 1rem; font-size: clamp(1.4rem, 2.6vw, 1.9rem); line-height: 1.25; font-weight: 700; color: var(--uc-morado-profundo); letter-spacing: -0.01em; }
+    .aviso { background: var(--crema); border: 1px solid #F8D3B0; border-radius: 14px; padding: 1rem 1.25rem; color: #4A3A2E; }
+    .aviso p { margin: 0; }
+    main > .aviso { box-shadow: var(--sombra); }
+    .nota { background: var(--lila); border: 1px solid var(--borde); border-radius: 14px; padding: 1rem 1.25rem; margin-top: 1.25rem; }
+    .nota p { margin: 0; }
+
+    /* El ciclo en seis pasos */
+    .ciclo { list-style: none; padding: 0 !important; margin: 1.5rem 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); gap: 0.75rem; }
+    .ciclo li { margin: 0 !important; background: var(--lila); border: 1px solid var(--borde); border-radius: 14px; padding: 1rem;
+      display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.84rem !important; line-height: 1.5; color: var(--texto-suave); }
+    .ciclo strong { color: var(--uc-morado-profundo); font-size: 0.95rem; }
+    .ciclo .num { width: 2rem; height: 2rem; border-radius: 10px; background: var(--uc-morado); color: #FFFFFF; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; font-size: 0.9rem; }
+
+    /* La ruta en cinco hitos */
+    .hitos { list-style: none; padding: 0 !important; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(10.5rem, 1fr)); gap: 0.75rem; }
+    .hitos li { margin: 0 !important; background: var(--lila); border: 1px solid var(--borde); border-radius: 14px; padding: 1.1rem;
+      font-size: 0.86rem !important; line-height: 1.5; color: var(--texto); }
+    .hitos strong { display: block; margin-bottom: 0.35rem; color: var(--uc-morado); font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; }
+    .hitos li.clave { background: var(--uc-morado-profundo); border-color: var(--uc-morado-profundo); color: rgba(255, 255, 255, 0.9); }
+    .hitos li.clave strong { color: var(--uc-ambar); }
+
+    /* Las bases sugeridas */
+    .bases { list-style: none; padding: 0 !important; margin: 1.25rem 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); gap: 0.9rem; counter-reset: base; }
+    .bases > li { margin: 0 !important; border: 1px solid #E8E1EE; border-radius: 14px; padding: 1.1rem; font-size: 0.88rem !important;
+      line-height: 1.55; counter-increment: base; display: block; }
+    .bases > li::before { content: "Base " counter(base); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--uc-naranja-texto); display: block; margin-bottom: 0.35rem; }
+    .bases > li > strong { color: var(--uc-morado-profundo); font-size: 1rem; }
+    .bases ul { list-style: none; padding: 0 !important; margin: 0.6rem 0 0; display: flex; flex-direction: column; gap: 0.5rem; }
+    .bases ul li { margin: 0 !important; font-size: 0.84rem !important; }
+    .bases ul li:nth-child(2) { background: var(--crema); border-radius: 8px; padding: 0.55rem 0.7rem; color: #5B3714; }
+
+    /* El notebook plantilla, como tarjeta oscura */
+    #plantilla { background: linear-gradient(140deg, var(--uc-morado-profundo) 0%, var(--uc-morado) 100%); color: rgba(255, 255, 255, 0.9); border: none; }
+    #plantilla h2 { color: #FFFFFF; }
+    #plantilla p { color: rgba(255, 255, 255, 0.88); }
+    #plantilla code { background: rgba(255, 255, 255, 0.14); color: #FFFFFF; }
+
+    /* Lo que se entrega */
+    .partes { list-style: none; padding: 0 !important; margin: 0 0 0.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 0.9rem; }
+    .partes li { margin: 0 !important; background: var(--lila); border: 1px solid var(--borde); border-top: 4px solid var(--uc-naranja);
+      border-radius: 14px; padding: 1.2rem; font-size: 0.9rem !important; line-height: 1.55; }
+    .partes strong { display: block; margin-bottom: 0.4rem; color: var(--uc-morado-profundo); font-size: 1.05rem; }
+
+    /* Tablas */
+    table { width: 100%; border-collapse: collapse; margin: 0.75rem 0 1rem; font-size: 0.92rem; }
+    th, td { text-align: left; vertical-align: top; padding: 0.75rem; border-top: 1px solid var(--borde); }
+    thead th { background: var(--uc-morado-profundo); color: #FFFFFF; border-top: none; }
+    tbody th { color: var(--uc-morado-profundo); }
+
+    /* La rúbrica: de Inicial a Destacado, el color se intensifica */
+    .rubrica { font-size: 0.84rem; line-height: 1.5; border: 1px solid var(--borde); border-radius: 14px; overflow: hidden; }
+    .rubrica thead th:nth-child(2) { background: #F1EEF3; color: var(--texto); }
+    .rubrica thead th:nth-child(3) { background: #EFE4F3; color: var(--uc-morado-profundo); }
+    .rubrica thead th:nth-child(4) { background: #E2CFEA; color: var(--uc-morado-profundo); }
+    .rubrica thead th:nth-child(5) { background: #FCE3CC; color: #7A3A12; }
+    .rubrica tbody th { width: 18%; font-size: 0.9rem; }
+    .rubrica tbody th small { display: block; font-weight: 600; color: #6B6475; font-size: 0.72rem; margin-top: 0.25rem; }
+    .rubrica td[data-nivel="Logrado"] { background: #FBF8FC; color: #2A1F30; }
+    .rubrica td[data-nivel="Destacado"] { background: #FFFAF4; color: #4A3A2E; }
+    @media (max-width: 48rem) {
+      .rubrica, .rubrica tbody, .rubrica tr, .rubrica th, .rubrica td { display: block; width: 100%; }
+      .rubrica thead { display: none; }
+      .rubrica tr { border-top: 1px solid var(--borde); }
+      .rubrica tbody th { width: 100%; background: var(--lila-2); border: 0; }
+      .rubrica td { border: 0; padding-top: 0.4rem; }
+      .rubrica td::before { content: attr(data-nivel); display: block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em;
+        text-transform: uppercase; color: var(--uc-naranja-texto); }
     }
-    .boton.principal { color: white !important; background: linear-gradient(140deg, var(--uc-morado) 0%, var(--uc-naranja-texto) 100%); }
-    .boton.secundario { color: var(--uc-morado) !important; border: 2px solid var(--uc-morado); background: white; }
-    .boton:hover, .boton:focus-visible { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(105, 30, 122, 0.25); }
-    .boton:focus-visible { outline: 3px solid var(--uc-morado); outline-offset: 2px; }
-    .acciones { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 0.5rem 0 0.75rem; }
 
-    footer { background: linear-gradient(180deg, #5C1A6C 0%, var(--uc-morado-profundo) 100%); }
-    footer p { margin: 0; padding: 1.5rem 0; text-align: center; color: white; font-size: 0.875rem; }
-    footer span { color: var(--uc-ambar); }
+    /* Pie */
+    footer { margin-top: auto; background: linear-gradient(180deg, var(--uc-morado-profundo) 0%, var(--uc-morado-noche) 100%); }
+    footer .fila { justify-content: space-between; padding-top: 1.5rem; padding-bottom: 1.5rem; }
+    footer p { margin: 0; color: rgba(255, 255, 255, 0.82); font-size: 0.85rem; }
+    footer span { color: var(--uc-ambar); font-weight: 700; }
 
-    @media (prefers-reduced-motion: reduce) { .boton { transition: none; } }
+    @media (max-width: 48rem) {
+      html { scroll-padding-top: 1rem; }
+      .cabecera { position: static; }
+      .cabecera-sub { display: none; }
+      .cabecera .boton { min-height: 40px; padding: 0 1rem; font-size: 0.85rem; }
+    }
+    @media (max-width: 40rem) {
+      .bloque { padding: 1.4rem; }
+      .heroe-fila { padding-top: 2.25rem; }
+    }
 
     @media print {
-      @page { margin: 1.6cm 1.4cm; }
-      body { background: white; font-size: 10.5pt; display: block; }
-      .skip-link, .indice, .boton i, .uc-franja { display: none; }
-      .heroe { background: none; color: #1E293B; border-bottom: 2px solid var(--uc-morado); }
-      .heroe .contenedor { padding: 0 0 0.75rem; }
-      .heroe p.lead { color: #1E293B; }
-      .heroe a.volver { color: var(--uc-morado); }
-      .antetitulo { color: var(--uc-naranja-texto); }
-      .uc-logo { box-shadow: none; padding: 0; margin-bottom: 0.75rem; }
-      main { padding: 1rem 0 0; }
-      .bloque { box-shadow: none; border: 0; padding: 0; margin-bottom: 1rem; }
-      .bloque h2 { break-after: avoid; }
-      .boton, .boton.principal, .boton.secundario { padding: 0; border: 0; color: var(--uc-morado) !important; background: none; }
-      .hitos { grid-template-columns: repeat(5, 1fr); }
-      .partes { grid-template-columns: repeat(3, 1fr); }
-      tr, .hitos li, .partes li, .aviso { break-inside: avoid; }
-      .rubrica thead { display: none; }
-      .rubrica, .rubrica tbody, .rubrica tr, .rubrica th, .rubrica td { display: block; width: 100%; }
-      .rubrica tr { border: 1px solid #CBD5E1; border-radius: 0.5rem; margin-bottom: 0.75rem; overflow: hidden; }
-      .rubrica tbody th, .rubrica td { border: 0; border-bottom: 1px solid #E5E7EB; }
-      .rubrica td::before {
-        content: attr(data-nivel); display: block; font-size: 0.72rem; font-weight: 700;
-        letter-spacing: 0.05em; text-transform: uppercase; color: var(--uc-naranja-texto);
-      }
-      footer { background: none; }
-      footer p { color: #475569; padding: 0.5rem 0; }
-      footer span { color: #475569; }
+      body { background: #FFFFFF; }
+      .cabecera { position: static; box-shadow: none; }
+      .indice-lateral, .skip-link, .acciones { display: none; }
+      .bloque { box-shadow: none; break-inside: avoid; }
+      #plantilla { background: #FFFFFF; color: var(--tinta); border: 1px solid var(--borde); }
+      #plantilla h2, #plantilla p { color: var(--tinta); }
+      .hitos li.clave { background: #FFFFFF; color: var(--tinta); }
       a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #475569; overflow-wrap: anywhere; }
     }
+
   </style>
 </head>
 
 <body>
   <a href="#contenido" class="skip-link">Saltar al contenido</a>
 
-  <header class="heroe">
-    <div class="contenedor">
+  <header class="cabecera">
+    <div class="contenedor fila">
       <span class="uc-logo"><img src="{{LOGO}}" alt="Fundación Universitaria Compensar"></span>
-      <p class="antetitulo">Machine Learning y Seguridad en la Nube · Proyecto final</p>
-      <h1>Del dato crudo a la decisión</h1>
-      <p class="lead">Un problema real, con datos reales: los revisas, los limpias, construyes y comparas modelos, y le dices
-        a quien decide qué hacer, con qué confianza y cómo cuidarías esos datos. Aquí están el enunciado, lo que se entrega
-        y cómo se evalúa.</p>
-      <p class="migas"><a class="volver" href="index.html"><i class="fas fa-arrow-left" aria-hidden="true"></i>
-          Volver a la portada del curso</a></p>
+      <div class="cabecera-texto">
+        <p class="cabecera-titulo">Machine Learning y Seguridad en la Nube</p>
+        <p class="cabecera-sub">Proyecto final · en parejas · Especialización en Big Data</p>
+      </div>
+      <a class="boton fantasma" href="index.html"><i class="fas fa-arrow-left" aria-hidden="true"></i>Portada del curso</a>
     </div>
-    <div class="uc-franja" aria-hidden="true"></div>
   </header>
 
-  <main id="contenido">
-    <div class="contenedor">
+  <section class="heroe" aria-labelledby="titulo-proyecto">
+    <div class="contenedor heroe-fila">
+      <div class="heroe-texto">
+        <span class="chip">Reemplaza al plan de Azure para Yarumo · 14 de noviembre</span>
+        <h1 id="titulo-proyecto">Del dato crudo<br>a la decisión</h1>
+        <p class="lead">Un problema real, con datos reales: los revisas, los limpias, construyes y comparas modelos, y le
+          dices a quien decide qué hacer, con qué confianza y cómo cuidarías esos datos.</p>
+        <div class="acciones">
+          <a class="boton claro" href="https://colab.research.google.com/github/JotaMao1985/Machine-Learning-cloud-computing_Ucompensar/blob/main/notebooks/plantilla-proyecto.ipynb" target="_blank" rel="noopener"><i class="fas fa-laptop-code"
+              aria-hidden="true"></i>Abrir la plantilla en Colab<span class="sr-only"> (se abre en otra pestaña)</span></a>
+          <a class="boton fantasma" href="#bases">Ver las 9 bases sugeridas</a>
+        </div>
+      </div>
+      <div class="fechas">
+        <div class="fecha"><span>Ficha del problema</span><strong>Domingo 15 · 23:59</strong></div>
+        <div class="fecha"><span>Entrega y sustentación</span><strong>Viernes 20 · 16:00 y 18:00</strong></div>
+      </div>
+    </div>
+    <div class="uc-franja" aria-hidden="true"></div>
+  </section>
+
+  <div class="contenedor disposicion">
+    <nav class="indice-lateral" aria-labelledby="titulo-indice">
+      <p id="titulo-indice" class="indice-titulo">Contenido</p>
+      <ol>
+          <li><a href="#pregunta">La idea</a></li>
+          <li><a href="#hitos">La ruta</a></li>
+          <li><a href="#organizacion">Cómo se organiza</a></li>
+          <li><a href="#datos">Los datos</a></li>
+          <li><a href="#bases">Bases sugeridas</a></li>
+          <li><a href="#plantilla">El notebook plantilla</a></li>
+          <li><a href="#partes">Lo que se entrega</a></li>
+          <li><a href="#lista-minima">La lista mínima</a></li>
+          <li><a href="#entrega">La entrega y la sustentación</a></li>
+          <li><a href="#evaluacion">La evaluación</a></li>
+          <li><a href="#rubrica">La rúbrica</a></li>
+          <li><a href="#ia">El uso de IA</a></li>
+          <li><a href="#fuentes">Para consultar</a></li>
+      </ol>
+    </nav>
+
+    <main id="contenido">
       <div class="aviso">
         <p><strong>Este enunciado reemplaza al anterior</strong> («Plan de adopción segura de Azure para el modelo de
           Yarumo»). Lo decidió el docente el 14 de noviembre de 2026, para todas las parejas. De Yarumo traes la línea base, las
@@ -236,26 +295,7 @@
       <!-- M9 del PLAN (14-nov-2026): el docente reemplaza M6–M7 para toda la cohorte; ficha de gobierno sin proveedor;
            datos abiertos oficiales o propios; entrega y sustentación el 20 de noviembre con alcance menor; 3 modelos. -->
 
-      <nav class="indice" aria-labelledby="titulo-indice">
-        <h2 id="titulo-indice">En esta página</h2>
-        <ol>
-          <li><a href="#pregunta">La idea</a></li>
-          <li><a href="#organizacion">Cómo se organiza</a></li>
-          <li><a href="#datos">Los datos</a></li>
-          <li><a href="#bases">Bases sugeridas</a></li>
-          <li><a href="#plantilla">El notebook plantilla</a></li>
-          <li><a href="#partes">Lo que se entrega</a></li>
-          <li><a href="#lista-minima">La lista mínima</a></li>
-          <li><a href="#hitos">Hitos</a></li>
-          <li><a href="#entrega">La entrega y la sustentación</a></li>
-          <li><a href="#evaluacion">La evaluación</a></li>
-          <li><a href="#rubrica">La rúbrica</a></li>
-          <li><a href="#ia">El uso de IA</a></li>
-          <li><a href="#fuentes">Para consultar</a></li>
-        </ol>
-      </nav>
-
-      <section class="bloque" id="pregunta" aria-labelledby="titulo-pregunta">
+<section class="bloque" id="pregunta" aria-labelledby="titulo-pregunta">
         <span class="etiqueta">La idea</span>
         <h2 id="titulo-pregunta" class="sr-only">La idea</h2>
         <p class="pregunta-grande">¿Qué decisión real puede mejorar un modelo, con datos que de verdad existen?</p>
@@ -265,11 +305,35 @@
           falta, <strong>crear características</strong>, comparar <strong>una línea base y tres modelos</strong>, elegir la
           métrica por la decisión e <strong>interpretar</strong> el resultado para quien decide. Al final dices cómo
           cuidarías esos datos si el modelo se usara de verdad.</p>
-        <p>No se trata de ganar en exactitud. Se trata de que otra persona pueda <strong>auditar</strong> cada decisión que
-          tomaste con los datos y con el modelo.</p>
+        <ol class="ciclo" aria-label="El ciclo del proyecto">
+          <li><span class="num">1</span><strong>Auditar</strong>Qué trae la base y qué le falta, antes de tocarla.</li>
+          <li><span class="num">2</span><strong>Limpiar e imputar</strong>Grafías, códigos de faltante y fechas; imputar dentro del <code>Pipeline</code>.</li>
+          <li><span class="num">3</span><strong>Crear</strong>Al menos una característica nueva, con su porqué.</li>
+          <li><span class="num">4</span><strong>Comparar</strong>Línea base y tres modelos con validación cruzada.</li>
+          <li><span class="num">5</span><strong>Decidir</strong>La métrica y el umbral que sirven a quien decide.</li>
+          <li><span class="num">6</span><strong>Interpretar</strong>Qué pesa en el modelo y si tiene sentido.</li>
+        </ol>
+        <div class="nota"><p>No se trata de ganar en exactitud. Se trata de que otra persona pueda <strong>auditar</strong> cada decisión que
+          tomaste con los datos y con el modelo.</p></div>
       </section>
 
-      <section class="bloque" id="organizacion" aria-labelledby="titulo-organizacion">
+<section class="bloque" id="hitos" aria-labelledby="titulo-hitos">
+        <h2 id="titulo-hitos">La ruta, en cinco hitos</h2>
+        <!-- M9: anuncio el 14-nov; ficha del problema hasta el 15-nov 23:59; respuesta el 16; entrega el 20 a las 16:00;
+             sustentación en la S5 (20-nov, desde las 18:00). -->
+        <ol class="hitos">
+          <li><strong>S4 · 14 de noviembre</strong>El enunciado nuevo. La pareja elige el problema y la base.</li>
+          <li class="clave"><strong>Domingo 15 · 23:59</strong>La ficha del problema, por la plataforma: la pregunta, quién decide qué, la
+            base (entidad, URL, fecha de descarga, licencia o permiso), filas, columnas, el % de faltantes y la etiqueta.
+            Si no la entregas a tiempo, eliges una base de la lista y le avisas al docente.</li>
+          <li><strong>Lunes 16</strong>El docente aprueba la ficha o pide ajustes (si los pide, reenvías hasta el martes 17 a las
+            23:59). Si el lunes a las 23:59 no hay respuesta, sigues con tu ficha.</li>
+          <li class="clave"><strong>Viernes 20 · 16:00</strong>La entrega por la plataforma del curso (hora de Colombia).</li>
+          <li><strong>S5 · 20 de noviembre</strong>La sustentación, desde las 18:00, y la coevaluación.</li>
+        </ol>
+      </section>
+
+<section class="bloque" id="organizacion" aria-labelledby="titulo-organizacion">
         <h2 id="titulo-organizacion">Cómo se organiza</h2>
         <ul>
           <li><strong>En parejas</strong>: las mismas de la sesión 2. Solo si el grupo tiene un número impar de estudiantes, un
@@ -285,7 +349,7 @@
         </ul>
       </section>
 
-      <section class="bloque" id="datos" aria-labelledby="titulo-datos">
+<section class="bloque" id="datos" aria-labelledby="titulo-datos">
         <h2 id="titulo-datos">Los datos</h2>
         <p>Valen dos tipos de datos, siempre con un <strong>origen que otra persona pueda verificar</strong>:</p>
         <ol>
@@ -331,7 +395,7 @@
              de FUENTES.md. -->
       </section>
 
-      <section class="bloque" id="bases" aria-labelledby="titulo-bases">
+<section class="bloque" id="bases" aria-labelledby="titulo-bases">
         <h2 id="titulo-bases">Bases sugeridas</h2>
         <!-- BASES: lista curada que comprueba la maestra (URL, filas, faltantes, licencia). -->
         <p>Estas nueve bases abiertas se revisaron para el curso el 14 de noviembre de 2026: la URL responde, se descargan
@@ -421,7 +485,7 @@
              la maestra volvió a probar 4 URL. Licencia: metadatos de cada conjunto; términos del portal: F-DATOS-01. -->
       </section>
 
-      <section class="bloque" id="plantilla" aria-labelledby="titulo-plantilla">
+<section class="bloque" id="plantilla" aria-labelledby="titulo-plantilla">
         <h2 id="titulo-plantilla">El notebook plantilla</h2>
         <!-- PLANTILLA: enlace a Colab cuando esté publicada (notebooks/plantilla-proyecto.ipynb). -->
         <p>Un cuaderno (<em>notebook</em>) de Colab con el esqueleto del proyecto y un ejemplo resuelto con una base abierta
@@ -438,7 +502,7 @@
           minutos.</p>
       </section>
 
-      <section class="bloque" id="partes" aria-labelledby="titulo-partes">
+<section class="bloque" id="partes" aria-labelledby="titulo-partes">
         <h2 id="titulo-partes">Lo que se entrega</h2>
         <ol class="partes">
           <li><strong>1 · El notebook</strong>Del dato crudo al modelo: auditoría, limpieza, imputación, características, línea
@@ -496,7 +560,7 @@
         </ol>
       </section>
 
-      <section class="bloque" id="lista-minima" aria-labelledby="titulo-lista">
+<section class="bloque" id="lista-minima" aria-labelledby="titulo-lista">
         <h2 id="titulo-lista">La lista mínima</h2>
         <div class="aviso">
           <p><strong>Es requisito para que el proyecto se evalúe:</strong> cada elemento tiene que estar. Qué tan bien está
@@ -518,23 +582,7 @@
         </ol>
       </section>
 
-      <section class="bloque" id="hitos" aria-labelledby="titulo-hitos">
-        <h2 id="titulo-hitos">Hitos</h2>
-        <!-- M9: anuncio el 14-nov; ficha del problema hasta el 15-nov 23:59; respuesta el 16; entrega el 20 a las 16:00;
-             sustentación en la S5 (20-nov, desde las 18:00). -->
-        <ol class="hitos">
-          <li><strong>S4 · 14 de noviembre</strong>El enunciado nuevo. La pareja elige el problema y la base.</li>
-          <li><strong>Domingo 15 · 23:59</strong>La ficha del problema, por la plataforma: la pregunta, quién decide qué, la
-            base (entidad, URL, fecha de descarga, licencia o permiso), filas, columnas, el % de faltantes y la etiqueta.
-            Si no la entregas a tiempo, eliges una base de la lista y le avisas al docente.</li>
-          <li><strong>Lunes 16</strong>El docente aprueba la ficha o pide ajustes (si los pide, reenvías hasta el martes 17 a las
-            23:59). Si el lunes a las 23:59 no hay respuesta, sigues con tu ficha.</li>
-          <li><strong>Viernes 20 · 16:00</strong>La entrega por la plataforma del curso (hora de Colombia).</li>
-          <li><strong>S5 · 20 de noviembre</strong>La sustentación, desde las 18:00, y la coevaluación.</li>
-        </ol>
-      </section>
-
-      <section class="bloque" id="entrega" aria-labelledby="titulo-entrega">
+<section class="bloque" id="entrega" aria-labelledby="titulo-entrega">
         <h2 id="titulo-entrega">La entrega y la sustentación</h2>
         <p>Por la plataforma del curso, <strong>el viernes 20 de noviembre de 2026, hasta las 16:00</strong> (hora de
           Colombia), una entrega por pareja con:</p>
@@ -552,7 +600,7 @@
           responden. Si hay muchas parejas, el docente puede organizar salas paralelas.</p>
       </section>
 
-      <section class="bloque" id="evaluacion" aria-labelledby="titulo-evaluacion">
+<section class="bloque" id="evaluacion" aria-labelledby="titulo-evaluacion">
         <h2 id="titulo-evaluacion">La evaluación</h2>
         <!-- PENDIENTE DEL DOCENTE: el peso de cada parte y de cada mirada en la nota; no se fijan aquí. -->
         <p>Como dicen los dos syllabus del curso, el proyecto se evalúa desde tres miradas. El peso de cada una en la nota lo
@@ -596,7 +644,7 @@
         <p>Al final, una línea abierta: lo que más les convenció del proyecto y lo primero que cambiarían.</p>
       </section>
 
-      <section class="bloque" id="rubrica" aria-labelledby="titulo-rubrica">
+<section class="bloque" id="rubrica" aria-labelledby="titulo-rubrica">
         <h2 id="titulo-rubrica">La rúbrica</h2>
         <p>Seis criterios, cada uno en cuatro niveles, alineados con los criterios de realización (CR) de los dos syllabus:
           Machine Learning y Seguridad en Cloud Computing. Los descriptores dicen qué se tiene que poder ver en el notebook,
@@ -696,7 +744,7 @@
              servicio; CR3 servicios para un plan de seguridad. La privacidad está en el tema 4.3 del syllabus de nube. -->
       </section>
 
-      <section class="bloque" id="ia" aria-labelledby="titulo-ia">
+<section class="bloque" id="ia" aria-labelledby="titulo-ia">
         <h2 id="titulo-ia">El uso de IA</h2>
         <p>Puedes usar herramientas de inteligencia artificial (IA) para programar, buscar o redactar, <strong>si lo
             declaras</strong> al final del PDF: qué herramienta usaste y para qué. Cada integrante de la pareja debe poder
@@ -705,7 +753,7 @@
           gobierno debería impedir. Los nombres de las columnas y los resultados agregados sí puedes compartirlos.</p>
       </section>
 
-      <section class="bloque" id="fuentes" aria-labelledby="titulo-fuentes">
+<section class="bloque" id="fuentes" aria-labelledby="titulo-fuentes">
         <h2 id="titulo-fuentes">Para consultar</h2>
         <p>Las fuentes que usa el curso. Cita las que uses.</p>
         <ul>
@@ -727,13 +775,13 @@
         <!-- F-ML-11, F-ML-12, F-ML-18, F-LEY-01 y la PRIORIDAD 4 de FUENTES.md (Pipeline, imputación, permutación,
              datos.gov.co). -->
       </section>
-    </div>
-  </main>
+    </main>
+  </div>
 
   <footer>
-    <div class="contenedor">
-      <p>Machine Learning y Seguridad en la Nube · Especialización en Big Data · Fundación Universitaria Compensar ·
-        Material diseñado por <span>Javier Mauricio Sierra</span></p>
+    <div class="contenedor fila">
+      <p>Machine Learning y Seguridad en la Nube · Especialización en Big Data · Fundación Universitaria Compensar</p>
+      <p>Material diseñado por <span>Javier Mauricio Sierra</span></p>
     </div>
   </footer>
 </body>
