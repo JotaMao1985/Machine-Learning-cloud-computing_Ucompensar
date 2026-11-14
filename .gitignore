@@ -19,3 +19,6 @@ fuentes/
 # El generador revela las reglas con que se inventaron los datos: queda solo en local (M3).
 # Los notebooks descargan datos/clientes.csv, que sí se publica.
 precalculo/genera_datos.py
+
+# Material interno del docente para calificar (guía de preguntas, triaje de entregas y sus salidas): no se publica
+evaluacion/
